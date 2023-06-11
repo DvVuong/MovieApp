@@ -50,6 +50,7 @@ class LoginViewController: BaseViewController {
         }else {
             viewModel.logInAccount(with: email, password: password) { bool in
                 if bool {
+                    UserDefaults.standard.set(bool, forKey: "Login")
                     ToastUtil.showToast(with: L10n.logInSuccess)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
                         guard let `self` = self else { return }
@@ -57,6 +58,7 @@ class LoginViewController: BaseViewController {
                         self.push(vc)
                     }
                 }else {
+                    UserDefaults.standard.set(bool, forKey: "Login")
                     ToastUtil.showToast(with: L10n.loginFailure)
                 }
             }
