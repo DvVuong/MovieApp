@@ -30,6 +30,15 @@
 		E2AAE4422A2352EA004CFE0C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AAE4412A2352EA004CFE0C /* BaseViewController.swift */; };
 		E2AAE4462A235489004CFE0C /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AAE4452A235489004CFE0C /* RegisterViewModel.swift */; };
 		E2AAE4492A23588C004CFE0C /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AAE4482A23588C004CFE0C /* Extension.swift */; };
+		E2B1EE6A2A363494006938D7 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B1EE682A363494006938D7 /* ProfileViewController.swift */; };
+		E2B1EE6B2A363495006938D7 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2B1EE692A363494006938D7 /* ProfileViewController.xib */; };
+		E2B1EE6F2A363914006938D7 /* FavoriteMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B1EE6D2A363913006938D7 /* FavoriteMovieViewController.swift */; };
+		E2B1EE702A363914006938D7 /* FavoriteMovieViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2B1EE6E2A363913006938D7 /* FavoriteMovieViewController.xib */; };
+		E2B1EE742A3639AA006938D7 /* ReelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B1EE722A3639AA006938D7 /* ReelsViewController.swift */; };
+		E2B1EE752A3639AA006938D7 /* ReelsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2B1EE732A3639AA006938D7 /* ReelsViewController.xib */; };
+		E2B1EE792A3639E2006938D7 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B1EE772A3639E2006938D7 /* SearchViewController.swift */; };
+		E2B1EE7A2A3639E2006938D7 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2B1EE782A3639E2006938D7 /* SearchViewController.xib */; };
+		E2E4CDFD2A358F8E0011259B /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4CDFC2A358F8E0011259B /* Assets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +69,15 @@
 		E2AAE4412A2352EA004CFE0C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		E2AAE4452A235489004CFE0C /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		E2AAE4482A23588C004CFE0C /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		E2B1EE682A363494006938D7 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		E2B1EE692A363494006938D7 /* ProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
+		E2B1EE6D2A363913006938D7 /* FavoriteMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovieViewController.swift; sourceTree = "<group>"; };
+		E2B1EE6E2A363913006938D7 /* FavoriteMovieViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoriteMovieViewController.xib; sourceTree = "<group>"; };
+		E2B1EE722A3639AA006938D7 /* ReelsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReelsViewController.swift; sourceTree = "<group>"; };
+		E2B1EE732A3639AA006938D7 /* ReelsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReelsViewController.xib; sourceTree = "<group>"; };
+		E2B1EE772A3639E2006938D7 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		E2B1EE782A3639E2006938D7 /* SearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
+		E2E4CDFC2A358F8E0011259B /* Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				9DA945A72A32BFCC0074D3FC /* Strings.swift */,
+				E2E4CDFC2A358F8E0011259B /* Assets.swift */,
 			);
 			path = Generated;
 			sourceTree = "<group>";
@@ -232,9 +251,49 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		E2B1EE672A36343B006938D7 /* ProfileSetting */ = {
+			isa = PBXGroup;
+			children = (
+				E2B1EE682A363494006938D7 /* ProfileViewController.swift */,
+				E2B1EE692A363494006938D7 /* ProfileViewController.xib */,
+			);
+			path = ProfileSetting;
+			sourceTree = "<group>";
+		};
+		E2B1EE6C2A36386B006938D7 /* FavoriteMovie */ = {
+			isa = PBXGroup;
+			children = (
+				E2B1EE6D2A363913006938D7 /* FavoriteMovieViewController.swift */,
+				E2B1EE6E2A363913006938D7 /* FavoriteMovieViewController.xib */,
+			);
+			path = FavoriteMovie;
+			sourceTree = "<group>";
+		};
+		E2B1EE712A36396D006938D7 /* ReelsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E2B1EE722A3639AA006938D7 /* ReelsViewController.swift */,
+				E2B1EE732A3639AA006938D7 /* ReelsViewController.xib */,
+			);
+			path = ReelsViewController;
+			sourceTree = "<group>";
+		};
+		E2B1EE762A3639BD006938D7 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				E2B1EE772A3639E2006938D7 /* SearchViewController.swift */,
+				E2B1EE782A3639E2006938D7 /* SearchViewController.xib */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		E2BC26A32A230D6100ECB360 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				E2B1EE762A3639BD006938D7 /* Search */,
+				E2B1EE712A36396D006938D7 /* ReelsViewController */,
+				E2B1EE6C2A36386B006938D7 /* FavoriteMovie */,
+				E2B1EE672A36343B006938D7 /* ProfileSetting */,
 				9DA945BB2A3329D00074D3FC /* MainTabBar */,
 				9DA945AF2A330C670074D3FC /* Home */,
 				E2AAE4392A234598004CFE0C /* SiginSignOut */,
@@ -327,8 +386,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2B1EE6B2A363495006938D7 /* ProfileViewController.xib in Resources */,
 				9DA945B82A330E170074D3FC /* LoginViewController.xib in Resources */,
+				E2B1EE7A2A3639E2006938D7 /* SearchViewController.xib in Resources */,
 				9DA945A22A32B24C0074D3FC /* Localizable.strings in Resources */,
+				E2B1EE752A3639AA006938D7 /* ReelsViewController.xib in Resources */,
+				E2B1EE702A363914006938D7 /* FavoriteMovieViewController.xib in Resources */,
 				E22CBA4F2A2193710021EDBE /* LaunchScreen.storyboard in Resources */,
 				E2AAE43E2A2346C2004CFE0C /* RegisterController.xib in Resources */,
 				E22CBA4C2A2193710021EDBE /* Assets.xcassets in Resources */,
@@ -391,15 +454,20 @@
 				E2AAE4422A2352EA004CFE0C /* BaseViewController.swift in Sources */,
 				E2AAE4462A235489004CFE0C /* RegisterViewModel.swift in Sources */,
 				9DA945A82A32BFCC0074D3FC /* Strings.swift in Sources */,
+				E2B1EE792A3639E2006938D7 /* SearchViewController.swift in Sources */,
 				9DA945AC2A32D91B0074D3FC /* FirebaseManager.swift in Sources */,
 				E2AAE4492A23588C004CFE0C /* Extension.swift in Sources */,
+				E2B1EE6F2A363914006938D7 /* FavoriteMovieViewController.swift in Sources */,
+				E2B1EE6A2A363494006938D7 /* ProfileViewController.swift in Sources */,
 				9DA945AE2A32DAD30074D3FC /* ToastUtil.swift in Sources */,
 				E22CBA472A21934A0021EDBE /* ViewController.swift in Sources */,
+				E2E4CDFD2A358F8E0011259B /* Assets.swift in Sources */,
 				9DA945B22A330C8A0074D3FC /* HomeViewController.swift in Sources */,
 				E2AAE43D2A2346C2004CFE0C /* RegisterController.swift in Sources */,
 				E22CBA432A21934A0021EDBE /* AppDelegate.swift in Sources */,
 				9DA945BD2A332A330074D3FC /* TabBarController.swift in Sources */,
 				E22CBA452A21934A0021EDBE /* SceneDelegate.swift in Sources */,
+				E2B1EE742A3639AA006938D7 /* ReelsViewController.swift in Sources */,
 				9DA945BA2A33144C0074D3FC /* ExtensionNavigation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

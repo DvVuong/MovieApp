@@ -19,3 +19,10 @@ extension UIButton {
         self.layer.borderColor = color?.cgColor
     }
 }
+
+extension UIView {
+    func cornerRadius() {
+        self.layer.cornerRadius = self.frame.size.height / 2
+        
+    }
+}
