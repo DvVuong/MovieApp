@@ -1,0 +1,24 @@
+/* 
+  Localizable.strings
+  MovieApp
+
+  Created by BeeTech on 09/06/2023.
+  
+*/
+
+//MARM: -D
+"resgiter_failure"                           = "Đăng ký thất bại!";
+"resgiter_success"                           = "Đăng ký thành công";
+//MARK: -U
+"user_name_emty"                             = "Vui lòng nhập tên người dùng";
+//MARK: -E
+"email_emty"                                 = "Vui lòng nhập Email";
+"email_notvalid"                             = "Email không đúng định dạng";
+//MARK: -M
+"password_cant_emty"                         = "Vui lòng nhập Mật khẩu";
+"password_notvalid"                          = "Mật khẩu không đúng định dạng";
+"password_weak"                              = "Mật khẩu phải lớn hơn 8 ký tự";
+"Password_must_not_contain_spaces"           = "Mật khẩu không được có khoảng trắng";
+//MARK: -L
+"logIn_success"                              = "Đăng nhập thành công";
+"login_failure"                              = "Đăng nhập thất bại, Vui lòng kiểm tra lại Email hoặc Mật khẩu";
