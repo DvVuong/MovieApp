@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6FA6663D3F5FCD1B9C03C610 /* Pods_MovieApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 895798C6446D80074EC4E740 /* Pods_MovieApp.framework */; };
+		9D96274E2A37254E00E0D11B /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D96274D2A37254E00E0D11B /* UserResponse.swift */; };
 		9DA945A22A32B24C0074D3FC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9DA945A12A32B24C0074D3FC /* Localizable.strings */; };
 		9DA945A82A32BFCC0074D3FC /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA945A72A32BFCC0074D3FC /* Strings.swift */; };
 		9DA945AA2A32D7E90074D3FC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DA945A92A32D7E80074D3FC /* GoogleService-Info.plist */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		3816C510497B22ACCDC682CB /* Pods-MovieApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp.release.xcconfig"; path = "Target Support Files/Pods-MovieApp/Pods-MovieApp.release.xcconfig"; sourceTree = "<group>"; };
 		895798C6446D80074EC4E740 /* Pods_MovieApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D96274D2A37254E00E0D11B /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
 		9DA945A12A32B24C0074D3FC /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		9DA945A72A32BFCC0074D3FC /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		9DA945A92A32D7E80074D3FC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -97,6 +99,14 @@
 				3816C510497B22ACCDC682CB /* Pods-MovieApp.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		9D96274C2A37253A00E0D11B /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				9D96274D2A37254E00E0D11B /* UserResponse.swift */,
+			);
+			path = Response;
 			sourceTree = "<group>";
 		};
 		9DA945A42A32BE7A0074D3FC /* Generated */ = {
@@ -207,6 +217,7 @@
 		E2AAE43F2A2352B5004CFE0C /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				9D96274C2A37253A00E0D11B /* Response */,
 				E2AAE4472A235853004CFE0C /* Extension */,
 				E2AAE4402A2352BE004CFE0C /* BaseViewController */,
 				9DA945AB2A32D91B0074D3FC /* FirebaseManager.swift */,
@@ -460,6 +471,7 @@
 				E22CBA472A21934A0021EDBE /* ViewController.swift in Sources */,
 				E2E4CDFD2A358F8E0011259B /* Assets.swift in Sources */,
 				9DA945B22A330C8A0074D3FC /* HomeViewController.swift in Sources */,
+				9D96274E2A37254E00E0D11B /* UserResponse.swift in Sources */,
 				E2AAE43D2A2346C2004CFE0C /* RegisterController.swift in Sources */,
 				E22CBA432A21934A0021EDBE /* AppDelegate.swift in Sources */,
 				9DA945BD2A332A330074D3FC /* TabBarController.swift in Sources */,

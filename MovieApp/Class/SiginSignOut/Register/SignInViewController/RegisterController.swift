@@ -50,17 +50,17 @@ class RegisterController: BaseViewController {
         viewModel.passErrorPublisher.assign(to: \.text, on: passworkError).store(in: &subscriptions)
         passworkError.isHidden = false
         // Button
-//        Publishers.CombineLatest3(viewModel.nameErrorPublisher.map { $0 == nil },
-//                                  viewModel.passErrorPublisher.map { $0 == nil },
-//                                  viewModel.emailErrorPublisher.map { $0 == nil })
-//        .map { $0.0 && $0.1 && $0.2 }
-//        .assign(to: \.isEnabled, on: btLogin)
-//        .store(in: &subscriptions)
-        Publishers.CombineLatest(viewModel.emailErrorPublisher.map {$0 == nil},
-                                 viewModel.passErrorPublisher.map {$0 == nil})
-        .map { $0.0 && $0.1}
+        Publishers.CombineLatest3(viewModel.nameErrorPublisher.map { $0 == nil },
+                                  viewModel.passErrorPublisher.map { $0 == nil },
+                                  viewModel.emailErrorPublisher.map { $0 == nil })
+        .map { $0.0 && $0.1 && $0.2 }
         .assign(to: \.isEnabled, on: btLogin)
         .store(in: &subscriptions)
+//        Publishers.CombineLatest(viewModel.emailErrorPublisher.map {$0 == nil},
+//                                 viewModel.passErrorPublisher.map {$0 == nil})
+//        .map { $0.0 && $0.1}
+//        .assign(to: \.isEnabled, on: btLogin)
+//        .store(in: &subscriptions)
     }
     
     
@@ -84,8 +84,9 @@ class RegisterController: BaseViewController {
     @objc private func didTapLogin() {
         let email = emailTextFiled.text ?? ""
         let password = passwordTextFiled.text ?? ""
+        let userName = userNameTextFiled.text ?? ""
         //Login
-        viewModel.resgisterAccount(with: email, password: password) { bool in
+        viewModel.resgisterAccount(with: email, password: password, username: userName) { bool in
             if bool {
                 ToastUtil.showToast(with: L10n.resgiterSuccess)
             }else {
