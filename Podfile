@@ -8,6 +8,6 @@ target 'MovieApp' do
   pod 'FirebaseAuth'
   pod 'FirebaseFirestore'
   pod 'Toaster'
+  pod 'FirebaseStorage'
   # Pods for MovieApp
-
 end

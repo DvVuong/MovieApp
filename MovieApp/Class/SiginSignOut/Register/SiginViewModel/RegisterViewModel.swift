@@ -39,9 +39,10 @@ final class RegisterViewModel {
         }.store(in: &subscriptions)
     }
     
-    func resgisterAccount(with email: String, password: String, completion: @escaping (Bool) -> Void) {
+    func resgisterAccount(with email: String, password: String, username: String , completion: @escaping (Bool) -> Void) {
         FirebaseManager.shared.resgiterAccount(with: email, password: password) { authDataResult, error in
             guard authDataResult == nil else {
+                FirebaseManager.shared.createAccountForstorage(authDataResult?.user.email ?? "", userName: username, id: authDataResult?.user.uid ?? "")
                 completion(true)
                 return
             }
@@ -63,9 +64,6 @@ final class RegisterViewModel {
     private func validUserName(_ username: String) -> (isValid: Bool, message: String?) {
         if username.isEmpty {
             return (false, L10n.userNameEmty)
-        }
-        if username == "vuongdv" {
-            return (true, "Correct user")
         }
         return (true, nil)
     }
