@@ -17,7 +17,6 @@
 		9DA945B32A330C8A0074D3FC /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DA945B12A330C8A0074D3FC /* HomeViewController.xib */; };
 		9DA945B72A330E170074D3FC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA945B52A330E170074D3FC /* LoginViewController.swift */; };
 		9DA945B82A330E170074D3FC /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DA945B62A330E170074D3FC /* LoginViewController.xib */; };
-		9DA945BA2A33144C0074D3FC /* ExtensionNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA945B92A33144C0074D3FC /* ExtensionNavigation.swift */; };
 		9DA945BD2A332A330074D3FC /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA945BC2A332A330074D3FC /* TabBarController.swift */; };
 		E22CBA432A21934A0021EDBE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22CBA422A21934A0021EDBE /* AppDelegate.swift */; };
 		E22CBA452A21934A0021EDBE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22CBA442A21934A0021EDBE /* SceneDelegate.swift */; };
@@ -53,7 +52,6 @@
 		9DA945B12A330C8A0074D3FC /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		9DA945B52A330E170074D3FC /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9DA945B62A330E170074D3FC /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
-		9DA945B92A33144C0074D3FC /* ExtensionNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionNavigation.swift; sourceTree = "<group>"; };
 		9DA945BC2A332A330074D3FC /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		C38535E0ADC35CAE6FC19B79 /* Pods-MovieApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp.debug.xcconfig"; path = "Target Support Files/Pods-MovieApp/Pods-MovieApp.debug.xcconfig"; sourceTree = "<group>"; };
 		E22CBA3F2A2193490021EDBE /* MovieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -166,12 +164,12 @@
 			isa = PBXGroup;
 			children = (
 				E2AAE43F2A2352B5004CFE0C /* Base */,
-				E2BC26A62A2310A800ECB360 /* ViewController */,
 				E2BC26A52A23104D00ECB360 /* AppDelegate+SceneDelegate */,
 				E2BC26A32A230D6100ECB360 /* Class */,
 				E2BC26A42A230FBA00ECB360 /* Storyboard */,
 				9DA945A42A32BE7A0074D3FC /* Generated */,
 				E2AAE4382A234579004CFE0C /* Resources */,
+				E2BC26A62A2310A800ECB360 /* ViewController */,
 				9DA945A92A32D7E80074D3FC /* GoogleService-Info.plist */,
 				E22CBA502A2193710021EDBE /* Info.plist */,
 				E22CBA4D2A2193710021EDBE /* LaunchScreen.storyboard */,
@@ -213,7 +211,6 @@
 				E2AAE4402A2352BE004CFE0C /* BaseViewController */,
 				9DA945AB2A32D91B0074D3FC /* FirebaseManager.swift */,
 				9DA945AD2A32DAD30074D3FC /* ToastUtil.swift */,
-				9DA945B92A33144C0074D3FC /* ExtensionNavigation.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -290,11 +287,11 @@
 		E2BC26A32A230D6100ECB360 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				9DA945BB2A3329D00074D3FC /* MainTabBar */,
 				E2B1EE762A3639BD006938D7 /* Search */,
 				E2B1EE712A36396D006938D7 /* ReelsViewController */,
 				E2B1EE6C2A36386B006938D7 /* FavoriteMovie */,
 				E2B1EE672A36343B006938D7 /* ProfileSetting */,
-				9DA945BB2A3329D00074D3FC /* MainTabBar */,
 				9DA945AF2A330C670074D3FC /* Home */,
 				E2AAE4392A234598004CFE0C /* SiginSignOut */,
 			);
@@ -468,7 +465,6 @@
 				9DA945BD2A332A330074D3FC /* TabBarController.swift in Sources */,
 				E22CBA452A21934A0021EDBE /* SceneDelegate.swift in Sources */,
 				E2B1EE742A3639AA006938D7 /* ReelsViewController.swift in Sources */,
-				9DA945BA2A33144C0074D3FC /* ExtensionNavigation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
