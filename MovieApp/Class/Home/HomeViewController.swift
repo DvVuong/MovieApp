@@ -16,14 +16,26 @@ class HomeViewController: BaseViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillLayoutSubviews() {
+        tabBarView.setCornerRadiusAndBorder(topLeftRadius: 8, topRightRadius: 8, bottomRightRadius: 0, bottomLeftRadius: 0)
+        tabBarView.cornerRadiusTopLeft()
+        tabBarView.layer.cornerRadius = 18
+        tabBarView.clipsToBounds = true
+        tabBarView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        
+    }
+    
     override func setupUI() {
-        tabBarView.cornerRadius()
+//        tabBarView.layer.cornerRadius = 15
+        
     }
     override func setupTap() {
         tabBarButton.forEach { button in
             button.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
         }
     }
+    
+//MARK: Navigation
     
     @objc func didTapButton(_ sender: UIButton) {
         switch sender.tag {
