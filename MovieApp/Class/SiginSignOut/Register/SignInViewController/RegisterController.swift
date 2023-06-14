@@ -18,6 +18,7 @@ class RegisterController: BaseViewController {
     @IBOutlet weak var emailTextFiled: UITextField!
     @IBOutlet weak var emailError: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var backButton: UIButton!
     
     private var subscriptions = Set<AnyCancellable>()
     private var viewModel = RegisterViewModel()
@@ -40,6 +41,8 @@ class RegisterController: BaseViewController {
         passworkError.textColor = .red
         emailError.isHidden = true
         emailError.textColor = .red
+        btLogin.cornerRadius(10)
+        backButton.cornerRadius(10)
     }
     
     override func onBind() {
@@ -56,14 +59,12 @@ class RegisterController: BaseViewController {
         .map { $0.0 && $0.1 && $0.2 }
         .assign(to: \.isEnabled, on: btLogin)
         .store(in: &subscriptions)
-//        Publishers.CombineLatest(viewModel.emailErrorPublisher.map {$0 == nil},
-//                                 viewModel.passErrorPublisher.map {$0 == nil})
-//        .map { $0.0 && $0.1}
-//        .assign(to: \.isEnabled, on: btLogin)
-//        .store(in: &subscriptions)
     }
-    
-    
+    private func setupBtLogin() {
+        btLogin.isEnabled = false
+        btLogin.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
+        backButton.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
+    }
     
     @objc private func didChangeTextFiled(_ textField: UITextField) {
         if textField === userNameTextFiled {
@@ -76,22 +77,23 @@ class RegisterController: BaseViewController {
            viewModel.emailPublisher.send(textField.text ?? "")
         }
     }
-    private func setupBtLogin() {
-        btLogin.isEnabled = false
-        btLogin.addTarget(self, action: #selector(didTapLogin), for: .touchUpInside)
-    }
    
-    @objc private func didTapLogin() {
+   
+    @objc private func didTapButton(_ sender: UIButton) {
         let email = emailTextFiled.text ?? ""
         let password = passwordTextFiled.text ?? ""
         let userName = userNameTextFiled.text ?? ""
-        //Login
-        viewModel.resgisterAccount(with: email, password: password, username: userName) { bool in
-            if bool {
-                ToastUtil.showToast(with: L10n.resgiterSuccess)
-            }else {
-                ToastUtil.showToast(with: L10n.resgiterFailure)
+        if sender === btLogin {
+            //Login
+            viewModel.resgisterAccount(with: email, password: password, username: userName) { bool in
+                if bool {
+                    ToastUtil.showToast(with: L10n.resgiterSuccess)
+                }else {
+                    ToastUtil.showToast(with: L10n.resgiterFailure)
+                }
             }
+        }else if sender === backButton {
+            pop()
         }
     }
 }
