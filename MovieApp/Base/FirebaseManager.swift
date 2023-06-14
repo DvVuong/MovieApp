@@ -32,11 +32,15 @@ class FirebaseManager {
                         "userName": userName,
                         "id": id
         ]
-        _ref = _db.collection(_user).addDocument(data: userData)
+        _db.collection(_user).document(id).setData(userData)
+        UserDefaultManager.shared.getIdUser(id)
     }
     
     func fecthUserData(_ completion: @escaping (UserResponse) -> Void) {
-        _db.collection(_user).document(<#T##documentPath: String##String#>).getDocument { dataSnapShot, error in
+        let idPath = UserDefaultManager.shared.setIdUser()
+        _db.collection(_user).document(idPath).getDocument { dataSnapShot, error in
+            let userData = UserResponse.init(json: dataSnapShot?.data() ?? [:])
+            completion(userData)
         }
     }
 }

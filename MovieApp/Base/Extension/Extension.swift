@@ -21,8 +21,8 @@ extension UIButton {
 }
 
 extension UIView {
-    func cornerRadius() {
-        self.layer.cornerRadius = self.frame.size.height / 2
+    func cornerRadius(_ height: CGFloat) {
+        self.layer.cornerRadius = height
     }
     
     func cornerRadiusTopLeft() {

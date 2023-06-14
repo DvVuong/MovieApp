@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RegisterController" customModule="MovieApp" customModuleProvider="target">
             <connections>
+                <outlet property="backButton" destination="Vrs-zf-yZG" id="fZh-9C-Oh3"/>
                 <outlet property="btLogin" destination="KAK-En-UXb" id="dIt-cX-Vfd"/>
                 <outlet property="emailError" destination="G8c-pO-IAc" id="owk-CP-G3f"/>
                 <outlet property="emailTextFiled" destination="2hc-sF-2i6" id="i1k-Gp-VtQ"/>
@@ -206,10 +207,22 @@
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title="Log In"/>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vrs-zf-yZG">
+                            <rect key="frame" x="10" y="16" width="30" height="30"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="Vrs-zf-yZG" secondAttribute="height" id="EMt-CR-Hwn"/>
+                                <constraint firstAttribute="width" constant="30" id="ex8-Vy-84R"/>
+                            </constraints>
+                            <color key="tintColor" systemColor="labelColor"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" image="arrow.left" catalog="system"/>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.26460111031590661" green="0.26687806854935686" blue="0.27370894324970763" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="KAK-En-UXb" firstAttribute="centerX" secondItem="F5E-eW-VUk" secondAttribute="centerX" id="5x4-Iy-HUd"/>
+                        <constraint firstItem="Vrs-zf-yZG" firstAttribute="top" secondItem="F5E-eW-VUk" secondAttribute="top" constant="16" id="A9a-1H-1uM"/>
                         <constraint firstAttribute="trailing" secondItem="w5Z-ym-Ef6" secondAttribute="trailing" constant="40" id="Gdh-zG-v5o"/>
                         <constraint firstItem="WmN-pu-Wl3" firstAttribute="top" secondItem="F5E-eW-VUk" secondAttribute="top" constant="50" id="NIB-pX-Ngq"/>
                         <constraint firstItem="w5Z-ym-Ef6" firstAttribute="centerX" secondItem="F5E-eW-VUk" secondAttribute="centerX" id="UEv-Yf-kjG"/>
@@ -217,6 +230,7 @@
                         <constraint firstItem="WmN-pu-Wl3" firstAttribute="centerX" secondItem="F5E-eW-VUk" secondAttribute="centerX" id="a6q-ln-p8Q"/>
                         <constraint firstItem="w5Z-ym-Ef6" firstAttribute="leading" secondItem="F5E-eW-VUk" secondAttribute="leading" constant="40" id="kqy-jW-Iby"/>
                         <constraint firstAttribute="bottom" secondItem="KAK-En-UXb" secondAttribute="bottom" constant="500" id="mdw-xe-u8Q"/>
+                        <constraint firstItem="Vrs-zf-yZG" firstAttribute="leading" secondItem="F5E-eW-VUk" secondAttribute="leading" constant="10" id="qU7-8w-p3j"/>
                         <constraint firstItem="w5Z-ym-Ef6" firstAttribute="top" secondItem="WmN-pu-Wl3" secondAttribute="bottom" constant="50" id="w3f-d9-w2D"/>
                     </constraints>
                 </scrollView>
@@ -234,10 +248,14 @@
         </view>
     </objects>
     <resources>
+        <image name="arrow.left" catalog="system" width="128" height="95"/>
         <image name="envelope" catalog="system" width="128" height="93"/>
         <image name="icons8-lock-128()" width="192" height="192"/>
         <image name="icons8-movie-50" width="50" height="50"/>
         <image name="person" catalog="system" width="128" height="121"/>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
