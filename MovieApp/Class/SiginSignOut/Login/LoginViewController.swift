@@ -15,8 +15,12 @@ class LoginViewController: BaseViewController {
     @IBOutlet weak var registerButton: UIButton!
     
     private var subscription = Set<AnyCancellable>()
-    
     let viewModel = RegisterViewModel()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = true
+    }
     
     override func setupUI() {
         emailTextField.text = "long@gmail.com"

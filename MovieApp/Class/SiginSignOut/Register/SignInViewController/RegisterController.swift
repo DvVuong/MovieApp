@@ -23,6 +23,11 @@ class RegisterController: BaseViewController {
     private var subscriptions = Set<AnyCancellable>()
     private var viewModel = RegisterViewModel()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
