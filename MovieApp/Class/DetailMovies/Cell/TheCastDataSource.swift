@@ -7,9 +7,9 @@
 
 import UIKit
 class TheCastDataSource: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
+//    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+//        return 2
+//    }
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 5
     }
@@ -33,5 +33,9 @@ class TheCastDataSource: UICollectionViewController, UICollectionViewDelegateFlo
             break
         }
         return UICollectionReusableView()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 80, height: 80)
     }
 }

@@ -16,10 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let id = UserDefaultManager.shared.setIdUser()
         if id.isEmpty {
             windows.rootViewController = UINavigationController(rootViewController: LoginViewController())
-            windows.rootViewController?.navigationController?.isNavigationBarHidden = true
         }else {
             windows.rootViewController = UINavigationController(rootViewController: TabBarController())
-            windows.rootViewController?.navigationController?.isNavigationBarHidden = true
         }
         windows.makeKeyAndVisible()
         self.window = windows

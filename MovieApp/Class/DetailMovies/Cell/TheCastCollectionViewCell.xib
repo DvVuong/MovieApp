@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_12" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,13 +18,13 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yDs-Co-1kj">
-                        <rect key="frame" x="0.0" y="0.0" width="139" height="138"/>
+                        <rect key="frame" x="10" y="0.0" width="129" height="138"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Space art wallpapers" translatesAutoresizingMaskIntoConstraints="NO" id="jxf-Xl-Cvj">
-                                <rect key="frame" x="0.0" y="0.0" width="139" height="138"/>
+                                <rect key="frame" x="0.0" y="0.0" width="129" height="138"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="jxf-Xl-Cvj" secondAttribute="trailing" id="0xL-UV-zaB"/>
                             <constraint firstItem="jxf-Xl-Cvj" firstAttribute="leading" secondItem="yDs-Co-1kj" secondAttribute="leading" id="254-ho-g74"/>
@@ -40,7 +39,7 @@
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstItem="yDs-Co-1kj" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="67w-ew-QO8"/>
+                <constraint firstItem="yDs-Co-1kj" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="67w-ew-QO8"/>
                 <constraint firstAttribute="trailing" secondItem="yDs-Co-1kj" secondAttribute="trailing" id="Bm0-16-j7s"/>
                 <constraint firstItem="yDs-Co-1kj" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="IjC-bi-XVK"/>
                 <constraint firstAttribute="bottom" secondItem="yDs-Co-1kj" secondAttribute="bottom" id="q8w-Ws-Zag"/>
@@ -54,8 +53,5 @@
     </objects>
     <resources>
         <image name="Space art wallpapers" width="736" height="1104"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

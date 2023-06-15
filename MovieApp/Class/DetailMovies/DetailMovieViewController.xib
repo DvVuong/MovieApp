@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -30,10 +30,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kow-PH-Nhu" userLabel="ViewTop">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="308"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="358"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="_" translatesAutoresizingMaskIntoConstraints="NO" id="Szz-C6-vPz">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="308"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="358"/>
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hgY-IS-Mf3">
                                     <rect key="frame" x="10" y="50" width="30" height="30"/>
@@ -62,7 +62,7 @@
                                     </state>
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4S7-S1-3Y5">
-                                    <rect key="frame" x="20" y="148" width="280" height="150"/>
+                                    <rect key="frame" x="20" y="198" width="280" height="150"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New  * Season 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b0W-KX-k9G">
                                             <rect key="frame" x="77.5" y="10" width="125" height="25"/>
@@ -176,7 +176,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ijf-Qg-7Nq" userLabel="ViewBottom">
-                            <rect key="frame" x="0.0" y="308" width="320" height="260"/>
+                            <rect key="frame" x="0.0" y="358" width="320" height="210"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ijg-R2-Ixx">
                                     <rect key="frame" x="20" y="5" width="280" height="90"/>
@@ -220,14 +220,14 @@
                                     </constraints>
                                 </stackView>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="9ZM-bq-n9b">
-                                    <rect key="frame" x="0.0" y="110" width="320" height="150"/>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <rect key="frame" x="0.0" y="110" width="320" height="100"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="150" id="cWW-Pf-gmN"/>
+                                        <constraint firstAttribute="height" constant="100" id="cWW-Pf-gmN"/>
                                     </constraints>
-                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wbS-aT-rtF">
+                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wbS-aT-rtF">
                                         <size key="itemSize" width="128" height="128"/>
-                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                        <size key="headerReferenceSize" width="50" height="50"/>
                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </collectionViewFlowLayout>
@@ -251,8 +251,8 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="VT5-Uz-Ku7" secondAttribute="trailing" id="QlC-3h-iON"/>
-                <constraint firstItem="VT5-Uz-Ku7" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="fZ8-0b-Hh2"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="VT5-Uz-Ku7" secondAttribute="top" id="foE-MU-A3o"/>
+                <constraint firstItem="VT5-Uz-Ku7" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="fZ8-0b-Hh2"/>
+                <constraint firstAttribute="top" secondItem="VT5-Uz-Ku7" secondAttribute="top" id="foE-MU-A3o"/>
                 <constraint firstItem="VT5-Uz-Ku7" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="g4Q-ls-ihv"/>
             </constraints>
             <point key="canvasLocation" x="130.53435114503816" y="-11.267605633802818"/>
@@ -260,7 +260,7 @@
     </objects>
     <resources>
         <image name="_" width="1224" height="2160"/>
-        <image name="escape" catalog="system" width="128" height="123"/>
+        <image name="escape" catalog="system" width="128" height="121"/>
         <image name="icons8-back-50" width="50" height="50"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
