@@ -32,7 +32,7 @@
                         </collectionViewFlowLayout>
                     </collectionView>
                     <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="vS8-Yd-MdA">
-                        <rect key="frame" x="70" y="300" width="274" height="26"/>
+                        <rect key="frame" x="70" y="355" width="274" height="26"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="26" id="XOQ-Hl-0of"/>
                         </constraints>
@@ -46,7 +46,7 @@
                     <constraint firstAttribute="bottomMargin" secondItem="vS8-Yd-MdA" secondAttribute="bottom" constant="-5" id="KLT-cV-X9o"/>
                     <constraint firstAttribute="trailing" secondItem="TOU-j3-PaJ" secondAttribute="trailing" id="OlF-PB-s9Z"/>
                     <constraint firstItem="TOU-j3-PaJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Q5r-aH-x90"/>
-                    <constraint firstItem="vS8-Yd-MdA" firstAttribute="top" secondItem="TOU-j3-PaJ" secondAttribute="bottom" constant="-50" id="U1R-FH-Mtj"/>
+                    <constraint firstItem="vS8-Yd-MdA" firstAttribute="top" secondItem="TOU-j3-PaJ" secondAttribute="bottom" constant="5" id="U1R-FH-Mtj"/>
                     <constraint firstAttribute="trailing" secondItem="vS8-Yd-MdA" secondAttribute="trailing" constant="70" id="sAy-fn-Ebq"/>
                 </constraints>
             </tableViewCellContentView>

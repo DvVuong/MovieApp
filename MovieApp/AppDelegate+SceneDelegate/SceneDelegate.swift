@@ -12,6 +12,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowSene = (scene as? UIWindowScene) else { return }
+        let windows = UIWindow(windowScene: windowSene)
+        let id = UserDefaultManager.shared.setIdUser()
+        if id.isEmpty {
+            windows.rootViewController = UINavigationController(rootViewController: LoginViewController())
+            windows.rootViewController?.navigationController?.isNavigationBarHidden = true
+        }else {
+            windows.rootViewController = UINavigationController(rootViewController: TabBarController())
+            windows.rootViewController?.navigationController?.isNavigationBarHidden = true
+        }
+        windows.makeKeyAndVisible()
+        self.window = windows
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

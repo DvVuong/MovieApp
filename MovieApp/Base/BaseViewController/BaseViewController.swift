@@ -29,6 +29,8 @@ class BaseViewController: UIViewController {
     func bindData() {}
     func onBind() {}
     
+    func setupDataSource() {}
+    
     private func keyBoardObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)

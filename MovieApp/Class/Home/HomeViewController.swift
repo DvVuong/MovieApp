@@ -10,8 +10,6 @@ import Combine
 
 class HomeViewController: BaseViewController {
     @IBOutlet weak var contenView: UIView!
-    @IBOutlet weak var tabBarView: UIView!
-    @IBOutlet var tabBarButton: [UIButton]!
     @IBOutlet weak var avatarImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var notificationView: UIView!
@@ -25,6 +23,7 @@ class HomeViewController: BaseViewController {
         viewModel.fetchUser()
         setupTabelView()
         setupViewModel()
+        setupDataSource()
     }
     
     override func setupViewModel() {
@@ -34,13 +33,16 @@ class HomeViewController: BaseViewController {
         }
         .store(in: &subcriptions)
     }
+    override func setupDataSource() {
+        dataSource.actionMoveToDetaiView = { [weak self] in
+            guard let `self` = self else { return }
+            let vc = DetailMovieViewController()
+            self.push(vc)
+        }
+    }
     
     override func viewWillLayoutSubviews() {
-        tabBarView.setCornerRadiusAndBorder(topLeftRadius: 8, topRightRadius: 8, bottomRightRadius: 0, bottomLeftRadius: 0)
-        tabBarView.cornerRadiusTopLeft()
-        tabBarView.layer.cornerRadius = 18
-        tabBarView.clipsToBounds = true
-        tabBarView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+
     }
     
     override func setupUI() {
@@ -57,47 +59,12 @@ class HomeViewController: BaseViewController {
         tableView.register(UINib(nibName: "RecentTableViewCell", bundle: nil), forCellReuseIdentifier: "RecentTableViewCell")
     }
     override func setupTap() {
-        tabBarButton.forEach { button in
-            button.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
-        }
+
     }
     
 //MARK: Navigation
     
     @objc func didTapButton(_ sender: UIButton) {
-        switch sender.tag {
-        case 0:
-            let vc = HomeViewController()
-            vc.view.backgroundColor  = .green
-            contenView.addSubview(vc.view)
-            push(vc)
-            vc.didMove(toParent: self)
-        case 1:
-            let vc = ReelsViewController()
-            vc.view.backgroundColor  = .red
-            contenView.addSubview(vc.view)
-            push(vc)
-            vc.didMove(toParent: self)
-        case 2:
-            let vc = SearchViewController()
-            vc.view.backgroundColor  = .yellow
-            contenView.addSubview(vc.view)
-            push(vc)
-            vc.didMove(toParent: self)
-        case 3:
-            let vc = FavoriteMovieViewController()
-            vc.view.backgroundColor  = .blue
-            contenView.addSubview(vc.view)
-            push(vc)
-            vc.didMove(toParent: self)
-        case 4:
-            let vc = ProfileViewController()
-            vc.view.backgroundColor  = .gray
-            contenView.addSubview(vc.view)
-            push(vc)
-            vc.didMove(toParent: self)
-        default:
-            break
-        }
+       
     }
 }

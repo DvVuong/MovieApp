@@ -9,6 +9,7 @@ import UIKit
 
 class CollectionViewDataSource: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    public var didSelectedItemHandler: (() -> Void)? = nil
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 4
@@ -23,13 +24,14 @@ class CollectionViewDataSource: UICollectionViewController, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-
         let totalCellWidth: CGFloat = (collectionView.frame.width * 2 / 3) * 3
         let totalSpacingWidth: CGFloat = 10 * (2)
-
         let leftInset = (collectionView.frame.width - CGFloat(totalCellWidth + totalSpacingWidth)) / 2
         let rightInset = leftInset
-
         return UIEdgeInsets(top: 0, left: leftInset, bottom: 0, right: rightInset)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+       didSelectedItemHandler?()
     }
 }

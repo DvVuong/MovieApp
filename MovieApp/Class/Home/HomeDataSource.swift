@@ -9,6 +9,8 @@ import UIKit
 
 class HomeDataSource: UITableViewController {
     
+    public var actionMoveToDetaiView:(() -> Void)? = nil
+    
     enum CellType {
         case category
         case detail
@@ -62,6 +64,11 @@ class HomeDataSource: UITableViewController {
         case .detail:
             let cell = tableView.dequeueReusableCell(withIdentifier: "DetailTableViewCell", for: indexPath) as! DetailTableViewCell
             cell.setupCollectionView()
+            cell.setupActionSelectedItem()
+            cell.actionSelected = { [weak self]  in
+                guard let `self` = self else { return }
+                self.actionMoveToDetaiView?()
+            }
             cell.selectionStyle = .none
             return cell
         case .recent:
@@ -75,6 +82,7 @@ class HomeDataSource: UITableViewController {
             cell.selectionStyle = .none
             return cell
         }
+        
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

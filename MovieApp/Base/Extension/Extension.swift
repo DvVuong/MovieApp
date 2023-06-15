@@ -68,6 +68,13 @@ extension UIView {
     }
     
 }
+
+extension UILabel {
+     func cornerRadiusLabel(_ height: CGFloat) {
+         self.layer.cornerRadius = height
+         self.layer.masksToBounds = true
+    }
+}
 extension UIViewController {
     func push(_ vc: UIViewController) {
         self.navigationController?.pushViewController(vc, animated: true)

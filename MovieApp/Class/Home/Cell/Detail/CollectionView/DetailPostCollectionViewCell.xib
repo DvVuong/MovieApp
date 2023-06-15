@@ -36,8 +36,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pow Pow" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hT5-tb-b7o">
-                                <rect key="frame" x="20" y="263" width="192" height="20.333333333333314"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <rect key="frame" x="20" y="263" width="192" height="37"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="37"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -48,7 +48,7 @@
                             <constraint firstItem="hVe-B5-izX" firstAttribute="top" secondItem="4w0-Pa-1OF" secondAttribute="top" constant="10" id="4z7-qD-yyJ"/>
                             <constraint firstItem="hVe-B5-izX" firstAttribute="leading" secondItem="4w0-Pa-1OF" secondAttribute="leading" constant="5" id="Fc7-sR-Wju"/>
                             <constraint firstItem="hT5-tb-b7o" firstAttribute="leading" secondItem="4w0-Pa-1OF" secondAttribute="leading" constant="20" id="Krm-Yk-KVH"/>
-                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="hT5-tb-b7o" secondAttribute="bottom" constant="16.670000000000002" id="Mea-Xe-8nc"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="hT5-tb-b7o" secondAttribute="bottom" id="Mea-Xe-8nc"/>
                             <constraint firstAttribute="trailing" secondItem="hVe-B5-izX" secondAttribute="trailing" constant="5" id="W1R-3r-hfc"/>
                             <constraint firstItem="hT5-tb-b7o" firstAttribute="top" secondItem="Q42-aY-nIt" secondAttribute="bottom" constant="5" id="dbd-iH-fmf"/>
                             <constraint firstAttribute="trailing" secondItem="hT5-tb-b7o" secondAttribute="trailing" constant="20" id="eUd-kO-mJE"/>

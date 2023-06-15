@@ -54,6 +54,9 @@ class LoginViewController: BaseViewController {
                     ToastUtil.showToast(with: L10n.logInSuccess)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
                         guard let `self` = self else { return }
+                        let tabbar = TabBarController()
+                        (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController =
+                        tabbar
                         let vc = HomeViewController()
                         self.push(vc)
                     }
