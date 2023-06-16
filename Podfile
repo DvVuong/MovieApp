@@ -9,5 +9,6 @@ target 'MovieApp' do
   pod 'FirebaseFirestore'
   pod 'Toaster'
   pod 'FirebaseStorage'
+  pod 'CardTabBar'
   # Pods for MovieApp
 end

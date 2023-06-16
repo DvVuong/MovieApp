@@ -54,6 +54,7 @@ final class RegisterViewModel {
         FirebaseManager.shared.loginAccount(with: email, password: password) { authDataResult, error in
             guard authDataResult == nil else  {
                 completion(true)
+                UserDefaultManager.shared.getCurrentUserID(authDataResult?.user.uid ?? "")
                 return
             }
             completion(false)

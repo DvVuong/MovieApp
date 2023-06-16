@@ -6,24 +6,32 @@
 //
 
 import UIKit
+import Combine
 
-class ProfileViewController: UIViewController {
-
+class ProfileViewController: BaseViewController {
+    @IBOutlet weak var avatarUser: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var tableView: UITableView!
+    
+    private let viewModel: ProfileViewModel = ProfileViewModel()
+    private var subcriptions = Set<AnyCancellable>()
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        viewModel.fetchUser()
+        setupUI()
+        setupViewModel()
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+   override func setupUI() {
+       avatarUser.cornerRadius(avatarUser.frame.size.height / 2)
     }
-    */
+    
+    override func setupViewModel() {
+        viewModel.userPublisher.sink { [weak self] userData in
+            guard let `self` = self else { return }
+            self.nameLabel.text = userData.userName ?? ""
+        }
+        .store(in: &subcriptions)
+    }
 
 }
