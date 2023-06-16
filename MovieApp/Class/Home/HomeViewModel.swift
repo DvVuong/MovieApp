@@ -14,7 +14,13 @@ class HomeViewModel {
     func fetchUser() {
         FirebaseManager.shared.fecthUserData { [weak self] userResponse in
             guard let `self` = self else { return }
-            self.userPublisher.send(userResponse)
+            let currentUserID = UserDefaultManager.shared.setCurrentUserID()
+            for i in userResponse {
+                if i.id == currentUserID {
+                    self.userPublisher.send(i)
+                    break
+                }
+            }
         }
     }
 }

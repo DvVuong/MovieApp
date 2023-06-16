@@ -11,14 +11,14 @@ class HomeDataSource: UITableViewController {
     
     public var actionMoveToDetaiView:(() -> Void)? = nil
     
-    enum CellType {
+    private enum CellType {
         case category
         case detail
         case recent
         case favorites
     }
     
-    var sections: [CellType] = [
+    private var sections: [CellType] = [
         .category,
         .detail,
         .recent,

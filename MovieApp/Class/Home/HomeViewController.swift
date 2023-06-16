@@ -37,6 +37,7 @@ class HomeViewController: BaseViewController {
         dataSource.actionMoveToDetaiView = { [weak self] in
             guard let `self` = self else { return }
             let vc = DetailMovieViewController()
+            vc.hidesBottomBarWhenPushed = true
             self.push(vc)
         }
     }

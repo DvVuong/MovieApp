@@ -12,7 +12,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowSene = (scene as? UIWindowScene) else { return }
-        let windows = UIWindow(windowScene: windowSene)
+        var windows = UIWindow(windowScene: windowSene)
+//        windows = UIWindow(frame: UIScreen.main.bounds)
         let id = UserDefaultManager.shared.setIdUser()
         if id.isEmpty {
             windows.rootViewController = UINavigationController(rootViewController: LoginViewController())

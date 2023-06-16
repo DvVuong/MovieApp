@@ -61,7 +61,7 @@ class LoginViewController: BaseViewController {
                         let tabbar = TabBarController()
                         (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController =
                         tabbar
-                        let vc = HomeViewController()
+                        let vc = TabBarController()
                         self.push(vc)
                     }
                 }else {

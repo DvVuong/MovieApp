@@ -46,6 +46,11 @@
 		9DA945B72A330E170074D3FC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA945B52A330E170074D3FC /* LoginViewController.swift */; };
 		9DA945B82A330E170074D3FC /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DA945B62A330E170074D3FC /* LoginViewController.xib */; };
 		9DA945BD2A332A330074D3FC /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA945BC2A332A330074D3FC /* TabBarController.swift */; };
+		9DAA12CF2A3C1EAD00C5308D /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAA12CE2A3C1EAD00C5308D /* NavigationController.swift */; };
+		9DAA12D12A3C5AA900C5308D /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAA12D02A3C5AA900C5308D /* ProfileViewModel.swift */; };
+		9DAA12D42A3C5F1400C5308D /* ProfileDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAA12D32A3C5F1400C5308D /* ProfileDataSource.swift */; };
+		9DAA12D72A3C60EB00C5308D /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAA12D52A3C60EB00C5308D /* ProfileTableViewCell.swift */; };
+		9DAA12D82A3C60EB00C5308D /* ProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DAA12D62A3C60EB00C5308D /* ProfileTableViewCell.xib */; };
 		E22CBA432A21934A0021EDBE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22CBA422A21934A0021EDBE /* AppDelegate.swift */; };
 		E22CBA452A21934A0021EDBE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22CBA442A21934A0021EDBE /* SceneDelegate.swift */; };
 		E22CBA472A21934A0021EDBE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22CBA462A21934A0021EDBE /* ViewController.swift */; };
@@ -109,6 +114,11 @@
 		9DA945B52A330E170074D3FC /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9DA945B62A330E170074D3FC /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		9DA945BC2A332A330074D3FC /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		9DAA12CE2A3C1EAD00C5308D /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		9DAA12D02A3C5AA900C5308D /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		9DAA12D32A3C5F1400C5308D /* ProfileDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataSource.swift; sourceTree = "<group>"; };
+		9DAA12D52A3C60EB00C5308D /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		9DAA12D62A3C60EB00C5308D /* ProfileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileTableViewCell.xib; sourceTree = "<group>"; };
 		C38535E0ADC35CAE6FC19B79 /* Pods-MovieApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp.debug.xcconfig"; path = "Target Support Files/Pods-MovieApp/Pods-MovieApp.debug.xcconfig"; sourceTree = "<group>"; };
 		E22CBA3F2A2193490021EDBE /* MovieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E22CBA422A21934A0021EDBE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -299,6 +309,16 @@
 			path = MainTabBar;
 			sourceTree = "<group>";
 		};
+		9DAA12D22A3C5EFB00C5308D /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				9DAA12D32A3C5F1400C5308D /* ProfileDataSource.swift */,
+				9DAA12D52A3C60EB00C5308D /* ProfileTableViewCell.swift */,
+				9DAA12D62A3C60EB00C5308D /* ProfileTableViewCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		9DCC55FA2A3A9E30009C7E16 /* DetailMovies */ = {
 			isa = PBXGroup;
 			children = (
@@ -389,6 +409,7 @@
 				E2AAE4402A2352BE004CFE0C /* BaseViewController */,
 				9DA945AB2A32D91B0074D3FC /* FirebaseManager.swift */,
 				9DA945AD2A32DAD30074D3FC /* ToastUtil.swift */,
+				9DAA12CE2A3C1EAD00C5308D /* NavigationController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -430,8 +451,10 @@
 		E2B1EE672A36343B006938D7 /* ProfileSetting */ = {
 			isa = PBXGroup;
 			children = (
+				9DAA12D22A3C5EFB00C5308D /* Cell */,
 				E2B1EE682A363494006938D7 /* ProfileViewController.swift */,
 				E2B1EE692A363494006938D7 /* ProfileViewController.xib */,
+				9DAA12D02A3C5AA900C5308D /* ProfileViewModel.swift */,
 			);
 			path = ProfileSetting;
 			sourceTree = "<group>";
@@ -564,6 +587,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D9B595F2A395A4B0001BDAD /* FavotitesCollectionViewCell.xib in Resources */,
+				9DAA12D82A3C60EB00C5308D /* ProfileTableViewCell.xib in Resources */,
 				E2B1EE6B2A363495006938D7 /* ProfileViewController.xib in Resources */,
 				9DA945B82A330E170074D3FC /* LoginViewController.xib in Resources */,
 				E2B1EE7A2A3639E2006938D7 /* SearchViewController.xib in Resources */,
@@ -657,16 +681,20 @@
 				9DA945AE2A32DAD30074D3FC /* ToastUtil.swift in Sources */,
 				9D9305AB2A387A52007E2647 /* DetailPostCollectionViewCell.swift in Sources */,
 				E22CBA472A21934A0021EDBE /* ViewController.swift in Sources */,
+				9DAA12D12A3C5AA900C5308D /* ProfileViewModel.swift in Sources */,
 				E2E4CDFD2A358F8E0011259B /* Assets.swift in Sources */,
 				9D93059E2A38710E007E2647 /* FavoritesTableViewCell.swift in Sources */,
 				9DA945B22A330C8A0074D3FC /* HomeViewController.swift in Sources */,
 				9D9305A12A38712B007E2647 /* HomeDataSource.swift in Sources */,
+				9DAA12CF2A3C1EAD00C5308D /* NavigationController.swift in Sources */,
 				9D96274E2A37254E00E0D11B /* UserResponse.swift in Sources */,
 				9D93058C2A386571007E2647 /* UserDefaultManager.swift in Sources */,
+				9DAA12D42A3C5F1400C5308D /* ProfileDataSource.swift in Sources */,
 				E2AAE43D2A2346C2004CFE0C /* RegisterController.swift in Sources */,
 				9D93058E2A386EE5007E2647 /* HomeViewModel.swift in Sources */,
 				9D9305962A3870D7007E2647 /* CategoryTableViewCell.swift in Sources */,
 				E22CBA432A21934A0021EDBE /* AppDelegate.swift in Sources */,
+				9DAA12D72A3C60EB00C5308D /* ProfileTableViewCell.swift in Sources */,
 				9DA945BD2A332A330074D3FC /* TabBarController.swift in Sources */,
 				9D24EB382A3AF52B008372AC /* DetaiMoviesCollectionViewCell.swift in Sources */,
 				9DA1C9842A3ACFD0009FDEAD /* TheCastCollectionViewCell.swift in Sources */,
@@ -821,7 +849,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = P4XWF3FX86;
+				DEVELOPMENT_TEAM = 4QZ97XH7T7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MovieApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -835,7 +863,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Hn.MovieApp1;
+				PRODUCT_BUNDLE_IDENTIFIER = Hn.MovieApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -853,7 +881,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = P4XWF3FX86;
+				DEVELOPMENT_TEAM = 4QZ97XH7T7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MovieApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -867,7 +895,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Hn.MovieApp1;
+				PRODUCT_BUNDLE_IDENTIFIER = Hn.MovieApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
