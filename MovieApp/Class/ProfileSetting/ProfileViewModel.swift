@@ -10,6 +10,7 @@ import Combine
 
 class ProfileViewModel {
     let userPublisher = PassthroughSubject<UserResponse, Never>()
+    let dosomething = CurrentValueSubject<String?,Never>(nil)
     func fetchUser() {
         FirebaseManager.shared.fecthUserData { [weak self] userResponse in
             guard let `self` = self else { return }
@@ -20,6 +21,15 @@ class ProfileViewModel {
                     break
                 }
             }
+        }
+    }
+    
+    func logoutUser() {
+        FirebaseManager.shared.logout {
+            dosomething.send("Logout")
+            let userID = UserDefaultManager.shared.setCurrentUserID()
+            FirebaseManager.shared.changeStateForUser(with: userID, isActive: false)
+            UserDefaultManager.shared.getIdUser("")
         }
     }
 }

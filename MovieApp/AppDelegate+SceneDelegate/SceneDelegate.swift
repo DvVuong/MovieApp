@@ -19,6 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             windows.rootViewController = UINavigationController(rootViewController: LoginViewController())
         }else {
             windows.rootViewController = UINavigationController(rootViewController: TabBarController())
+            FirebaseManager.shared.changeStateForUser(with: id, isActive: true)
         }
         windows.makeKeyAndVisible()
         self.window = windows

@@ -10,5 +10,6 @@ target 'MovieApp' do
   pod 'Toaster'
   pod 'FirebaseStorage'
   pod 'CardTabBar'
+  pod 'SnapKit', '~> 5.6.0'
   # Pods for MovieApp
 end

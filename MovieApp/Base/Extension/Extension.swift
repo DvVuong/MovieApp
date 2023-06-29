@@ -21,6 +21,11 @@ extension UIButton {
 }
 
 extension UIView {
+    func setupBoderWidth(with boderWidth: CGFloat, color: CGColor) {
+        self.layer.borderWidth = boderWidth
+        self.layer.borderColor = color
+    }
+    
     func cornerRadius(_ height: CGFloat) {
         self.layer.cornerRadius = height
     }

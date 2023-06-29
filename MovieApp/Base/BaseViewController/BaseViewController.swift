@@ -8,7 +8,6 @@
 import UIKit
 
 class BaseViewController: UIViewController {
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -21,6 +20,19 @@ class BaseViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         self.view.endEditing(true)
+    }
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        print("=====>",self.nibName ?? "")
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        print("<========",self.nibName ?? "")
     }
     
     func setupUI() {}

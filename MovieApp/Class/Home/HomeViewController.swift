@@ -42,10 +42,6 @@ class HomeViewController: BaseViewController {
         }
     }
     
-    override func viewWillLayoutSubviews() {
-
-    }
-    
     override func setupUI() {
         avatarImage.cornerRadius(avatarImage.frame.size.height / 2)
         notificationView.cornerRadius(10)
