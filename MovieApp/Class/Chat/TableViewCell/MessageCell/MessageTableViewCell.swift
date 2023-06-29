@@ -19,7 +19,6 @@ class MessageTableViewCell: UITableViewCell {
         // Initialization code
         imageAvatar.cornerRadius(imageAvatar.frame.height / 2)
         imageAvatar.setupBoderWidth(with: 1, color: UIColor.black.cgColor)
-        print("vuongdv")
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
