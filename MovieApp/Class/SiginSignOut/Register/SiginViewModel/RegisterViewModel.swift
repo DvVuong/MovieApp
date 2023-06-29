@@ -42,7 +42,7 @@ final class RegisterViewModel {
     func resgisterAccount(with email: String, password: String, username: String , completion: @escaping (Bool) -> Void) {
         FirebaseManager.shared.resgiterAccount(with: email, password: password) { authDataResult, error in
             guard authDataResult == nil else {
-                FirebaseManager.shared.createAccountForstorage(authDataResult?.user.email ?? "", userName: username, id: authDataResult?.user.uid ?? "")
+                FirebaseManager.shared.createAccount(authDataResult?.user.email ?? "", userName: username, id: authDataResult?.user.uid ?? "", isActive: true)
                 completion(true)
                 return
             }
@@ -55,6 +55,7 @@ final class RegisterViewModel {
             guard authDataResult == nil else  {
                 completion(true)
                 UserDefaultManager.shared.getCurrentUserID(authDataResult?.user.uid ?? "")
+                FirebaseManager.shared.changeStateForUser(with: authDataResult?.user.uid ?? "", isActive: true)
                 return
             }
             completion(false)

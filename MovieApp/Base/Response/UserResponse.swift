@@ -11,11 +11,15 @@ class UserResponse {
     var email: String?
     var id: String?
     var userName: String?
+    var active: Bool?
+    var imageUrl: String?
     
-    init(email: String? = nil, id: String? = nil, userName: String? = nil) {
+    init(email: String? = nil, id: String? = nil, userName: String? = nil, active: Bool? = nil, imageUrl: String? = nil) {
         self.email = email
         self.id = id
         self.userName = userName
+        self.active = active
+        self.imageUrl = imageUrl
     }
     
     convenience init (json: [String: Any]) {
@@ -31,6 +35,12 @@ class UserResponse {
             case "userName":
                 let wrapValue = value as? String
                 self.userName = wrapValue
+            case "acitve":
+                let wrapValue = value as? Bool
+                self.active = wrapValue
+            case "imageUrl":
+                let wrapValue = value as? String
+                self.imageUrl = wrapValue
             default:
                 break
             }
@@ -42,6 +52,7 @@ class UserResponse {
             "id" : self.id,
             "email" : self.email,
             "userName" : self.userName,
+            "active": self.active
         ] as [String: Any]
     }
 }

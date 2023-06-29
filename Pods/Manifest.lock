@@ -717,6 +717,7 @@ PODS:
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
   - PromisesObjC (2.1.1)
+  - SnapKit (5.6.0)
   - SwiftGen (6.6.2)
   - Toaster (2.3.0)
 
@@ -725,6 +726,7 @@ DEPENDENCIES:
   - FirebaseAuth
   - FirebaseFirestore
   - FirebaseStorage
+  - SnapKit (~> 5.6.0)
   - SwiftGen (~> 6.0)
   - Toaster
 
@@ -749,6 +751,7 @@ SPEC REPOS:
     - Libuv-gRPC
     - nanopb
     - PromisesObjC
+    - SnapKit
     - SwiftGen
     - Toaster
 
@@ -772,9 +775,10 @@ SPEC CHECKSUMS:
   Libuv-gRPC: 55e51798e14ef436ad9bc45d12d43b77b49df378
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SwiftGen: 1366a7f71aeef49954ca5a63ba4bef6b0f24138c
   Toaster: c3473963c78e8cabbf6ea6f11ad0fdaae6f54987
 
-PODFILE CHECKSUM: 844d913e2f2668c59c4c126dec8fcaa8a885ec1e
+PODFILE CHECKSUM: 8d47ff70a138b4c4e28fb912ded33fc46c793e79
 
 COCOAPODS: 1.11.3

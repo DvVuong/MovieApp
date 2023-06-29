@@ -45,6 +45,13 @@ class TabBarController: CardTabBarController {
         return navController
     }()
     
+    lazy var chatTab: UIViewController = {
+        let chatTabItem = UITabBarItem(title: "Chat", image: UIImage(systemName: "message.fill"), selectedImage: nil)
+        let naviController = NavigationController(rootViewController: ChatViewController())
+        naviController.tabBarItem = chatTabItem
+        return naviController
+    }()
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,7 +73,7 @@ class TabBarController: CardTabBarController {
     }
     
     private func setupViewController() {
-        viewControllers = [homeTab, bookTab, editTab, notificationTab, moreTab]
+        viewControllers = [homeTab, bookTab, editTab, chatTab, moreTab]
     }
 
 }
