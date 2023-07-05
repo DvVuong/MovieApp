@@ -13,7 +13,7 @@ import SnapKit
 class CustomNavigationHeader: UIView {
     lazy var backButton: UIButton = {
        let button = UIButton()
-        button.setImage(Asset.icons8BackWhite.image, for: .normal)
+        button.setImage(Asset.icons8BackBlack.image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -56,7 +56,7 @@ class CustomNavigationHeader: UIView {
             make.centerX.equalToSuperview()
         }
         
-        
+       updateConstraintsIfNeeded()
     }
 
     func customItemView(with leftButton: UIButton, title: UILabel) {

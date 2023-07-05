@@ -31,6 +31,7 @@ internal enum Asset {
   internal static let colorIndicator = ColorAsset(name: "color_indicator")
   internal static let colorShadow = ColorAsset(name: "color_shadow")
   internal static let icons8Back50 = ImageAsset(name: "icons8-back-50")
+  internal static let icons8BackBlack = ImageAsset(name: "icons8-back-black")
   internal static let icons8BackWhite = ImageAsset(name: "icons8-back-white")
   internal static let icons8Lock128 = ImageAsset(name: "icons8-lock-128()")
   internal static let icons8Movie50 = ImageAsset(name: "icons8-movie-50")
