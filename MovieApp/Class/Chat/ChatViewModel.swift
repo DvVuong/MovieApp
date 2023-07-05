@@ -11,10 +11,19 @@ import Combine
 class ChatViewModel {
     let messagePublisher = PassthroughSubject<[MessageResponse], Never>()
     let userPublisher = PassthroughSubject<[UserResponse], Never>()
+    let currentUser = UserDefaultManager.shared.setCurrentUserID()
+    let reloadData = PassthroughSubject<Void, Never>()
+    
+    func fetchUser() {
+        FirebaseManager.shared.fecthUserData { [weak self] arrays in
+            guard let `self` = self else {return}
+            let user = arrays.filter { $0.id != self.currentUser}
+            self.userPublisher.send(user)
+        }
+    }
     
     func deMozip() {
     var messageArr = [MessageResponse]()
-    var userArry = [UserResponse]()
     
     let arr1 = MessageResponse(text: "a",
                                time: 0,
@@ -25,16 +34,6 @@ class ChatViewModel {
                                imageurl: "d")
     
     messageArr.append(arr1)
-        
-        messagePublisher.send(messageArr)
-    
-    let arr2 = UserResponse(email: "asd",
-                            id: "d",
-                            userName: "s",
-                            active: true,
-                            imageUrl: "d")
-    userArry.append(arr2)
-        userPublisher.send(userArry)
-        
+    messagePublisher.send(messageArr)
     }
 }

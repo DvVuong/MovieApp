@@ -35,7 +35,7 @@ class UserResponse {
             case "userName":
                 let wrapValue = value as? String
                 self.userName = wrapValue
-            case "acitve":
+            case "active":
                 let wrapValue = value as? Bool
                 self.active = wrapValue
             case "imageUrl":

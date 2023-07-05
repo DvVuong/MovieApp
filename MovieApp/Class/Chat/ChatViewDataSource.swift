@@ -8,22 +8,25 @@
 import UIKit
 
 class ChatViewDataSource: UITableViewController {
+    public var didGetReciverUser: ((UserResponse) -> Void)? = nil
     private enum CellType {
-        case userActive(model: [UserResponse])
-        case message(model: [MessageResponse])
+        case userActive
+        case message
      }
     
-    private var data: [MessageResponse] = [MessageResponse]()
     private var userData: [UserResponse] = [UserResponse]()
-    private var sections = [CellType]()
+    private var data: [MessageResponse] = [MessageResponse]()
+    private var sections: [CellType] = [
+        .userActive,
+        .message
+    ]
     
-    func setTableView(_ tableView: UITableView, list: [MessageResponse], userList: [UserResponse]) {
-        self.data = list
+    func setTableView(_ tableView: UITableView, userList: [UserResponse]) {
         self.userData = userList
-        
-        sections.append(.userActive(model: userData))
-        sections.append(.message(model: data))
-        
+    }
+    
+    func setTableView(_ tableView: UITableView, listMessage: [MessageResponse]) {
+        self.data = listMessage
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -32,26 +35,29 @@ class ChatViewDataSource: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch sections[section] {
-        case .userActive(_):
+        case .userActive:
             return 1
-        case .message(let model):
-            return 2
+        case .message:
+            return data.count
         }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch sections[indexPath.section] {
-        case .userActive(let model):
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "UserActiveTableViewCell", for: indexPath) as? UserActiveTableViewCell else {
-                return fatalError() as! UITableViewCell
+        case .userActive:
+             let cell = tableView.dequeueReusableCell(withIdentifier: "UserActiveTableViewCell", for: indexPath) as! UserActiveTableViewCell
+            cell.setupColletionView(self.userData)
+            cell.didChooserReciverUser()
+            cell.reciverUser = {[weak self] user in
+                guard let `self` = self else {return}
+                self.didGetReciverUser?(user)
             }
-            cell.setupColletionView()
+            cell.selectionStyle = .none
             return cell
-        case .message(let model):
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell", for: indexPath) as? MessageTableViewCell else {
-                return fatalError() as! UITableViewCell
-            }
-            cell.nameLabel.text = "Admin"
+        case .message:
+             let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell", for: indexPath) as! MessageTableViewCell
+            cell.bindData(data[indexPath.row])
+            cell.selectionStyle = .none
             return cell
         }
     }

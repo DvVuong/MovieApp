@@ -11,12 +11,14 @@ final class MessageResponse {
     var text: String?
     var time: Double?
     var nameSender: String?
+    var senderAvatar: String?
     var idSender: String?
     var reciveName: String?
+    var reciverAvatar: String?
     var idRecive: String?
     var imageUrl: String?
     
-    init(text: String? = nil, time: Double? = nil, nameSender: String? = nil, idSender: String? = nil, reciveName: String? = nil, idRecive: String? = nil, imageurl: String? = nil) {
+    init(text: String? = nil, time: Double? = nil, nameSender: String? = nil, senderAvatar: String? = nil ,idSender: String? = nil, reciveName: String? = nil, reciverAvatar: String? = nil ,idRecive: String? = nil, imageurl: String? = nil) {
         self.text = text
         self.time = time
         self.nameSender = nameSender
@@ -24,6 +26,8 @@ final class MessageResponse {
         self.reciveName = reciveName
         self.idRecive = idRecive
         self.imageUrl = imageurl
+        self.senderAvatar = senderAvatar
+        self.reciverAvatar = reciverAvatar
     }
     
     convenience init(json: [String: Any]) {
@@ -36,10 +40,14 @@ final class MessageResponse {
                 self.time = value as? Double
             case "nameSender":
                 self.nameSender = value as? String
+            case "senderAvatar":
+                self.senderAvatar = value as? String
             case "idSender":
                 self.idSender = value as? String
             case "reciveName":
                 self.reciveName = value as? String
+            case "reciverAvatar":
+                self.reciverAvatar = value as? String
             case "idRecive":
                 self.idRecive = value as? String
             case "imageUrl":
@@ -58,7 +66,9 @@ final class MessageResponse {
             "idSender": self.idSender as Any,
             "reciveName": self.reciveName as Any,
             "idRecive": self.idRecive as Any,
-            "imageUrl": self.imageUrl as Any
+            "imageUrl": self.imageUrl as Any,
+            "reciverAvatar": self.reciverAvatar as Any,
+            "senderAvatar": self.senderAvatar as Any
         ]
     }
 }

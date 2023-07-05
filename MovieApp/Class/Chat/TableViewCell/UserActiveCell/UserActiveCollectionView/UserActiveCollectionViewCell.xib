@@ -12,24 +12,24 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="UserActiveCollectionViewCell" customModule="MovieApp" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="209" height="178"/>
+            <rect key="frame" x="0.0" y="0.0" width="174" height="115"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="209" height="178"/>
+                <rect key="frame" x="0.0" y="0.0" width="174" height="115"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jkh-1h-KX8">
-                        <rect key="frame" x="0.0" y="0.0" width="209" height="178"/>
+                        <rect key="frame" x="0.0" y="0.0" width="174" height="115"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Space art wallpapers" translatesAutoresizingMaskIntoConstraints="NO" id="JM8-hU-mjp">
-                                <rect key="frame" x="64.5" y="10" width="80" height="80"/>
+                                <rect key="frame" x="47" y="10" width="80" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="JM8-hU-mjp" secondAttribute="height" id="gDw-og-gax"/>
                                     <constraint firstAttribute="width" constant="80" id="xT3-z6-3eV"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XCi-e0-q7h">
-                                <rect key="frame" x="20" y="92" width="169" height="20.5"/>
+                                <rect key="frame" x="20" y="92" width="134" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -45,7 +45,7 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="x1p-oL-JHw" secondAttribute="trailing" constant="55" id="5dk-PM-vZW"/>
+                            <constraint firstAttribute="trailing" secondItem="x1p-oL-JHw" secondAttribute="trailing" constant="20" id="5dk-PM-vZW"/>
                             <constraint firstAttribute="trailing" secondItem="XCi-e0-q7h" secondAttribute="trailing" constant="20" id="Byg-2Q-aL3"/>
                             <constraint firstItem="JM8-hU-mjp" firstAttribute="centerX" secondItem="jkh-1h-KX8" secondAttribute="centerX" id="DGw-CJ-6P2"/>
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="XCi-e0-q7h" secondAttribute="bottom" id="HCU-Pd-Km8"/>
@@ -64,13 +64,13 @@
                 <constraint firstAttribute="bottom" secondItem="jkh-1h-KX8" secondAttribute="bottom" id="NNU-Yw-XHd"/>
                 <constraint firstItem="jkh-1h-KX8" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="YLo-uu-zuc"/>
             </constraints>
-            <size key="customSize" width="209" height="178"/>
+            <size key="customSize" width="174" height="115"/>
             <connections>
                 <outlet property="imageActive" destination="x1p-oL-JHw" id="vh8-TG-JPJ"/>
                 <outlet property="imageAvatar" destination="JM8-hU-mjp" id="yQg-aO-K1f"/>
                 <outlet property="nameLabel" destination="XCi-e0-q7h" id="PiW-aL-Eu0"/>
             </connections>
-            <point key="canvasLocation" x="247.10144927536234" y="103.79464285714285"/>
+            <point key="canvasLocation" x="221.73913043478262" y="82.700892857142847"/>
         </collectionViewCell>
     </objects>
     <resources>

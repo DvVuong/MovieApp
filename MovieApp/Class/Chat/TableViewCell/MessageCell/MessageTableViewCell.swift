@@ -19,6 +19,9 @@ class MessageTableViewCell: UITableViewCell {
         // Initialization code
         imageAvatar.cornerRadius(imageAvatar.frame.height / 2)
         imageAvatar.setupBoderWidth(with: 1, color: UIColor.black.cgColor)
+        
+        imageActive.cornerRadius(imageActive.frame.height / 2)
+        imageActive.setupBoderWidth(with: 2, color: UIColor.white.cgColor)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -27,7 +30,7 @@ class MessageTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func bindData() {
-        
+    func bindData(_ messgae: MessageResponse) {
+        nameLabel.text = messgae.nameSender ?? ""
     }
 }
