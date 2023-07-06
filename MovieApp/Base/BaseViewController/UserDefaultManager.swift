@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import SwiftUI
 class UserDefaultManager {
     static let shared = UserDefaultManager()
     private let _idUser = "UserID"
     private let _idCurrentUSer = "CurrentUserID"
+    private let _curentUser = "CurrentUser"
     
     func getIdUser(_ id: String) {
         UserDefaults.standard.set(id, forKey: _idUser)
@@ -22,8 +24,30 @@ class UserDefaultManager {
     func getCurrentUserID(_ id: String) {
         UserDefaults.standard.set(id, forKey: _idCurrentUSer)
     }
+    
     func setCurrentUserID() -> String {
         return UserDefaults.standard.string(forKey: _idCurrentUSer) ?? ""
     }
     
+    func setCurrentUser(_ currentUser: UserResponse) {
+        do {
+            let encoderData = try PropertyListEncoder().encode(currentUser)
+            UserDefaults.standard.set(encoderData, forKey: _curentUser)
+        }
+        catch (let error) {
+            print("vuongdv", error.localizedDescription)
+        }
+    }
+    
+    func getCurrentUsert() -> UserResponse {
+        do {
+            let data = UserDefaults.standard.value(forKey: _curentUser) as! Data
+            let objc = try PropertyListDecoder().decode(UserResponse.self, from: data)
+            return objc
+        }
+        catch (let error){
+            print("vuongdv", error.localizedDescription)
+        }
+        return UserResponse()
+    }
 }

@@ -71,17 +71,29 @@ class FirebaseManager {
     
     func createMessage(_ text: String, sender: UserResponse, reciver: UserResponse) {
         let time = Date().timeIntervalSince1970
+        let messageKey = _db.collection(_message).document().documentID
+        let document = _db.collection(_message)
+            .document(sender.id ?? "")
+            .collection(reciver.id ?? "")
+            .document()
+        
         let data: [String: Any] = [
             "text" : text,
-            "nameSender" : sender.userName,
-            "nameReciver" : reciver.userName,
-            "timeSend": time
-            
+            "nameSender" : sender.userName as Any,
+            "nameReciver" : reciver.userName as Any,
+            "timeSend": time,
+            "message": messageKey
         ]
-        _db.collection(_message).document(sender.id ?? "").collection(reciver.id ?? "").addDocument(data: data)
+        document.setData(data)
+        let reciverDocument = _db.collection(_message)
+            .document(reciver.id ?? "")
+            .collection(sender.id ?? "")
+            .document()
+        
+        reciverDocument.setData(data)
     }
     
-//    func fecthMessage(_ sender: UserResponse, reciver: UserResponse) {
-//        _db.collection(_message).
-//    }
+    func fecthMessage(_ sender: UserResponse, reciver: UserResponse) {
+        
+    }
 }

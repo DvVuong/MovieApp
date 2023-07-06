@@ -18,6 +18,7 @@ class HomeViewModel {
             for i in userResponse {
                 if i.id == currentUserID {
                     self.userPublisher.send(i)
+                    UserDefaultManager.shared.setCurrentUser(i)
                     break
                 }
             }

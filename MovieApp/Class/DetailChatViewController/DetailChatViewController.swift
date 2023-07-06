@@ -24,8 +24,10 @@ class DetailChatViewController: BaseViewController {
     @IBOutlet weak var heightContrainsBottomView: NSLayoutConstraint!
     
     private let dataSource: DetailDataSource = DetailDataSource()
+    private let viewModel: DetailChatViewModel = DetailChatViewModel()
     convenience init(reciverUser: UserResponse) {
         self.init()
+        viewModel.reciverUserPassthroughSubject.send(reciverUser)
     }
     
     override func viewWillLayoutSubviews() {
@@ -69,6 +71,7 @@ class DetailChatViewController: BaseViewController {
         photoButton.addTarget(self, action: #selector(didTaButton(_:)), for: .touchUpInside)
         recordingButton.addTarget(self, action: #selector(didTaButton(_:)), for: .touchUpInside)
         collapseButton.addTarget(self, action: #selector(didTaButton(_:)), for: .touchUpInside)
+        sendButton.addTarget(self, action: #selector(didTaButton(_:)), for: .touchUpInside)
         
     }
     
@@ -83,6 +86,8 @@ class DetailChatViewController: BaseViewController {
             self.startRecoding()
         }else if sender === collapseButton {
             self.handelCollapse()
+        }else if sender === sendButton {
+            sendMessage()
         }
     }
     
@@ -100,6 +105,10 @@ class DetailChatViewController: BaseViewController {
     
     private func handelCollapse() {
         
+    }
+    
+    private func sendMessage() {
+        viewModel.createMessage("Firts Message")
     }
     
 }
