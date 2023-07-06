@@ -7,7 +7,7 @@
 
 import Foundation
 
-class UserResponse {
+class UserResponse: Codable {
     var email: String?
     var id: String?
     var userName: String?
