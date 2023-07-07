@@ -16,6 +16,7 @@ class FirebaseManager {
     private let _user = "User"
     private let _message = "Message"
     private var _arrayUser = [UserResponse]()
+    private var _arrayMessage = [MessageResponse]()
     
     func resgiterAccount(with email: String, password: String, completion: @escaping(AuthDataResult?, Error?) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
@@ -82,8 +83,10 @@ class FirebaseManager {
             "nameSender" : sender.userName as Any,
             "nameReciver" : reciver.userName as Any,
             "timeSend": time,
-            "message": messageKey
+            "message": messageKey,
+            "typeMessage": 0
         ]
+        
         document.setData(data)
         let reciverDocument = _db.collection(_message)
             .document(reciver.id ?? "")
@@ -93,7 +96,20 @@ class FirebaseManager {
         reciverDocument.setData(data)
     }
     
-    func fecthMessage(_ sender: UserResponse, reciver: UserResponse) {
-        
+    func fecthMessage(_ sender: UserResponse, reciver: UserResponse, completion: @escaping ([MessageResponse]) -> Void) {
+        self._arrayMessage.removeAll()
+        _db.collection(_message).document(sender.id ?? "").collection(reciver.id ?? "").addSnapshotListener {[weak self] dataSnapShot, error in
+            guard let `self` = self else {return}
+            if error != nil { return }
+            guard let dataSnapShot = dataSnapShot else  {return}
+            
+            for i in dataSnapShot.documentChanges {
+                if i.type == .added || i.type == .removed {
+                    let message = MessageResponse(json: i.document.data())
+                    self._arrayMessage.append(message)
+                }
+            }
+            completion(self._arrayMessage)
+        }
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class DetailChatViewController: BaseViewController {
     
@@ -25,6 +26,7 @@ class DetailChatViewController: BaseViewController {
     
     private let dataSource: DetailDataSource = DetailDataSource()
     private let viewModel: DetailChatViewModel = DetailChatViewModel()
+    private var store = Set<AnyCancellable>()
     convenience init(reciverUser: UserResponse) {
         self.init()
         viewModel.reciverUserPassthroughSubject.send(reciverUser)
@@ -41,6 +43,32 @@ class DetailChatViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+        setupViewModel()
+        viewModel.fetchMessage()
+      
+    }
+    
+    override func setupViewModel() {
+//        viewModel.fetchMessage()
+//            .receive(on: DispatchQueue.main)
+//            .sink { completion in
+//            switch completion {
+//            case .finished:
+//                print("vuongdv completed fetch Message")
+//            case .failure(let error):
+//                print("vuongdv fetch message failure message with", error.localizedDescription)
+//            }
+//        } receiveValue: { [weak self] data in
+//            guard let `self` = self  else {return}
+//            self.dataSource.setupTableView(self.messageTableView, list: data)
+//            self.messageTableView.reloadData()
+//        }.store(in: &store)
+        
+        viewModel.message.sink(receiveValue: {[weak self] data in
+            guard let `self` = self else {return}
+            self.dataSource.setupTableView(self.messageTableView, list: data ?? [])
+            self.messageTableView.reloadData()
+        }).store(in: &store)
     }
     
     private func setupTableView() {
@@ -49,20 +77,20 @@ class DetailChatViewController: BaseViewController {
         messageTableView.separatorStyle = .none
         
         messageTableView.register(UINib(nibName: "ConvertionTableViewCell", bundle: nil), forCellReuseIdentifier: "ConvertionTableViewCell")
-        let m1 = MessageResponse(text: "abcasdasdasdasdasdasdasdasdasdasdasdasdasdasdqwdewfdweferferf",
-                                 time: 0,
-                                 nameSender: "",
-                                 senderAvatar: "",
-                                 idSender: "",
-                                 reciveName: "",
-                                 reciverAvatar: "",
-                                 idRecive: "",
-                                 imageurl: "")
-        
-        var arr = [MessageResponse]()
-        arr.append(m1)
-        
-        dataSource.setupTableView(messageTableView, list: arr)
+//        let m1 = MessageResponse(text: "abcasdasdasdasdasdasdasdasdasdasdasdasdasdasdqwdewfdweferferf",
+//                                 time: 0,
+//                                 nameSender: "",
+//                                 senderAvatar: "",
+//                                 idSender: "",
+//                                 reciveName: "",
+//                                 reciverAvatar: "",
+//                                 idRecive: "",
+//                                 imageurl: "")
+//
+//        var arr = [MessageResponse]()
+//        arr.append(m1)
+//
+//        dataSource.setupTableView(messageTableView, list: arr)
     }
     
     override func setupTap() {
@@ -108,6 +136,7 @@ class DetailChatViewController: BaseViewController {
     }
     
     private func sendMessage() {
+        print("vuongdv SendMessage")
         viewModel.createMessage("Firts Message")
     }
     
