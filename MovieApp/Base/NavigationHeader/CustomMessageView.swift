@@ -54,7 +54,7 @@ class CustomMessageView: UIView {
             make.top.equalTo(5)
             make.bottom.equalTo(-5)
             make.trailing.greaterThanOrEqualTo(avatarImage.snp.leading).offset(-10)
-            make.width.equalTo(250)
+            make.width.lessThanOrEqualTo(250)
         }
         updateConstraintsIfNeeded()
     }
@@ -76,7 +76,7 @@ class CustomMessageView: UIView {
             make.top.equalTo(5)
             make.bottom.equalTo(-5)
             make.leading.greaterThanOrEqualTo(avatarImage.snp.trailing).offset(5)
-            make.width.equalTo(250)
+            make.width.lessThanOrEqualTo(250)
         }
         
         updateConstraintsIfNeeded()
