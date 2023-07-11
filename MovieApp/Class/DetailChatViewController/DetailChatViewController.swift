@@ -9,7 +9,6 @@ import UIKit
 import Combine
 
 class DetailChatViewController: BaseViewController {
-    
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var avatarImage: UIImageView!
     @IBOutlet weak var stateImage: UIImageView!
@@ -23,6 +22,9 @@ class DetailChatViewController: BaseViewController {
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var messageTableView: UITableView!
     @IBOutlet weak var heightContrainsBottomView: NSLayoutConstraint!
+    
+    @IBOutlet weak var heigthContrainViewBottom: NSLayoutConstraint!
+    
     
     private let dataSource: DetailDataSource = DetailDataSource()
     private let viewModel: DetailChatViewModel = DetailChatViewModel()
@@ -45,25 +47,9 @@ class DetailChatViewController: BaseViewController {
         setupTableView()
         setupViewModel()
         viewModel.fetchMessage()
-      
     }
     
     override func setupViewModel() {
-//        viewModel.fetchMessage()
-//            .receive(on: DispatchQueue.main)
-//            .sink { completion in
-//            switch completion {
-//            case .finished:
-//                print("vuongdv completed fetch Message")
-//            case .failure(let error):
-//                print("vuongdv fetch message failure message with", error.localizedDescription)
-//            }
-//        } receiveValue: { [weak self] data in
-//            guard let `self` = self  else {return}
-//            self.dataSource.setupTableView(self.messageTableView, list: data)
-//            self.messageTableView.reloadData()
-//        }.store(in: &store)
-        
         viewModel.message.sink(receiveValue: {[weak self] data in
             guard let `self` = self else {return}
             self.dataSource.setupTableView(self.messageTableView, list: data ?? [])
@@ -75,22 +61,8 @@ class DetailChatViewController: BaseViewController {
         messageTableView.delegate = dataSource
         messageTableView.dataSource = dataSource
         messageTableView.separatorStyle = .none
-        
         messageTableView.register(UINib(nibName: "ConvertionTableViewCell", bundle: nil), forCellReuseIdentifier: "ConvertionTableViewCell")
-//        let m1 = MessageResponse(text: "abcasdasdasdasdasdasdasdasdasdasdasdasdasdasdqwdewfdweferferf",
-//                                 time: 0,
-//                                 nameSender: "",
-//                                 senderAvatar: "",
-//                                 idSender: "",
-//                                 reciveName: "",
-//                                 reciverAvatar: "",
-//                                 idRecive: "",
-//                                 imageurl: "")
-//
-//        var arr = [MessageResponse]()
-//        arr.append(m1)
-//
-//        dataSource.setupTableView(messageTableView, list: arr)
+        messageTableView.register(UINib(nibName: "ReciverUserTableViewCell", bundle: nil), forCellReuseIdentifier: "ReciverUserTableViewCell")
     }
     
     override func setupTap() {
@@ -100,7 +72,6 @@ class DetailChatViewController: BaseViewController {
         recordingButton.addTarget(self, action: #selector(didTaButton(_:)), for: .touchUpInside)
         collapseButton.addTarget(self, action: #selector(didTaButton(_:)), for: .touchUpInside)
         sendButton.addTarget(self, action: #selector(didTaButton(_:)), for: .touchUpInside)
-        
     }
     
     @objc private func didTaButton(_ sender: UIButton) {
@@ -136,8 +107,25 @@ class DetailChatViewController: BaseViewController {
     }
     
     private func sendMessage() {
+        let messageType = MessageType(type: 0)
         print("vuongdv SendMessage")
-        viewModel.createMessage("Firts Message")
+        viewModel.createMessage(textView.text, messagetye: messageType)
     }
     
+}
+
+extension DetailChatViewController {
+    override func keyBoardWillShow(_ sender: Notification) {
+        print("vuongdv keyBoardWillShow")
+        let keyboardframe = (sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey]! as! NSValue).cgRectValue.height
+        self.heigthContrainViewBottom.constant = keyboardframe + 10
+        print("vuongdv \(self.heigthContrainViewBottom.constant) ")
+        print("vuongdv \(keyboardframe) ")
+        self.view.layoutIfNeeded()
+    }
+    override func keyBoardWillHide(_ sender: Notification) {
+        print("vuongdv keyBoardWillHide")
+        self.heigthContrainViewBottom.constant = view.safeAreaInsets.bottom
+        self.view.layoutIfNeeded()
+    }
 }

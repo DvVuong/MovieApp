@@ -9,6 +9,14 @@
 import UIKit
 class DetailDataSource: UITableViewController {
     
+//    var messageArrays: [MessageResponse]? = nil {
+//        didSet {
+//           data = messageArrays ?? []
+//
+//            tableView.reloadData()
+//        }
+//    }
+    
     private var data = [MessageResponse]()
     
     func setupTableView(_ tabelView: UITableView, list: [MessageResponse]) {
@@ -20,9 +28,16 @@ class DetailDataSource: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ConvertionTableViewCell", for: indexPath) as! ConvertionTableViewCell
+        let currentId = UserDefaultManager.shared.setCurrentUserID()
         let item = data[indexPath.row]
-        cell.bindData(item)
-        return cell
+        if item.idSender == currentId {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ConvertionTableViewCell", for: indexPath) as! ConvertionTableViewCell
+            cell.bindData(item)
+            return cell
+        }else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ReciverUserTableViewCell", for: indexPath) as! ReciverUserTableViewCell
+            cell.bindDataToView(with: item)
+            return cell
+        }
     }
 }

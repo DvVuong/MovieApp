@@ -19,7 +19,9 @@ class HomeViewModel {
                 if i.id == currentUserID {
                     self.userPublisher.send(i)
                     UserDefaultManager.shared.setCurrentUser(i)
-                    break
+//                    break
+                }else {
+                    UserDefaultManager.shared.setPartnerUser(i)
                 }
             }
         }

@@ -66,6 +66,7 @@
 		E246A50D2A51E44900D3CF6C /* DetailDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E246A50C2A51E44900D3CF6C /* DetailDataSource.swift */; };
 		E2801B842A55C61D00C1B0AD /* DetailChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2801B832A55C61C00C1B0AD /* DetailChatViewModel.swift */; };
 		E2A209922A49F132003DF2D9 /* CustomNavigationHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A209912A49F131003DF2D9 /* CustomNavigationHeader.swift */; };
+		E2AA0B9C2A5C54C000F93091 /* MessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AA0B9B2A5C54C000F93091 /* MessageType.swift */; };
 		E2AAE43D2A2346C2004CFE0C /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AAE43B2A2346C2004CFE0C /* RegisterController.swift */; };
 		E2AAE43E2A2346C2004CFE0C /* RegisterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2AAE43C2A2346C2004CFE0C /* RegisterController.xib */; };
 		E2AAE4422A2352EA004CFE0C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AAE4412A2352EA004CFE0C /* BaseViewController.swift */; };
@@ -94,6 +95,8 @@
 		E2BA05D72A4EA73B00F81D2E /* ListUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BA05D52A4EA73B00F81D2E /* ListUserTableViewCell.swift */; };
 		E2BA05D82A4EA73B00F81D2E /* ListUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2BA05D62A4EA73B00F81D2E /* ListUserTableViewCell.xib */; };
 		E2BA05DA2A4EA7A300F81D2E /* ListUserDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BA05D92A4EA7A300F81D2E /* ListUserDataSource.swift */; };
+		E2D174B82A5D311B0013C63B /* ReciverUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D174B62A5D311B0013C63B /* ReciverUserTableViewCell.swift */; };
+		E2D174B92A5D311B0013C63B /* ReciverUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2D174B72A5D311B0013C63B /* ReciverUserTableViewCell.xib */; };
 		E2E4CDFD2A358F8E0011259B /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4CDFC2A358F8E0011259B /* Assets.swift */; };
 /* End PBXBuildFile section */
 
@@ -161,6 +164,7 @@
 		E246A50C2A51E44900D3CF6C /* DetailDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDataSource.swift; sourceTree = "<group>"; };
 		E2801B832A55C61C00C1B0AD /* DetailChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailChatViewModel.swift; sourceTree = "<group>"; };
 		E2A209912A49F131003DF2D9 /* CustomNavigationHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationHeader.swift; sourceTree = "<group>"; };
+		E2AA0B9B2A5C54C000F93091 /* MessageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MessageType.swift; path = MovieApp/Class/DetailChatViewController/MessageType.swift; sourceTree = SOURCE_ROOT; };
 		E2AAE43B2A2346C2004CFE0C /* RegisterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
 		E2AAE43C2A2346C2004CFE0C /* RegisterController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterController.xib; sourceTree = "<group>"; };
 		E2AAE4412A2352EA004CFE0C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -189,6 +193,8 @@
 		E2BA05D52A4EA73B00F81D2E /* ListUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListUserTableViewCell.swift; sourceTree = "<group>"; };
 		E2BA05D62A4EA73B00F81D2E /* ListUserTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListUserTableViewCell.xib; sourceTree = "<group>"; };
 		E2BA05D92A4EA7A300F81D2E /* ListUserDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListUserDataSource.swift; sourceTree = "<group>"; };
+		E2D174B62A5D311B0013C63B /* ReciverUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReciverUserTableViewCell.swift; sourceTree = "<group>"; };
+		E2D174B72A5D311B0013C63B /* ReciverUserTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReciverUserTableViewCell.xib; sourceTree = "<group>"; };
 		E2E4CDFC2A358F8E0011259B /* Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -445,6 +451,7 @@
 		E246A5012A51D6E900D3CF6C /* TableViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				E2D174B32A5D2EF70013C63B /* ReciverUserMessage */,
 				E246A5082A51DD0900D3CF6C /* ConvertionTableViewCell.swift */,
 				E246A5092A51DD0900D3CF6C /* ConvertionTableViewCell.xib */,
 			);
@@ -458,6 +465,14 @@
 				E246A5062A51DB4500D3CF6C /* CustomMessageView.swift */,
 			);
 			path = NavigationHeader;
+			sourceTree = "<group>";
+		};
+		E2AA0B9A2A5C545700F93091 /* RequetsParam */ = {
+			isa = PBXGroup;
+			children = (
+				E2AA0B9B2A5C54C000F93091 /* MessageType.swift */,
+			);
+			path = RequetsParam;
 			sourceTree = "<group>";
 		};
 		E2AAE4382A234579004CFE0C /* Resources */ = {
@@ -490,6 +505,7 @@
 		E2AAE43F2A2352B5004CFE0C /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				E2AA0B9A2A5C545700F93091 /* RequetsParam */,
 				E2099A8C2A4D39D300CCC3A0 /* ImageManager */,
 				E2A209902A49F0D2003DF2D9 /* NavigationHeader */,
 				9DA1C97E2A3AB3B7009FDEAD /* CustomView */,
@@ -678,6 +694,15 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
+		E2D174B32A5D2EF70013C63B /* ReciverUserMessage */ = {
+			isa = PBXGroup;
+			children = (
+				E2D174B62A5D311B0013C63B /* ReciverUserTableViewCell.swift */,
+				E2D174B72A5D311B0013C63B /* ReciverUserTableViewCell.xib */,
+			);
+			path = ReciverUserMessage;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -762,6 +787,7 @@
 				9DA945B32A330C8A0074D3FC /* HomeViewController.xib in Resources */,
 				E2B670A92A4C901D0019C9DE /* UserActiveCollectionViewCell.xib in Resources */,
 				9D9305A62A387264007E2647 /* RecentTableViewCell.xib in Resources */,
+				E2D174B92A5D311B0013C63B /* ReciverUserTableViewCell.xib in Resources */,
 				9D24EB312A3AD36F008372AC /* HeaderCell.xib in Resources */,
 				9DA1C97D2A3AA0F3009FDEAD /* DetailMovieViewController.xib in Resources */,
 				E2BA05D82A4EA73B00F81D2E /* ListUserTableViewCell.xib in Resources */,
@@ -830,6 +856,7 @@
 				E2B1EE792A3639E2006938D7 /* SearchViewController.swift in Sources */,
 				9DA945AC2A32D91B0074D3FC /* FirebaseManager.swift in Sources */,
 				9D24EB352A3AE9AF008372AC /* TheCastDataSource.swift in Sources */,
+				E2D174B82A5D311B0013C63B /* ReciverUserTableViewCell.swift in Sources */,
 				9DA1C9802A3AB3CE009FDEAD /* CustomLable.swift in Sources */,
 				9DA1C97C2A3AA0F3009FDEAD /* DetailMovieViewController.swift in Sources */,
 				E2B670A82A4C901D0019C9DE /* UserActiveCollectionViewCell.swift in Sources */,
@@ -873,6 +900,7 @@
 				9DA1C9842A3ACFD0009FDEAD /* TheCastCollectionViewCell.swift in Sources */,
 				E2B6F8ED2A4342CD003AD85B /* ChatViewController.swift in Sources */,
 				E2B1DAB22A4B30B1009E230B /* ChatViewDataSource.swift in Sources */,
+				E2AA0B9C2A5C54C000F93091 /* MessageType.swift in Sources */,
 				E22CBA452A21934A0021EDBE /* SceneDelegate.swift in Sources */,
 				E2801B842A55C61D00C1B0AD /* DetailChatViewModel.swift in Sources */,
 				9D24EB302A3AD36F008372AC /* HeaderCell.swift in Sources */,

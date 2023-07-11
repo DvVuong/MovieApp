@@ -14,6 +14,7 @@ class DetailChatViewModel {
     var reciverUser: UserResponse?
     var message = CurrentValueSubject<[MessageResponse]?, Never>(nil)
     var store = Set<AnyCancellable>()
+    private var arraysMessage = [MessageResponse]()
     init() {
         reciverUserPassthroughSubject.sink(receiveValue: {[weak self] user in
             guard let `self` = self else {return}
@@ -22,28 +23,27 @@ class DetailChatViewModel {
         .store(in: &store)
     }
     
-    func createMessage(_ text: String) {
-        FirebaseManager.shared.createMessage(text, sender: currentUser, reciver: reciverUser ?? UserResponse())
+    func createMessage(_ text: String, messagetye: MessageType) {
+        FirebaseManager.shared.createMessage(text, sender: currentUser, reciver: reciverUser ?? UserResponse(), messageType: messagetye)
     }
     
     func fetchMessage() {
+        arraysMessage.removeAll()
         FirebaseManager.shared.fecthMessage(self.currentUser, reciver: self.reciverUser ?? UserResponse()) {[weak self] message in
             guard let `self` = self else {return}
-            print("vuongdv Begin Fetch message")
-            self.message.send(message)
+            let currentUser = UserDefaultManager.shared.getCurrentUsert()
+            let partner = UserDefaultManager.shared.getPartnerUser()
+            self.arraysMessage.removeAll()
+            for i in message {
+                if i.idRecive == currentUser.id ?? "" || i.idRecive == partner.id ?? "" {
+                    self.arraysMessage.append(contentsOf: message)
+                    self.arraysMessage = self.arraysMessage.sorted {
+                        $0.time ?? 0 < $1.time ?? 0
+                    }
+                }
+            }
+            self.message.send(self.arraysMessage)
         }
     }
-    
-//    func fetchMessage() -> Future<[MessageResponse], Never> {
-//        return Future {[weak self]  promise in
-//            guard let `self` = self else {return}
-//            FirebaseManager.shared.fecthMessage(self.currentUser, reciver: self.reciverUser ?? UserResponse()) { message in
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-//                    print("vuongdv Begin Fetch message")
-//                    promise(.success(message))
-//                }
-//            }
-//        }
-//    }
 }
 

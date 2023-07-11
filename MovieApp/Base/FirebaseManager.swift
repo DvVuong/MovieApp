@@ -17,6 +17,8 @@ class FirebaseManager {
     private let _message = "Message"
     private var _arrayUser = [UserResponse]()
     private var _arrayMessage = [MessageResponse]()
+    private var dataSource = DetailDataSource()
+    var queue = DispatchQueue(label: "FetchMessage", qos: .background)
     
     func resgiterAccount(with email: String, password: String, completion: @escaping(AuthDataResult?, Error?) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
@@ -70,7 +72,7 @@ class FirebaseManager {
     }
     //MARK: - Create Message
     
-    func createMessage(_ text: String, sender: UserResponse, reciver: UserResponse) {
+    func createMessage(_ text: String, sender: UserResponse, reciver: UserResponse,  messageType: MessageType ) {
         let time = Date().timeIntervalSince1970
         let messageKey = _db.collection(_message).document().documentID
         let document = _db.collection(_message)
@@ -81,10 +83,12 @@ class FirebaseManager {
         let data: [String: Any] = [
             "text" : text,
             "nameSender" : sender.userName as Any,
+            "idSender": sender.id as Any,
             "nameReciver" : reciver.userName as Any,
+            "idRecive": reciver.id as Any,
             "timeSend": time,
             "message": messageKey,
-            "typeMessage": 0
+            "typeMessage": messageType.type as Any
         ]
         
         document.setData(data)
@@ -96,13 +100,14 @@ class FirebaseManager {
         reciverDocument.setData(data)
     }
     
+
     func fecthMessage(_ sender: UserResponse, reciver: UserResponse, completion: @escaping ([MessageResponse]) -> Void) {
         self._arrayMessage.removeAll()
         _db.collection(_message).document(sender.id ?? "").collection(reciver.id ?? "").addSnapshotListener {[weak self] dataSnapShot, error in
             guard let `self` = self else {return}
             if error != nil { return }
-            guard let dataSnapShot = dataSnapShot else  {return}
-            
+            guard let dataSnapShot = dataSnapShot else {return}
+            self._arrayMessage.removeAll()
             for i in dataSnapShot.documentChanges {
                 if i.type == .added || i.type == .removed {
                     let message = MessageResponse(json: i.document.data())
@@ -110,6 +115,8 @@ class FirebaseManager {
                 }
             }
             completion(self._arrayMessage)
+            
+//            self.dataSource.messageArrays = self._arrayMessage
         }
     }
 }

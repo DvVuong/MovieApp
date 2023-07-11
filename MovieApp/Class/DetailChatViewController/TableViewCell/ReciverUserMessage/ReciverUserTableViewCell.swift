@@ -1,14 +1,14 @@
 //
-//  ConvertionTableViewCell.swift
+//  ReciverUserTableViewCell.swift
 //  MovieApp
 //
-//  Created by mr.root on 7/2/23.
+//  Created by mr.root on 7/10/23.
 //
 
 import UIKit
 
-class ConvertionTableViewCell: UITableViewCell {
-    @IBOutlet weak var contenview: CustomMessageView!
+class ReciverUserTableViewCell: UITableViewCell {
+    @IBOutlet weak var bubbelView: CustomMessageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,10 +21,7 @@ class ConvertionTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func bindData(_ message: MessageResponse) {
-        
-     contenview.setupForSenderUser(with: message)
-        contenview.layoutIfNeeded()
+    func bindDataToView(with message: MessageResponse) {
+        bubbelView.setupForReciverUser(message)
     }
-    
 }
