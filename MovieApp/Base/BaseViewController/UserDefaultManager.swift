@@ -12,6 +12,7 @@ class UserDefaultManager {
     private let _idUser = "UserID"
     private let _idCurrentUSer = "CurrentUserID"
     private let _curentUser = "CurrentUser"
+    private let _partnerUser = "PartnerUser"
     
     func getIdUser(_ id: String) {
         UserDefaults.standard.set(id, forKey: _idUser)
@@ -46,6 +47,28 @@ class UserDefaultManager {
             return objc
         }
         catch (let error){
+            print("vuongdv", error.localizedDescription)
+        }
+        return UserResponse()
+    }
+    
+    func setPartnerUser(_ partnerUser: UserResponse) {
+        do {
+            let encoderData = try PropertyListEncoder().encode(partnerUser)
+            UserDefaults.standard.set(encoderData, forKey: _partnerUser)
+        }
+        catch (let error) {
+            print("vuongdv", error.localizedDescription)
+        }
+    }
+    
+    func getPartnerUser()  -> UserResponse {
+        do {
+            let data = UserDefaults.standard.value(forKey: _partnerUser) as! Data
+            let objc = try PropertyListDecoder().decode(UserResponse.self, from: data)
+            return objc
+        }
+        catch (let error) {
             print("vuongdv", error.localizedDescription)
         }
         return UserResponse()

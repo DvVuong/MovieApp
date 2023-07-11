@@ -78,7 +78,6 @@ class CustomMessageView: UIView {
             make.leading.greaterThanOrEqualTo(avatarImage.snp.trailing).offset(5)
             make.width.lessThanOrEqualTo(250)
         }
-        
         updateConstraintsIfNeeded()
     }
 }

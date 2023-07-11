@@ -8,13 +8,16 @@
 import UIKit
 
 class BaseViewController: UIViewController {
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("====> \(self.nibName ?? "") viewDidLoad")
         setupUI()
         setupTap()
         keyBoardObserver()
-        func bindData() {}
-        func onBind() {}
+        bindData()
+        onBind()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -24,7 +27,7 @@ class BaseViewController: UIViewController {
     
     init() {
         super.init(nibName: nil, bundle: nil)
-        print("=====>",self.nibName ?? "")
+       
     }
     
     required init?(coder: NSCoder) {
@@ -32,7 +35,9 @@ class BaseViewController: UIViewController {
     }
     
     deinit {
-        print("<========",self.nibName ?? "")
+        
+        print("<==== \(self.nibName ?? "") deinit")
+        
     }
     
     func setupUI() {}
@@ -61,12 +66,14 @@ extension BaseViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         hideKeyboardWhenTappedAround()
     }
+    
 }
 
 
 extension BaseViewController {
     @objc func keyBoardWillShow(_ sender: Notification) {
-         
+       
+        
     }
     
     @objc func keyBoardWillHide(_ sender: Notification) {
