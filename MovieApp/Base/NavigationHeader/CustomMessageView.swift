@@ -28,7 +28,7 @@ class CustomMessageView: UIView {
         textLabel.textColor = .white
         textLabel.backgroundColor  = .blue
         textLabel.numberOfLines = 0
-        textLabel.cornerRadius(8)
+        textLabel.cornerRadius(10)
         avatarImage.contentMode = .scaleAspectFill
         avatarImage.cornerRadius(heightAvatarImage / 2)
     }

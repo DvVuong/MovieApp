@@ -18,6 +18,7 @@ class BaseViewController: UIViewController {
         keyBoardObserver()
         bindData()
         onBind()
+        setupGestureImage()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -45,8 +46,8 @@ class BaseViewController: UIViewController {
     func setupViewModel() {}
     func bindData() {}
     func onBind() {}
-    
     func setupDataSource() {}
+    func setupGestureImage() {}
     
     private func keyBoardObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
