@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 final class MessageResponse {
     var text: String?
@@ -17,8 +18,10 @@ final class MessageResponse {
     var reciverAvatar: String?
     var idRecive: String?
     var imageUrl: String?
-    
-    init(text: String? = nil, time: Double? = nil, nameSender: String? = nil, senderAvatar: String? = nil ,idSender: String? = nil, reciveName: String? = nil, reciverAvatar: String? = nil ,idRecive: String? = nil, imageurl: String? = nil) {
+    var ratioImage: CGFloat?
+    var typeMessage: Int?
+
+    init(text: String? = nil, time: Double? = nil, nameSender: String? = nil, senderAvatar: String? = nil ,idSender: String? = nil, reciveName: String? = nil, reciverAvatar: String? = nil ,idRecive: String? = nil, imageurl: String? = nil, ratioImage: CGFloat? = nil, typeMessage: Int? = nil) {
         self.text = text
         self.time = time
         self.nameSender = nameSender
@@ -28,6 +31,8 @@ final class MessageResponse {
         self.imageUrl = imageurl
         self.senderAvatar = senderAvatar
         self.reciverAvatar = reciverAvatar
+        self.ratioImage = ratioImage
+        self.typeMessage = typeMessage
     }
     
     convenience init(json: [String: Any]) {
@@ -52,6 +57,10 @@ final class MessageResponse {
                 self.idRecive = value as? String
             case "imageUrl":
                 self.imageUrl = value as? String
+            case "ratioImage":
+                self.ratioImage = value as? CGFloat
+            case "typeMessage":
+                self.typeMessage = value as? Int
             default:
                 break
             }
@@ -68,7 +77,9 @@ final class MessageResponse {
             "idRecive": self.idRecive as Any,
             "imageUrl": self.imageUrl as Any,
             "reciverAvatar": self.reciverAvatar as Any,
-            "senderAvatar": self.senderAvatar as Any
+            "senderAvatar": self.senderAvatar as Any,
+            "ratioImage": self.ratioImage as Any,
+            "typeMessage": self.typeMessage as Any
         ]
     }
 }

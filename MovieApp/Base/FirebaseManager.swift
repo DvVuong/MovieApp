@@ -5,9 +5,10 @@
 //  Created by BeeTech on 09/06/2023.
 //
 
-import Foundation
+import FirebaseStorage
 import FirebaseAuth
 import FirebaseFirestore
+import UIKit
 
 class FirebaseManager {
     static let shared = FirebaseManager()
@@ -16,8 +17,9 @@ class FirebaseManager {
     private let _user = "User"
     private let _message = "Message"
     private var _arrayUser = [UserResponse]()
-    private var _arrayMessage = [MessageResponse]()
+   
     private var dataSource = DetailDataSource()
+    private var imageUrl = ""
     var queue = DispatchQueue(label: "FetchMessage", qos: .background)
     
     func resgiterAccount(with email: String, password: String, completion: @escaping(AuthDataResult?, Error?) -> Void) {
@@ -100,23 +102,70 @@ class FirebaseManager {
         reciverDocument.setData(data)
     }
     
-
-    func fecthMessage(_ sender: UserResponse, reciver: UserResponse, completion: @escaping ([MessageResponse]) -> Void) {
-        self._arrayMessage.removeAll()
-        _db.collection(_message).document(sender.id ?? "").collection(reciver.id ?? "").addSnapshotListener {[weak self] dataSnapShot, error in
+    func createMessageWithImage(with image: UIImage, sender: UserResponse, reciver: UserResponse, messageType: MessageType) {
+        let autoKey = self._db.collection(_message).document().documentID
+        let storeRef = Storage.storage().reference()
+        let imagekey = NSUUID().uuidString
+        let ratioImage = image.size.width / image.size.height
+        let time = Date().timeIntervalSince1970
+        guard let image = image.jpegData(compressionQuality: 0.4) else {return}
+        let imageFolder = storeRef.child(_message).child(imagekey)
+        storeRef.child(_message).child(imagekey).putData(image) { [weak self] data, error in
             guard let `self` = self else {return}
+            if error != nil {return}
+            imageFolder.downloadURL { [weak self] url, error in
+                guard let `self` = self else {return}
+                if error != nil {return}
+                guard let url = url else {return}
+                self.imageUrl = "\(url)"
+               
+                let document = self._db.collection(self._message)
+                    .document(sender.id ?? "")
+                    .collection(reciver.id ?? "")
+                    .document()
+
+                let data: [String: Any] = [
+                    "imageUrl" : self.imageUrl,
+                    "nameSender" : sender.userName as Any,
+                    "idSender": sender.id as Any,
+                    "nameReciver" : reciver.userName as Any,
+                    "idRecive": reciver.id as Any,
+                    "timeSend": time,
+                    "message": autoKey,
+                    "typeMessage": messageType.type as Any,
+                    "ratioImage": ratioImage
+                ]
+    
+                document.setData(data)
+                let reciverDocument = self._db.collection(self._message)
+                    .document(reciver.id ?? "")
+                    .collection(sender.id ?? "")
+                    .document()
+
+                reciverDocument.setData(data)
+           }
+        }
+    }
+    
+    //MARK: FetchMessage
+    func fecthMessage(_ sender: UserResponse, reciver: UserResponse, completion: @escaping ([MessageResponse]) -> Void) {
+        var _arrayMessage = [MessageResponse]()
+        _db.collection(_message).document(sender.id ?? "").collection(reciver.id ?? "").addSnapshotListener { dataSnapShot, error in
             if error != nil { return }
             guard let dataSnapShot = dataSnapShot else {return}
-            self._arrayMessage.removeAll()
+           
             for i in dataSnapShot.documentChanges {
                 if i.type == .added || i.type == .removed {
                     let message = MessageResponse(json: i.document.data())
-                    self._arrayMessage.append(message)
+                    if message.idRecive == sender.id ?? "" || message.idRecive == reciver.id ?? "" {
+                        _arrayMessage.append(message)
+                        _arrayMessage = _arrayMessage.sorted {
+                            $0.time ?? 0 < $1.time ?? 0
+                        }
+                    }
                 }
             }
-            completion(self._arrayMessage)
-            
-//            self.dataSource.messageArrays = self._arrayMessage
+            completion(_arrayMessage)
         }
     }
 }
