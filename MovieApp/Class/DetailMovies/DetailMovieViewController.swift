@@ -6,9 +6,12 @@
 //
 
 import UIKit
+import RxSwift
 
 class DetailMovieViewController: BaseViewController {
     
+    @IBOutlet weak var imageMovie: UIImageView!
+    @IBOutlet weak var nameMovieLabel: UILabel!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var ageLabel: CustomLabel!
     @IBOutlet weak var escapeButton: UIButton!
@@ -17,9 +20,32 @@ class DetailMovieViewController: BaseViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     private var dataSource: TheCastDataSource = TheCastDataSource()
+    private var viewModel: DetailViewModel = DetailViewModel()
+    private var bag = DisposeBag()
+    convenience init(item: Movie) {
+        self.init()
+        viewModel.movieItem.onNext(item)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        setupViewModel()
+    }
+    
+    override func setupViewModel() {
+        viewModel.movieItem
+            .subscribe(onNext: { movie in
+                DispatchQueue.main.async {
+                    self.nameMovieLabel.text = movie.name
+                    self.producerLabel.text = movie.q
+                }
+        })
+            .disposed(by: bag)
+        
+        DispatchQueue.main.async {[weak self] in
+            guard let `self` = self else {return}
+            self.imageMovie.image = self.viewModel.getImage()
+        }
     }
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()

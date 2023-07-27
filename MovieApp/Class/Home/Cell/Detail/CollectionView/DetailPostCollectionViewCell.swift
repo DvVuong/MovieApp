@@ -18,8 +18,20 @@ class DetailPostCollectionViewCell: UICollectionViewCell {
         setupUI()
     }
     
-    func setupUI() {
+    private func setupUI() {
         imageMovies.cornerRadius(10)
+        imageMovies.contentMode = .scaleAspectFill
+    }
+    
+    func bindData(with data: Movie) {
+        nameLabel.text = data.name
+        titleLabel.text = "\(String(describing: data.year))"
+        ImageManager.share.fetchImage(with: data.i?.imageUrl ?? "", completion: {[weak self] image in
+            guard let `self` = self else {return}
+            DispatchQueue.main.async {
+                self.imageMovies.image = image
+            }
+        })
     }
 
 }

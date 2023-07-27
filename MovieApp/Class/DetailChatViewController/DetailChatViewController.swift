@@ -104,15 +104,16 @@ class DetailChatViewController: BaseViewController {
         vc.sendButtonAction = {[weak self] image in
             guard let `self` = self else {return}
             let messageType = MessageType(type: 1)
-            self.viewModel.createMessgaeWithImage(with: image, messageType: messageType)
+//            self.viewModel.createMessgaeWithImage(with: image, messageType: messageType)
         }
+        vc.deleagte = self
         push(vc)
     }
     
     private func openPhotoLibrabry() {
-        self.imagePickerViewControll.delegate = self
-        self.imagePickerViewControll.sourceType = .photoLibrary
-        present(imagePickerViewControll, animated: true)
+        let vc = MVPCamemraViewController()
+        vc.openPhotoLibrabry = true
+        push(vc)
     }
     
     private func startRecoding() {
@@ -136,6 +137,7 @@ class DetailChatViewController: BaseViewController {
     }
 }
 
+
 extension DetailChatViewController {
     override func keyBoardWillShow(_ sender: Notification) {
         let keyboardframe = (sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey]! as! NSValue).cgRectValue.height
@@ -148,6 +150,7 @@ extension DetailChatViewController {
         self.view.layoutIfNeeded()
     }
 }
+
 extension DetailChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage  else {return}
@@ -158,5 +161,10 @@ extension DetailChatViewController: UIImagePickerControllerDelegate, UINavigatio
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.imagePickerViewControll.dismiss(animated: true)
+    }
+}
+extension DetailChatViewController: MVPCamemraViewControllerDelegate {
+    func didChooseImage(with messages: [UIImage]) {
+        print("vuongdv \(messages.count)")
     }
 }
