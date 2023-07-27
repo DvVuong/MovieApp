@@ -17,12 +17,12 @@ class TabBarController: CardTabBarController {
         return homeNavTab
     }()
 
-    lazy var bookTab: UIViewController = {
-        let searchTabItem = UITabBarItem(title: "Search", image: Asset.icSearch.image, selectedImage: nil)
-        let navController = NavigationController(rootViewController: SearchViewController())
-        navController.tabBarItem = searchTabItem
-        return navController
-    }()
+//    lazy var bookTab: UIViewController = {
+//        let searchTabItem = UITabBarItem(title: "Search", image: Asset.icSearch.image, selectedImage: nil)
+//        let navController = NavigationController(rootViewController: SearchViewController())
+//        navController.tabBarItem = searchTabItem
+//        return navController
+//    }()
 
     lazy var editTab: UIViewController = {
         let randomTabItem = UITabBarItem(title: "Reels", image: Asset.icPlay.image, selectedImage: nil)
@@ -52,6 +52,13 @@ class TabBarController: CardTabBarController {
         return naviController
     }()
     
+    lazy var bookTap: UIViewController = {
+        let bookItem = UITabBarItem(title: "Book", image: UIImage(systemName: "book.closed.fill")?.withTintColor(.black), selectedImage: nil)
+        let naviController = NavigationController(rootViewController: ReadingBookViewController())
+        naviController.tabBarItem = bookItem
+        return naviController
+    }()
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,7 +80,7 @@ class TabBarController: CardTabBarController {
     }
     
     private func setupViewController() {
-        viewControllers = [homeTab, bookTab, editTab, chatTab, moreTab]
+        viewControllers = [homeTab, bookTap, editTab, chatTab, moreTab]
     }
 
 }

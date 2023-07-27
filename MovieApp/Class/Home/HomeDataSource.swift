@@ -9,21 +9,25 @@ import UIKit
 
 class HomeDataSource: UITableViewController {
     
-    public var actionMoveToDetaiView:(() -> Void)? = nil
+    public var actionMoveToDetaiView:((Movie) -> Void)? = nil
+    private var data: [Movie] = []
+    
+    func setupTableView(width tableView: UITableView, list: [Movie]) {
+        self.data = list
+        sections.append(.category)
+        sections.append(.detail(model: data))
+        sections.append(.recent)
+        sections.append(.favorites)
+    }
     
     private enum CellType {
         case category
-        case detail
+        case detail(model: [Movie])
         case recent
         case favorites
     }
     
-    private var sections: [CellType] = [
-        .category,
-        .detail,
-        .recent,
-        .favorites
-    ]
+    private var sections: [CellType] = []
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
@@ -61,13 +65,13 @@ class HomeDataSource: UITableViewController {
             cell.selectionStyle = .none
             
             return cell
-        case .detail:
+        case .detail(let model):
             let cell = tableView.dequeueReusableCell(withIdentifier: "DetailTableViewCell", for: indexPath) as! DetailTableViewCell
-            cell.setupCollectionView()
+            cell.setupCollectionView(with: model)
             cell.setupActionSelectedItem()
-            cell.actionSelected = { [weak self]  in
+            cell.actionSelected = { [weak self] item  in
                 guard let `self` = self else { return }
-                self.actionMoveToDetaiView?()
+                self.actionMoveToDetaiView?(item)
             }
             cell.selectionStyle = .none
             return cell

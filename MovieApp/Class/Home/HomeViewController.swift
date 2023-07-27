@@ -7,6 +7,8 @@
 
 import UIKit
 import Combine
+import RxSwift
+import RxCocoa
 
 class HomeViewController: BaseViewController {
     @IBOutlet weak var contenView: UIView!
@@ -18,12 +20,30 @@ class HomeViewController: BaseViewController {
     private let viewModel: HomeViewModel = HomeViewModel()
     private var dataSource: HomeDataSource = HomeDataSource()
     private var subcriptions = Set<AnyCancellable>()
+    private var bag = DisposeBag()
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.fetchUser()
         setupTabelView()
         setupViewModel()
         setupDataSource()
+        
+        DispatchQueue.global(qos: .background).async {
+            APIService.shared.fecthListMovie(with: .get, parameter: "game")
+                .subscribe { event in
+                    switch event {
+                    case .success( let results):
+                        guard let data = results.d else {return}
+                        DispatchQueue.main.async {
+                            self.dataSource.setupTableView(width: self.tableView, list: data)
+                            self.tableView.reloadData()
+                        }
+                    case .failure( let error):
+                        print("vuongdv, \(error)")
+                    }
+                }
+                .disposed(by: self.bag)
+        }
     }
     
     override func setupViewModel() {
@@ -34,9 +54,9 @@ class HomeViewController: BaseViewController {
         .store(in: &subcriptions)
     }
     override func setupDataSource() {
-        dataSource.actionMoveToDetaiView = { [weak self] in
+        dataSource.actionMoveToDetaiView = { [weak self] item in
             guard let `self` = self else { return }
-            let vc = DetailMovieViewController()
+            let vc = DetailMovieViewController(item: item)
             vc.hidesBottomBarWhenPushed = true
             self.push(vc)
         }

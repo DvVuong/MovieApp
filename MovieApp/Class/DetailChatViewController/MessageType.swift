@@ -12,3 +12,10 @@ final class MessageType {
         self.type = type
     }
 }
+
+//final class MethodHTTP {
+//    var type: String?
+//    init(type: String?) {
+//        self.type = type
+//    }
+//}

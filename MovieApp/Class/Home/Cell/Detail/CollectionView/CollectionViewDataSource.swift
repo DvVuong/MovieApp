@@ -10,13 +10,20 @@ import UIKit
 class CollectionViewDataSource: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     public var didSelectedItemHandler: (() -> Void)? = nil
+    private var data: [Movie] = []
+    
+    func setupCollectionView(with collectionView: UICollectionView, list: [Movie]) {
+        self.data = list
+    }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return self.data.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DetailPostCollectionViewCell", for: indexPath) as! DetailPostCollectionViewCell
+        let item = data[indexPath.row]
+        cell.bindData(with: item)
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

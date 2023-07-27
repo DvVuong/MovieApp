@@ -11,5 +11,8 @@ target 'MovieApp' do
   pod 'FirebaseStorage'
   pod 'CardTabBar'
   pod 'SnapKit', '~> 5.6.0'
+  pod 'CardSlider'
+  pod 'RxSwift'
+  pod 'RxCocoa'
   # Pods for MovieApp
 end

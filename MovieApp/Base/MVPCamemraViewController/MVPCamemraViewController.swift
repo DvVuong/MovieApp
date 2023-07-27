@@ -8,9 +8,15 @@
 import UIKit
 import AVFoundation
 import SnapKit
+import PhotosUI
+
 enum ChangeCamera: Int {
     case front
     case back
+}
+
+protocol MVPCamemraViewControllerDelegate: AnyObject {
+    func didChooseImage(with messages: [UIImage])
 }
 
 class MVPCamemraViewController: BaseViewController {
@@ -32,14 +38,24 @@ class MVPCamemraViewController: BaseViewController {
     private let previewlayer = AVCaptureVideoPreviewLayer()
     private let picker = UIImagePickerController()
     private var changeCamere: ChangeCamera? = ChangeCamera.front
+    weak var deleagte: MVPCamemraViewControllerDelegate?
     
-    public var handelImage: UIImage!
-    public var sendButtonAction: ((UIImage) -> Void)? = nil
+    public var arrayImage: [UIImage] = []
+    public var sendButtonAction: (([UIImage]) -> Void)? = nil
+    
+    var openPhotoLibrabry: Bool? = false {
+        didSet {
+            return openPhotoLabrabri()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         cameraView.layer.addSublayer(previewlayer)
         setupTap()
-        checkCameraPermission()
+        if openPhotoLibrabry == false {
+            checkCameraPermission()
+        }
         setupGestureImage()
         image.isHidden = true
         viewSendImage.isHidden = true
@@ -119,10 +135,17 @@ class MVPCamemraViewController: BaseViewController {
     }
     
     private func openPhotoLabrabri() {
-        picker.delegate = self
-        picker.sourceType = .photoLibrary
-        picker.modalPresentationStyle = .overFullScreen
-        self.present(picker, animated: true)
+        //Step 1: Create PHPPickerConfig
+        if #available(iOS 14, *) {
+            var phpPickerConfig = PHPickerConfiguration()
+            phpPickerConfig.selectionLimit = 10
+            let phpController = PHPickerViewController(configuration: phpPickerConfig)
+            phpController.delegate = self
+            phpController.modalPresentationStyle = .overFullScreen
+            self.present(phpController, animated: true)
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     private func changCameraPosition() {
@@ -146,13 +169,13 @@ class MVPCamemraViewController: BaseViewController {
         }else if sender == cancelSendButton {
             
         }else if sender == sendButton {
-            sendButtonAction?(handelImage)
+            sendButtonAction?(arrayImage)
         }
     }
 }
 
+
 extension MVPCamemraViewController:  AVCapturePhotoCaptureDelegate, AVCaptureVideoDataOutputSampleBufferDelegate {
-    
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         guard let data = photo.fileDataRepresentation() else {return}
         DispatchQueue.main.async {
@@ -161,22 +184,25 @@ extension MVPCamemraViewController:  AVCapturePhotoCaptureDelegate, AVCaptureVid
             self.session?.stopRunning()
             self.viewSendImage.isHidden = false
             self.viewBotton.isHidden = true
-            self.handelImage = self.image.image ?? UIImage()
+            self.arrayImage.append(self.image.image ?? UIImage())
+            self.deleagte?.didChooseImage(with: self.arrayImage)
         }
     }
 }
-extension MVPCamemraViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-       guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {return}
-        picker.dismiss(animated: true)
-        self.image.image = image
-        self.handelImage = image
-        self.image.isHidden = false
-        self.viewBotton.isHidden = true
-        self.viewSendImage.isHidden = false
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true)
+
+extension MVPCamemraViewController: PHPickerViewControllerDelegate {
+    @available(iOS 14, *)
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        dismiss(animated: true)
+        popToRoot()
+        for result in results {
+            result.itemProvider.loadObject(ofClass: UIImage.self) { [weak self] object, error in
+                guard let `self` = self else {return}
+                if let image = object as? UIImage {
+                    self.arrayImage.append(image)
+                    self.deleagte?.didChooseImage(with: self.arrayImage)
+                }
+            }
+        }
     }
 }

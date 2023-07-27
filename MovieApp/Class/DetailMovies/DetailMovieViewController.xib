@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -17,6 +17,8 @@
                 <outlet property="categoryLabel" destination="Qdv-VT-ltO" id="Rrg-Py-SEV"/>
                 <outlet property="collectionView" destination="9ZM-bq-n9b" id="UTq-Rl-vN4"/>
                 <outlet property="escapeButton" destination="4QZ-LO-v03" id="u8a-KS-b4z"/>
+                <outlet property="imageMovie" destination="Szz-C6-vPz" id="Uuz-35-K0W"/>
+                <outlet property="nameMovieLabel" destination="YAb-0G-1Ot" id="AO2-C9-PfJ"/>
                 <outlet property="producerLabel" destination="c8w-cP-9y7" id="k3R-pK-KzK"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -259,7 +261,7 @@
     </objects>
     <resources>
         <image name="_" width="1224" height="2160"/>
-        <image name="escape" catalog="system" width="128" height="123"/>
+        <image name="escape" catalog="system" width="128" height="121"/>
         <image name="icons8-back-50" width="50" height="50"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
