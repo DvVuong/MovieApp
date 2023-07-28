@@ -6,10 +6,16 @@
 //
 
 import UIKit
+protocol HomeDataSourceDelegate: AnyObject {
+    func handlerActionScroll()
+    func handelEndActionScroll()
+}
 
 class HomeDataSource: UITableViewController {
     
     public var actionMoveToDetaiView:((Movie) -> Void)? = nil
+    public var handlerActionScroll: (() -> Void)? = nil
+    weak var delegate: HomeDataSourceDelegate?
     private var data: [Movie] = []
     
     func setupTableView(width tableView: UITableView, list: [Movie]) {
@@ -27,7 +33,8 @@ class HomeDataSource: UITableViewController {
         case favorites
     }
     
-    private var sections: [CellType] = []
+    private var sections: [CellType] = [
+    ]
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
@@ -65,9 +72,9 @@ class HomeDataSource: UITableViewController {
             cell.selectionStyle = .none
             
             return cell
-        case .detail(let model):
+        case .detail(let models):
             let cell = tableView.dequeueReusableCell(withIdentifier: "DetailTableViewCell", for: indexPath) as! DetailTableViewCell
-            cell.setupCollectionView(with: model)
+            cell.setupCollectionView(with: models)
             cell.setupActionSelectedItem()
             cell.actionSelected = { [weak self] item  in
                 guard let `self` = self else { return }
@@ -88,6 +95,54 @@ class HomeDataSource: UITableViewController {
         }
         
     }
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch sections[section] {
+        case .category:
+            return 0
+        case .recent:
+            return 40
+        case .detail:
+            return 0
+        case .favorites:
+            return 40
+        }
+    }
+    
+//    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+//        guard let header = view as? UITableViewHeaderFooterView else {return}
+//        header.textLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
+//        header.textLabel?.frame = CGRect(x: header.bounds.origin.x + 2, y: header.bounds.origin.y, width: 100, height: header.bounds.height)
+//    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "CustomHeader") as? CustomHeaderView else {return UIView()}
+        header.delegate = self
+        header.buttonValue = "Close"
+        switch sections[section] {
+        case .category:
+            header.titleLable.text = ""
+        case .detail:
+            header.titleLable.text = ""
+        case .recent:
+            header.titleLable.text = "Recent Watched"
+        case .favorites:
+            header.titleLable.text = "My Favorites"
+        }
+        return header
+    }
+
+//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        switch sections[section] {
+//        case .category:
+//            return nil
+//        case .recent:
+//            return "Recent Wathched"
+//        case .detail:
+//            return nil
+//        case .favorites:
+//            return "My Favorites"
+//        }
+//    }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch sections[indexPath.section] {
@@ -100,5 +155,23 @@ class HomeDataSource: UITableViewController {
         case .favorites:
             return 230
         }
+    }
+    
+//    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        delegate?.handlerActionScroll()
+//    }
+    
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        delegate?.handlerActionScroll()
+    }
+    
+    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        delegate?.handelEndActionScroll()
+    }
+}
+
+extension HomeDataSource: CustomHeaderViewDelegate {
+    func didTapButton() {
+        print("vuongdv Tap Tap Tap")
     }
 }

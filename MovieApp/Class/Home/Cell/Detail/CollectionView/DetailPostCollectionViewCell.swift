@@ -21,6 +21,7 @@ class DetailPostCollectionViewCell: UICollectionViewCell {
     private func setupUI() {
         imageMovies.cornerRadius(10)
         imageMovies.contentMode = .scaleAspectFill
+        imageMovies.clipsToBounds = true
     }
     
     func bindData(with data: Movie) {

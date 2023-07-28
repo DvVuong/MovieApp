@@ -11,7 +11,9 @@ import RxSwift
 import RxCocoa
 
 class HomeViewController: BaseViewController {
-    @IBOutlet weak var contenView: UIView!
+    @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var heigthConstrainHeaderView: NSLayoutConstraint!
+    @IBOutlet weak var heightContrainstableView: NSLayoutConstraint!
     @IBOutlet weak var avatarImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var notificationView: UIView!
@@ -54,6 +56,7 @@ class HomeViewController: BaseViewController {
         .store(in: &subcriptions)
     }
     override func setupDataSource() {
+        dataSource.delegate = self
         dataSource.actionMoveToDetaiView = { [weak self] item in
             guard let `self` = self else { return }
             let vc = DetailMovieViewController(item: item)
@@ -74,6 +77,8 @@ class HomeViewController: BaseViewController {
         tableView.register(UINib(nibName: "DetailTableViewCell", bundle: nil), forCellReuseIdentifier: "DetailTableViewCell")
         tableView.register(UINib(nibName: "FavoritesTableViewCell", bundle: nil), forCellReuseIdentifier: "FavoritesTableViewCell")
         tableView.register(UINib(nibName: "RecentTableViewCell", bundle: nil), forCellReuseIdentifier: "RecentTableViewCell")
+        
+        tableView.register(CustomHeaderView.self, forHeaderFooterViewReuseIdentifier: "CustomHeader")
     }
     override func setupTap() {
 
@@ -83,5 +88,21 @@ class HomeViewController: BaseViewController {
     
     @objc func didTapButton(_ sender: UIButton) {
        
+    }
+}
+extension HomeViewController: HomeDataSourceDelegate {
+    func handlerActionScroll() {
+        UIView.animate(withDuration: 1, delay: 2, options: .transitionCurlUp) {[weak self] in
+            guard let `self` = self else {return}
+//            self.heigthConstrainHeaderView.constant = 0
+//            self.heightContrainstableView.constant = 0
+        }
+    }
+    func handelEndActionScroll() {
+        UIView.animate(withDuration: 1, delay: 2, options: .transitionCurlDown) {[weak self] in
+            guard let `self` = self else {return}
+//            self.heigthConstrainHeaderView.constant = 90
+//            self.heightContrainstableView.constant = 46
+        }
     }
 }
