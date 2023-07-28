@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,7 +13,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="MovieApp" customModuleProvider="target">
             <connections>
                 <outlet property="avatarImage" destination="ywJ-vs-DCB" id="UeQ-p4-JgU"/>
-                <outlet property="contenView" destination="wbg-pp-QLg" id="mhK-IH-5Jm"/>
+                <outlet property="headerView" destination="Y0H-59-NDQ" id="ZqN-MK-Xda"/>
+                <outlet property="heightContrainstableView" destination="jy0-Jb-PCk" id="3gI-H3-PAI"/>
+                <outlet property="heigthConstrainHeaderView" destination="a66-UA-0w7" id="zei-aC-iKb"/>
                 <outlet property="nameLabel" destination="vHG-DK-AwY" id="0WP-nt-87x"/>
                 <outlet property="notificationView" destination="yJ8-4D-Lyu" id="2Ba-W8-7JJ"/>
                 <outlet property="tableView" destination="fjT-ja-ZET" id="xxT-vd-NwX"/>
@@ -44,7 +47,7 @@
                                 <constraint firstAttribute="height" constant="17" id="BRv-uU-Ej6"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" red="0.98111838102340698" green="0.99239963293075562" blue="0.98105365037918091" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello," textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vq0-cf-HvY">
@@ -54,7 +57,7 @@
                                 <constraint firstAttribute="width" constant="44" id="hUo-z4-1WE"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" red="0.98111838102340698" green="0.99239963293075562" blue="0.98105365037918091" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yJ8-4D-Lyu">
@@ -86,7 +89,7 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" name="color_background"/>
                     <constraints>
                         <constraint firstItem="yJ8-4D-Lyu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vHG-DK-AwY" secondAttribute="trailing" constant="10" id="2wl-nh-MFg"/>
                         <constraint firstItem="vHG-DK-AwY" firstAttribute="top" secondItem="Vq0-cf-HvY" secondAttribute="bottom" constant="2" id="VK8-oN-lU5"/>
@@ -109,24 +112,27 @@
             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="Y0H-59-NDQ" firstAttribute="top" secondItem="wbg-pp-QLg" secondAttribute="bottom" id="6Je-Ag-aAc"/>
-                <constraint firstAttribute="bottom" secondItem="fjT-ja-ZET" secondAttribute="bottom" id="6m5-qt-Iyi"/>
                 <constraint firstItem="Y0H-59-NDQ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="EuC-03-fwt"/>
                 <constraint firstItem="wbg-pp-QLg" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Id2-M4-FMs"/>
                 <constraint firstItem="wbg-pp-QLg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="LkV-Js-h9o"/>
-                <constraint firstItem="fjT-ja-ZET" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="cVI-oG-gbP"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="fjT-ja-ZET" secondAttribute="trailing" id="NYM-xt-Wum"/>
+                <constraint firstItem="fjT-ja-ZET" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" constant="34" id="aWi-Fq-tNp"/>
                 <constraint firstAttribute="top" secondItem="wbg-pp-QLg" secondAttribute="bottom" id="fPi-wn-jKJ"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="fjT-ja-ZET" secondAttribute="trailing" id="fyj-N8-vXS"/>
+                <constraint firstItem="fjT-ja-ZET" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="46" id="jy0-Jb-PCk"/>
                 <constraint firstItem="Y0H-59-NDQ" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="n5u-U2-lB1"/>
-                <constraint firstItem="fjT-ja-ZET" firstAttribute="top" secondItem="Y0H-59-NDQ" secondAttribute="bottom" id="nda-81-vhP"/>
                 <constraint firstAttribute="trailing" secondItem="wbg-pp-QLg" secondAttribute="trailing" id="rEc-NE-oBO"/>
+                <constraint firstItem="fjT-ja-ZET" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="wE4-x3-hbZ"/>
             </constraints>
             <point key="canvasLocation" x="-166.66666666666669" y="-37.5"/>
         </view>
     </objects>
     <resources>
         <image name="Space art wallpapers" width="736" height="1104"/>
-        <image name="bell" catalog="system" width="125" height="128"/>
-        <image name="circle.fill" catalog="system" width="128" height="123"/>
+        <image name="bell" catalog="system" width="128" height="124"/>
+        <image name="circle.fill" catalog="system" width="128" height="121"/>
+        <namedColor name="color_background">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
