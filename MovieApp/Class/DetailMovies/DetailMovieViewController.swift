@@ -33,13 +33,14 @@ class DetailMovieViewController: BaseViewController {
     }
     
     override func setupViewModel() {
-        viewModel.movieItem
-            .subscribe(onNext: { movie in
-                DispatchQueue.main.async {
-                    self.nameMovieLabel.text = movie.name
-                    self.producerLabel.text = movie.q
-                }
-        })
+        viewModel.movieItemBehaviorRelay
+            .subscribe(onNext: {[weak self] movie in
+                print("vuongdv movie: \(movie.name ?? "nil")")
+                guard let `self` = self else {return}
+                self.nameMovieLabel.text = movie.name
+                self.producerLabel.text = movie.q
+                self.categoryLabel.text = movie.name
+            })
             .disposed(by: bag)
         
         DispatchQueue.main.async {[weak self] in

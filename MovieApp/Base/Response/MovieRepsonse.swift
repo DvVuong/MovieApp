@@ -7,14 +7,14 @@
 
 import Foundation
 
-class MovieRespone: Codable {
+struct MovieRespone: Codable {
     var d: [Movie]?
     private enum CodingKeys: String, CodingKey {
         case d
     }
 }
 
-class Movie: Codable {
+struct Movie: Codable {
     var i: ImageMovie?
     let name: String?
     let q: String?
@@ -27,9 +27,10 @@ class Movie: Codable {
             case year = "y"
             case i
         }
+    
 }
 
-class ImageMovie: Codable {
+struct ImageMovie: Codable {
     var height: Int?
     var imageUrl: String?
     var width: Int?

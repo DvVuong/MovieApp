@@ -7,11 +7,16 @@
 
 import UIKit
 protocol HomeDataSourceDelegate: AnyObject {
-    func handlerActionScroll()
-    func handelEndActionScroll()
+    func willHideTabbar()
+    func willShowTabbar()
+    func showTabBar()
 }
 
 class HomeDataSource: UITableViewController {
+    
+    private var startContentOffset: CGFloat!
+    private var lastContentOffset: CGFloat!
+    
     
     public var actionMoveToDetaiView:((Movie) -> Void)? = nil
     public var handlerActionScroll: (() -> Void)? = nil
@@ -104,15 +109,9 @@ class HomeDataSource: UITableViewController {
         case .detail:
             return 0
         case .favorites:
-            return 40
+            return 30
         }
     }
-    
-//    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-//        guard let header = view as? UITableViewHeaderFooterView else {return}
-//        header.textLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
-//        header.textLabel?.frame = CGRect(x: header.bounds.origin.x + 2, y: header.bounds.origin.y, width: 100, height: header.bounds.height)
-//    }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "CustomHeader") as? CustomHeaderView else {return UIView()}
@@ -131,19 +130,6 @@ class HomeDataSource: UITableViewController {
         return header
     }
 
-//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        switch sections[section] {
-//        case .category:
-//            return nil
-//        case .recent:
-//            return "Recent Wathched"
-//        case .detail:
-//            return nil
-//        case .favorites:
-//            return "My Favorites"
-//        }
-//    }
-    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch sections[indexPath.section] {
         case .category:
@@ -157,17 +143,44 @@ class HomeDataSource: UITableViewController {
         }
     }
     
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+          let contentOffsetY = scrollView.contentOffset.x
+          self.startContentOffset = contentOffsetY
+          self.lastContentOffset = contentOffsetY
+      }
+      
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+          let currentOffset = scrollView.contentOffset.x
+          let differentFromStart = self.startContentOffset - currentOffset
+          let differentFromLast = self.lastContentOffset - currentOffset
+          self.lastContentOffset = currentOffset
+          if (differentFromStart < 0) {
+              if (scrollView.isTracking && abs(differentFromLast) > 1) {
+                  delegate?.willHideTabbar()
+              }
+          } else {
+              if (scrollView.isTracking && (abs(differentFromLast) > 1)) {
+                  delegate?.willShowTabbar()
+              }
+          }
+      }
+      
+    override func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+        delegate?.showTabBar()
+        return true
+    }
+    
 //    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
 //        delegate?.handlerActionScroll()
 //    }
     
-    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        delegate?.handlerActionScroll()
-    }
-    
-    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        delegate?.handelEndActionScroll()
-    }
+//    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+//        delegate?.handlerActionScroll()
+//    }
+//
+//    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+//        delegate?.handelEndActionScroll()
+//    }
 }
 
 extension HomeDataSource: CustomHeaderViewDelegate {

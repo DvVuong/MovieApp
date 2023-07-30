@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 import RxRelay
+import SwiftUI
 
 
 enum MethodHTTP: String {
@@ -32,7 +33,8 @@ class APIService {
         "content-type": "application/json"
     ]
     
-    func fecthListMovie(with method: MethodHTTP = .get, parameter: String)  -> Single<MovieRespone> {
+  
+    func fetchListMovie<T: Codable>(with method: MethodHTTP = .get, parameter: String, expecting: T.Type )  -> Single<T> {
         return Single.create { single in
             var path = APIPath.shared.BASER_URL
             let param: [String: String] = [
@@ -69,7 +71,7 @@ class APIService {
                 
                 do {
                     let decoder = JSONDecoder()
-                    let json = try decoder.decode(MovieRespone.self, from: data)
+                    let json = try decoder.decode(expecting, from: data)
                     single(.success(json))
                 }
                 catch (let error) {

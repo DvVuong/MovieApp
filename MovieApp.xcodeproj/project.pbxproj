@@ -110,6 +110,7 @@
 		E2D386502A6EE012003CFBBC /* CommonDataRespone.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D3864F2A6EE012003CFBBC /* CommonDataRespone.swift */; };
 		E2D386522A6EE182003CFBBC /* CommonResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D386512A6EE182003CFBBC /* CommonResponse.swift */; };
 		E2E4CDFD2A358F8E0011259B /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4CDFC2A358F8E0011259B /* Assets.swift */; };
+		E2EC98E72A769B6400D6D503 /* CustomNavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EC98E62A769B6400D6D503 /* CustomNavigationBarView.swift */; };
 		E2FD476C2A61B6860015DA9D /* MVPCamemraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FD476A2A61B6860015DA9D /* MVPCamemraViewController.swift */; };
 		E2FD476D2A61B6860015DA9D /* MVPCamemraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2FD476B2A61B6860015DA9D /* MVPCamemraViewController.xib */; };
 /* End PBXBuildFile section */
@@ -222,6 +223,7 @@
 		E2D3864F2A6EE012003CFBBC /* CommonDataRespone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonDataRespone.swift; sourceTree = "<group>"; };
 		E2D386512A6EE182003CFBBC /* CommonResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonResponse.swift; sourceTree = "<group>"; };
 		E2E4CDFC2A358F8E0011259B /* Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
+		E2EC98E62A769B6400D6D503 /* CustomNavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBarView.swift; sourceTree = "<group>"; };
 		E2FD476A2A61B6860015DA9D /* MVPCamemraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVPCamemraViewController.swift; sourceTree = "<group>"; };
 		E2FD476B2A61B6860015DA9D /* MVPCamemraViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MVPCamemraViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -517,6 +519,7 @@
 			children = (
 				E2A209912A49F131003DF2D9 /* CustomNavigationHeader.swift */,
 				E246A5062A51DB4500D3CF6C /* CustomMessageView.swift */,
+				E2EC98E62A769B6400D6D503 /* CustomNavigationBarView.swift */,
 			);
 			path = NavigationHeader;
 			sourceTree = "<group>";
@@ -941,6 +944,7 @@
 				E2B670A82A4C901D0019C9DE /* UserActiveCollectionViewCell.swift in Sources */,
 				E2BA05DA2A4EA7A300F81D2E /* ListUserDataSource.swift in Sources */,
 				9D9305AE2A387A71007E2647 /* CollectionViewDataSource.swift in Sources */,
+				E2EC98E72A769B6400D6D503 /* CustomNavigationBarView.swift in Sources */,
 				E2B6F8F52A434776003AD85B /* ChatViewModel.swift in Sources */,
 				E29A00882A68372000344A2D /* CustomAcitviView.swift in Sources */,
 				E246A5072A51DB4500D3CF6C /* CustomMessageView.swift in Sources */,

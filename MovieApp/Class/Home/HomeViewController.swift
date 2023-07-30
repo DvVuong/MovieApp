@@ -11,18 +11,32 @@ import RxSwift
 import RxCocoa
 
 class HomeViewController: BaseViewController {
-    @IBOutlet weak var headerView: UIView!
-    @IBOutlet weak var heigthConstrainHeaderView: NSLayoutConstraint!
+//    @IBOutlet weak var headerView: UIView!
+//    @IBOutlet weak var heigthConstrainHeaderView: NSLayoutConstraint!
     @IBOutlet weak var heightContrainstableView: NSLayoutConstraint!
-    @IBOutlet weak var avatarImage: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var notificationView: UIView!
+//    @IBOutlet weak var avatarImage: UIImageView!
+//    @IBOutlet weak var nameLabel: UILabel!
+//    @IBOutlet weak var notificationView: UIView!
     @IBOutlet weak var tableView: UITableView!
     
+    
+    private var isHidingTabBar: Bool = false
     private let viewModel: HomeViewModel = HomeViewModel()
     private var dataSource: HomeDataSource = HomeDataSource()
     private var subcriptions = Set<AnyCancellable>()
     private var bag = DisposeBag()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = false
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.fetchUser()
@@ -31,7 +45,7 @@ class HomeViewController: BaseViewController {
         setupDataSource()
         
         DispatchQueue.global(qos: .background).async {
-            APIService.shared.fecthListMovie(with: .get, parameter: "game")
+            APIService.shared.fetchListMovie(with: .get, parameter: "game", expecting: MovieRespone.self)
                 .subscribe { event in
                     switch event {
                     case .success( let results):
@@ -48,12 +62,53 @@ class HomeViewController: BaseViewController {
         }
     }
     
+    override func viewWillLayoutSubviews() {
+            super.viewWillLayoutSubviews()
+            let safeAreaInsets: UIEdgeInsets = UIEdgeInsets(top: 0,
+                                                            left: 0,
+                                                            bottom: self.tabBarController?.view.safeAreaInsets.bottom ?? 0,
+                                                            right: 0)
+            tableView.contentInset = safeAreaInsets
+            tableView.scrollIndicatorInsets = safeAreaInsets
+        }
+        
+        func hideTabBarIfNeeded() {
+            guard !self.isHidingTabBar else { return }
+            self.isHidingTabBar = true
+            self.tabBarController?.setTabBar(hidden: true, animated: true)
+        }
+        
+        func showTabBarIfNeeded() {
+            guard self.isHidingTabBar else { return }
+            self.isHidingTabBar = false
+            self.tabBarController?.setTabBar(hidden: false, animated: true)
+        }
+    
     override func setupViewModel() {
         viewModel.userPublisher.sink { [weak self] userData in
             guard let `self` = self else { return }
-            self.nameLabel.text = userData.userName ?? ""
+            self.configureNavi(with: nil, nameUser: userData.userName)
+
         }
         .store(in: &subcriptions)
+    }
+    
+    private func configureNavi(with image: String?, nameUser: String?) {
+        guard let name = nameUser else {return}
+        let navi = navigationController!
+        
+        let customView = CustomNavigationBarView(frame: CGRect(x: 0, y: 0, width: navi.navigationBar.frame.width, height: navi.navigationBar.frame.height))
+        customView.backgroundColor = .clear
+        customView.textLabel.text = name
+        customView.textLabel.textColor = .black
+        customView.avatarImage.image = Asset.caitlynArcaneWickellia.image
+        customView.heightAvatarImage = navi.navigationBar.frame.height - 5
+        customView.setupCustomUI()
+        
+        // Thêm view vào navigationBar
+        if let navigationBar = self.navigationController?.navigationBar {
+            navigationBar.addSubview(customView)
+        }
     }
     override func setupDataSource() {
         dataSource.delegate = self
@@ -66,10 +121,11 @@ class HomeViewController: BaseViewController {
     }
     
     override func setupUI() {
-        avatarImage.cornerRadius(avatarImage.frame.size.height / 2)
-        notificationView.cornerRadius(10)
+//        avatarImage.cornerRadius(avatarImage.frame.size.height / 2)
+//        notificationView.cornerRadius(10)
     }
     
+
     private func setupTabelView() {
         tableView.delegate = dataSource
         tableView.dataSource = dataSource
@@ -91,18 +147,22 @@ class HomeViewController: BaseViewController {
     }
 }
 extension HomeViewController: HomeDataSourceDelegate {
-    func handlerActionScroll() {
-        UIView.animate(withDuration: 1, delay: 2, options: .transitionCurlUp) {[weak self] in
-            guard let `self` = self else {return}
-//            self.heigthConstrainHeaderView.constant = 0
-//            self.heightContrainstableView.constant = 0
-        }
+    func showTabBar() {
+        showTabBarIfNeeded()
+        print("vuongdv1 ShowTabar")
     }
-    func handelEndActionScroll() {
-        UIView.animate(withDuration: 1, delay: 2, options: .transitionCurlDown) {[weak self] in
-            guard let `self` = self else {return}
-//            self.heigthConstrainHeaderView.constant = 90
-//            self.heightContrainstableView.constant = 46
-        }
+    
+    func willHideTabbar() {
+        hideTabBarIfNeeded()
+        print("vuongdv HideTabbar")
     }
+    
+    func willShowTabbar() {
+        showTabBarIfNeeded()
+        print("vuongdv2 ShowTabar")
+    }
+    
+    
 }
+
+

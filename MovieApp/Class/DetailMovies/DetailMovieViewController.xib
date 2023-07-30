@@ -75,13 +75,13 @@
                                             <color key="textColor" red="0.92059016100225599" green="0.868155566505601" blue="0.50926101778293598" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Arcane" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YAb-0G-1Ot">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Arcane" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YAb-0G-1Ot">
                                             <rect key="frame" x="20" y="9.5" width="240" height="55"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="46"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="5" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jGL-gR-d4w">
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jGL-gR-d4w">
                                             <rect key="frame" x="0.0" y="74.5" width="280" height="60.5"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MBa-Qg-dhc">
@@ -109,7 +109,7 @@
                                                     <rect key="frame" x="55" y="0.0" width="150" height="60.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="League of Legend" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qdv-VT-ltO" customClass="CustomLabel" customModule="MovieApp" customModuleProvider="target">
-                                                            <rect key="frame" x="5" y="0.0" width="140" height="60.5"/>
+                                                            <rect key="frame" x="5" y="0.0" width="137" height="60.5"/>
                                                             <color key="backgroundColor" red="0.98111838102340698" green="0.99239963293075562" blue="0.98105365037918091" alpha="0.4496361941" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" red="0.98111838102340698" green="0.99239963293075562" blue="0.98105365037918091" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
