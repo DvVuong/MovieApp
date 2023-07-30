@@ -57,14 +57,11 @@ class CustomHeaderView: UITableViewHeaderFooterView {
         
         titleLable.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(15)
-            make.top.equalToSuperview().offset(5)
             make.centerY.equalToSuperview()
-            make.height.equalTo(35)
         }
+        
         closeButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(5)
             make.trailing.equalToSuperview().offset(-15)
-            make.height.equalTo(35)
             make.centerY.equalToSuperview()
         }
         

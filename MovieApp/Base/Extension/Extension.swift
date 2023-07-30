@@ -8,6 +8,8 @@
 import UIKit
 import Combine
 
+let kAnimationDuration: Float = 0.3
+
 extension UIButton {
     func conerRadius(with numberRadius: CGFloat) {
         self.layer.cornerRadius = numberRadius
@@ -122,4 +124,25 @@ extension UIColor {
         static let itemBackground = UIColor(named: "tabItem_background")
         static let title = UIColor(named: "title")
     }
+}
+
+extension UITabBarController {
+    func setTabBar(hidden: Bool, animated: Bool) {
+           let animationDuration = animated ? kAnimationDuration : 0
+        UIView.animate(withDuration: 0.5, animations: {
+               var frame = self.tabBar.frame
+               frame.origin.y = self.view.frame.height
+               if !hidden {
+                   frame.origin.y -= frame.height
+               } else {
+                   let backgroundImageSize = self.tabBar.backgroundImage?.size ?? CGSize.zero
+                   let heightDiff: CGFloat = backgroundImageSize.height - frame.height
+                   // If background image size is large, tabBar top seem.
+                   if heightDiff > 0 {
+                       frame.origin.y += heightDiff
+                   }
+               }
+               self.tabBar.frame = frame
+           }, completion:nil)
+       }
 }

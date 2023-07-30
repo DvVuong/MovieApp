@@ -11,8 +11,14 @@ import SnapKit
 class CustomMessageView: UIView {
     lazy var textLabel = CustomLabel()
     lazy var avatarImage = UIImageView()
+    lazy var titleLabel = CustomLabel()
+    private var heightContrains: CGFloat = 0
     
-    private let heightAvatarImage: CGFloat = 30
+    var heightAvatarImage: CGFloat = 30 {
+        willSet {
+            heightContrains = newValue
+        }
+    }
     
     override init(frame: CGRect) {
           super.init(frame: frame)
@@ -39,11 +45,7 @@ class CustomMessageView: UIView {
         
         textLabel.text = senderUser.text
         avatarImage.image = Asset.spaceArtWallpapers.image
-        
-//        ImageManager.share.fetchImage(with: senderUser.senderAvatar ?? "") { image in
-//            self.avatarImage.image = image
-//        }
-        
+            
         avatarImage.snp.makeConstraints { make in
             make.width.height.equalTo(heightAvatarImage)
             make.trailing.equalToSuperview().offset(-10)

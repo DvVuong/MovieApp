@@ -12,21 +12,25 @@ import UIKit
 
 class DetailViewModel {
     let movieItem = PublishSubject<Movie>()
-    let imgUrl = BehaviorRelay<String>(value: "")
+    let movieItemBehaviorRelay = BehaviorRelay<Movie>(value: Movie(i: nil, name: nil, q: nil, cast: nil, year: nil))
+    let imgUrlBehaviorRelay = BehaviorRelay<String>(value: "")
     private var bag = DisposeBag()
     
     init() {
         movieItem.subscribe(onNext: {[weak self] movie in
             guard let `self` = self else {return}
-            self.imgUrl.accept(movie.i?.imageUrl ?? "")
+            self.imgUrlBehaviorRelay.accept(movie.i?.imageUrl ?? "")
+            self.movieItemBehaviorRelay.accept(movie)
         }).disposed(by: bag)
+        
+        
         
     }
     
     func getImage() -> UIImage {
         var img: UIImage?
         
-        ImageManager.share.fetchImage(with: imgUrl.value, completion: {[weak self] image in
+        ImageManager.share.fetchImage(with: imgUrlBehaviorRelay.value, completion: {[weak self] image in
             guard let `self` = self else {return}
             img = image
         })
