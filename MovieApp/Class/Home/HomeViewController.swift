@@ -43,23 +43,6 @@ class HomeViewController: BaseViewController {
         setupTabelView()
         setupViewModel()
         setupDataSource()
-        
-        DispatchQueue.global(qos: .background).async {
-            APIService.shared.fetchListMovie(with: .get, parameter: "game", expecting: MovieRespone.self)
-                .subscribe { event in
-                    switch event {
-                    case .success( let results):
-                        guard let data = results.d else {return}
-                        DispatchQueue.main.async {
-                            self.dataSource.setupTableView(width: self.tableView, list: data)
-                            self.tableView.reloadData()
-                        }
-                    case .failure( let error):
-                        print("vuongdv, \(error)")
-                    }
-                }
-                .disposed(by: self.bag)
-        }
     }
     
     override func viewWillLayoutSubviews() {
@@ -91,6 +74,38 @@ class HomeViewController: BaseViewController {
 
         }
         .store(in: &subcriptions)
+        
+        viewModel.fetchListMovie()
+            .drive(onNext: {[weak self] movies in
+                guard let `self` = self else {return}
+                self.dataSource.setupTableView(width: self.tableView, list: movies.results)
+                self.tableView.reloadData()
+            })
+            .disposed(by: bag)
+        
+        viewModel.fetchTopRateMovie()
+            .drive(onNext: {[weak self] item in
+                guard let `self` = self else {return}
+                self.dataSource.setupTableView(width: self.tableView, listTopRate: item.results)
+                self.dataSource.indexPath = {[weak self] indexPath in
+                    guard let `self` = self else {return}
+                    self.tableView.rectForRow(at: indexPath)
+                }
+                
+            })
+            .disposed(by: bag)
+        
+        viewModel.fetchOnTheAirMovie()
+            .drive(onNext: {[weak self] item in
+                guard let `self` = self else {return}
+                self.dataSource.setupTableView(width: self.tableView, listOnTheAir: item.results)
+                self.dataSource.indexPath = {[weak self] indexPath in
+                guard let `self` = self else {return}
+                self.tableView.rectForRow(at: indexPath)
+            }
+                
+            })
+            .disposed(by: bag)
     }
     
     private func configureNavi(with image: String?, nameUser: String?) {
@@ -120,12 +135,6 @@ class HomeViewController: BaseViewController {
         }
     }
     
-    override func setupUI() {
-//        avatarImage.cornerRadius(avatarImage.frame.size.height / 2)
-//        notificationView.cornerRadius(10)
-    }
-    
-
     private func setupTabelView() {
         tableView.delegate = dataSource
         tableView.dataSource = dataSource
@@ -136,10 +145,7 @@ class HomeViewController: BaseViewController {
         
         tableView.register(CustomHeaderView.self, forHeaderFooterViewReuseIdentifier: "CustomHeader")
     }
-    override func setupTap() {
-
-    }
-    
+   
 //MARK: Navigation
     
     @objc func didTapButton(_ sender: UIButton) {

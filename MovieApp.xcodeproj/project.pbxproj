@@ -79,6 +79,7 @@
 		E2AAE4462A235489004CFE0C /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AAE4452A235489004CFE0C /* RegisterViewModel.swift */; };
 		E2AAE4492A23588C004CFE0C /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AAE4482A23588C004CFE0C /* Extension.swift */; };
 		E2AB48742A72C4C600A8FEB1 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AB48732A72C4C400A8FEB1 /* DetailViewModel.swift */; };
+		E2AEB64B2A77E29200A54933 /* APIService+Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AEB64A2A77E29200A54933 /* APIService+Request.swift */; };
 		E2B1DAB22A4B30B1009E230B /* ChatViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B1DAB12A4B30B1009E230B /* ChatViewDataSource.swift */; };
 		E2B1EE6A2A363494006938D7 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B1EE682A363494006938D7 /* ProfileViewController.swift */; };
 		E2B1EE6B2A363495006938D7 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2B1EE692A363494006938D7 /* ProfileViewController.xib */; };
@@ -192,6 +193,7 @@
 		E2AAE4452A235489004CFE0C /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		E2AAE4482A23588C004CFE0C /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		E2AB48732A72C4C400A8FEB1 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		E2AEB64A2A77E29200A54933 /* APIService+Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "APIService+Request.swift"; sourceTree = "<group>"; };
 		E2B1DAB12A4B30B1009E230B /* ChatViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewDataSource.swift; sourceTree = "<group>"; };
 		E2B1EE682A363494006938D7 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		E2B1EE692A363494006938D7 /* ProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
@@ -510,6 +512,7 @@
 			children = (
 				9DA945AB2A32D91B0074D3FC /* FirebaseManager.swift */,
 				E29E9BB32A6D75F300AADF94 /* APIService.swift */,
+				E2AEB64A2A77E29200A54933 /* APIService+Request.swift */,
 			);
 			path = "ConfigAPI+Firebase";
 			sourceTree = "<group>";
@@ -976,6 +979,7 @@
 				9DAA12D42A3C5F1400C5308D /* ProfileDataSource.swift in Sources */,
 				E2FD476C2A61B6860015DA9D /* MVPCamemraViewController.swift in Sources */,
 				E246A50D2A51E44900D3CF6C /* DetailDataSource.swift in Sources */,
+				E2AEB64B2A77E29200A54933 /* APIService+Request.swift in Sources */,
 				E2AAE43D2A2346C2004CFE0C /* RegisterController.swift in Sources */,
 				E2B278442A740B9400D60F21 /* CustomHeaderView.swift in Sources */,
 				9D93058E2A386EE5007E2647 /* HomeViewModel.swift in Sources */,

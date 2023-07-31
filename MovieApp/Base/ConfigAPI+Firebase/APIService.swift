@@ -28,51 +28,52 @@ class APIService {
     static var schedulerBackground: SerialDispatchQueueScheduler = SerialDispatchQueueScheduler(qos: DispatchQoS.userInitiated)
     var queue = DispatchQueue(label: "CallAPI", qos: .background)
     private var defaultHeader: [String: String] = [
-        "X-RapidAPI-Key": "2937700a51msh8792f64b6a85189p1ed388jsn0d294a68bbb6",
-        "X-RapidAPI-Host": "online-movie-database.p.rapidapi.com",
-        "content-type": "application/json"
+        "accept": "application.json",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0ZTRlZjlhNThjYmI5OTRhZjNlOGIwOTViMWQ1MDM2YSIsInN1YiI6IjYzMDYwM2Y3NmU5MzhhMDA5MjM2ZTg4NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1RUPiu6hjnsCH5_MGlk6xMk1deD7rrUunKMDA19wSeE"
     ]
     
-  
-    func fetchListMovie<T: Codable>(with method: MethodHTTP = .get, parameter: String, expecting: T.Type )  -> Single<T> {
-        return Single.create { single in
-            var path = APIPath.shared.BASER_URL
-            let param: [String: String] = [
-                "q": parameter
-            ]
-            var paraString = ""
-            for (key, value) in param {
-                paraString += key + "=" + value
-            }
+    func fetchData<T: Codable>(with method: MethodHTTP = .get,
+                               path: String,
+                               parameter: [String: Any],
+                               expecting: T.Type)  -> Observable<T> {
+        return Observable.create { observer in
+//            var path = APIPath.shared.BASER_URL
+//            let param: [String: String] = [
+//                "q": parameter
+//            ]
+//            var paraString = ""
+//            for (key, value) in param {
+//                paraString += key + "=" + value
+//            }
+//
+//            if !paraString.isEmpty {
+//                paraString = "?" + paraString
+//                if (paraString.hasPrefix("&")) {
+//                    paraString.removeLast()
+//                }
+//                path = path + paraString
+//            }
             
-            if !paraString.isEmpty {
-                paraString = "?" + paraString
-                if (paraString.hasPrefix("&")) {
-                    paraString.removeLast()
-                }
-                path = path + paraString
-            }
-            
-            var request = URLRequest(url: NSURL(string: path)! as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
+            var request = URLRequest(url: NSURL(string: APIPath.BASER_URL + "/" + path )! as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
             request.httpMethod = method.rawValue
             request.allHTTPHeaderFields = self.defaultHeader
             let session = URLSession.shared
             let dataTask = session.dataTask(with: request) { data, httpReponse, error in
                 guard let data = data, error == nil else {
-                    return single(.failure(CustomError.invalidURL))
+                    return observer.onError(error!)
                 }
                 guard let response = httpReponse as? HTTPURLResponse else  {
                     return
                 }
                 
                 if response.statusCode == 400 {
-                    single(.failure(CustomError.badRequest))
+                    observer.onError(CustomError.badRequest)
                 }
                 
                 do {
                     let decoder = JSONDecoder()
                     let json = try decoder.decode(expecting, from: data)
-                    single(.success(json))
+                    observer.onNext(json)
                 }
                 catch (let error) {
                     DispatchQueue.main.async {
