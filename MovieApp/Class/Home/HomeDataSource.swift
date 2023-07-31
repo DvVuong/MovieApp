@@ -17,25 +17,24 @@ class HomeDataSource: UITableViewController {
     private var startContentOffset: CGFloat!
     private var lastContentOffset: CGFloat!
     
-    
     public var actionMoveToDetaiView:((Movie) -> Void)? = nil
     public var handlerActionScroll: (() -> Void)? = nil
-    weak var delegate: HomeDataSourceDelegate?
-    private var data: [Movie] = []
+    public var indexPath: ((IndexPath) -> Void)? = nil
     
-    func setupTableView(width tableView: UITableView, list: [Movie]) {
-        self.data = list
+    weak var delegate: HomeDataSourceDelegate?
+    
+    func setupTableView(width tableView: UITableView, list: [Movie]? = nil, listTopRate: [Movie]? = nil, listOnTheAir: [Movie]? = nil) {
         sections.append(.category)
-        sections.append(.detail(model: data))
-        sections.append(.recent)
-        sections.append(.favorites)
+        sections.append(.detail(model: list ?? []))
+        sections.append(.recent(model: listTopRate ?? []))
+        sections.append(.favorites(model: listOnTheAir ?? []))
     }
     
     private enum CellType {
         case category
         case detail(model: [Movie])
-        case recent
-        case favorites
+        case recent(model: [Movie])
+        case favorites(model: [Movie])
     }
     
     private var sections: [CellType] = [
@@ -87,14 +86,16 @@ class HomeDataSource: UITableViewController {
             }
             cell.selectionStyle = .none
             return cell
-        case .recent:
+        case .recent(let models):
+            self.indexPath?(indexPath)
             let cell = tableView.dequeueReusableCell(withIdentifier: "RecentTableViewCell", for: indexPath) as! RecentTableViewCell
-            cell.setupCollectionView()
+            cell.setupCollectionView(with: models)
             cell.selectionStyle = .none
             return cell
-        case .favorites:
+        case .favorites(let models):
+            self.indexPath?(indexPath)
             let cell = tableView.dequeueReusableCell(withIdentifier: "FavoritesTableViewCell", for: indexPath) as! FavoritesTableViewCell
-            cell.setupCollectionView()
+            cell.setupCollectionView(with: models)
             cell.selectionStyle = .none
             return cell
         }

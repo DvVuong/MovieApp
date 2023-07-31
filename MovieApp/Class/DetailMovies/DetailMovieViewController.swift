@@ -35,11 +35,11 @@ class DetailMovieViewController: BaseViewController {
     override func setupViewModel() {
         viewModel.movieItemBehaviorRelay
             .subscribe(onNext: {[weak self] movie in
-                print("vuongdv movie: \(movie.name ?? "nil")")
+                print("vuongdv movie: \(movie.title ?? "nil")")
                 guard let `self` = self else {return}
-                self.nameMovieLabel.text = movie.name
-                self.producerLabel.text = movie.q
-                self.categoryLabel.text = movie.name
+                self.nameMovieLabel.text = movie.title
+//                self.producerLabel.text = movie.q
+//                self.categoryLabel.text = movie.name
             })
             .disposed(by: bag)
         

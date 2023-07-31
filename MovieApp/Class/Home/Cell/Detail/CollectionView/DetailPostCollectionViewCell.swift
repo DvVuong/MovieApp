@@ -25,9 +25,9 @@ class DetailPostCollectionViewCell: UICollectionViewCell {
     }
     
     func bindData(with data: Movie) {
-        nameLabel.text = data.name
-        titleLabel.text = "\(String(describing: data.year))"
-        ImageManager.share.fetchImage(with: data.i?.imageUrl ?? "", completion: {[weak self] image in
+        nameLabel.text = data.title
+        titleLabel.text = "\(String(describing: data.id))"
+        ImageManager.share.fetchImage(with: data.posterPath ?? "" , completion: {[weak self] image in
             guard let `self` = self else {return}
             DispatchQueue.main.async {
                 self.imageMovies.image = image

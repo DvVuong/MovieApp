@@ -8,61 +8,36 @@
 import Foundation
 
 struct MovieRespone: Codable {
-    var d: [Movie]?
+    var page: Int?
+    var results: [Movie]?
     private enum CodingKeys: String, CodingKey {
-        case d
+        case results
+        case page
     }
 }
 
 struct Movie: Codable {
-    var i: ImageMovie?
-    let name: String?
-    let q: String?
-    let cast : String?
-    let year: Int?
+    var backdropPath: String?
+    var id: Int?
+    var title: String?
+    var originalLanguage: String?
+    var originalTitle: String?
+    var overview: String?
+    var posterPath: String?
+    var mediaType: String?
+    var releaseDate: String?
+    var voteAverage: Float?
+
         private enum CodingKeys: String, CodingKey {
-            case name = "l"
-            case q
-            case cast = "s"
-            case year = "y"
-            case i
+            case backdropPath = "backdrop_path"
+            case id
+            case title
+            case originalLanguage = "original_language"
+            case originalTitle = "original_title"
+            case overview
+            case posterPath = "poster_path"
+            case mediaType = "media_type"
+            case releaseDate = "release_date"
+           case voteAverage = "vote_average"
         }
-    
 }
-
-struct ImageMovie: Codable {
-    var height: Int?
-    var imageUrl: String?
-    var width: Int?
-    private enum CodingKeys: String, CodingKey {
-        case height
-        case imageUrl
-        case width
-    }
-}
-
-//struct MovieRepsonse: Codable {
-//    var l: String
-////    var q: String
-//    var rank: Int
-//    var s: String
-//    var y: Int
-//
-//    private enum CodingKeys: String, CodingKey {
-//        case l
-//        case rank
-//        case s
-//        case y
-//    }
-//}
-//
-//struct MovieResult: Codable {
-//    var d: [MovieRepsonse]
-//    var q: String
-//    var v: String
-//    private enum CodingKeys: String, CodingKey {
-//        case d
-//        case q
-//        case v
-//    }
-//}
