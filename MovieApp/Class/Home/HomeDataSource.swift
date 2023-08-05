@@ -10,6 +10,9 @@ protocol HomeDataSourceDelegate: AnyObject {
     func willHideTabbar()
     func willShowTabbar()
     func showTabBar()
+    func didChooseTVShow()
+    func didChooseAnime()
+    func didChooseMyList()
 }
 
 class HomeDataSource: UITableViewController {
@@ -18,27 +21,57 @@ class HomeDataSource: UITableViewController {
     private var lastContentOffset: CGFloat!
     
     public var actionMoveToDetaiView:((Movie) -> Void)? = nil
+    public var actionMoveToDetaiViewWithFavorites:((Movie) -> Void)? = nil
+    public var actionMoveToDetaiViewRecent:((Movie) -> Void)? = nil
     public var handlerActionScroll: (() -> Void)? = nil
     public var indexPath: ((IndexPath) -> Void)? = nil
+    private var listMovie: [Movie] = []
+    private var topRateMovie: [Movie] = []
+    private var onTheAriMovie: [Movie] = []
+    private var tvList: [Movie] = []
     
     weak var delegate: HomeDataSourceDelegate?
     
-    func setupTableView(width tableView: UITableView, list: [Movie]? = nil, listTopRate: [Movie]? = nil, listOnTheAir: [Movie]? = nil) {
-        sections.append(.category)
-        sections.append(.detail(model: list ?? []))
-        sections.append(.recent(model: listTopRate ?? []))
-        sections.append(.favorites(model: listOnTheAir ?? []))
-    }
-    
     private enum CellType {
         case category
-        case detail(model: [Movie])
-        case recent(model: [Movie])
-        case favorites(model: [Movie])
+        case detail
+        case recent
+        case favorites
     }
     
     private var sections: [CellType] = [
+        .category,
+        .detail,
+        .recent,
+        .favorites
     ]
+    
+    func setupTableViewForListMovie(width tableView: UITableView, list: [Movie]?) {
+        guard let list = list else {return}
+        self.listMovie = list
+        tableView.reloadSections([1], with: .automatic)
+    }
+    
+    func setupTableViewForTopRateMovie(width tableView: UITableView, list: [Movie]?) {
+        guard let list = list else {return}
+        self.topRateMovie = list
+        tableView.reloadSections([2], with: .automatic)
+    }
+    
+    func setupTableViewForOnTheAirMovie(width tableView: UITableView, list: [Movie]?) {
+        guard let list = list else {return}
+        self.onTheAriMovie = list
+        tableView.reloadSections([3], with: .automatic)
+    }
+    
+    func setupTableViewForTvList(width tableView: UITableView, list: [Movie]?) {
+        self.listMovie.removeAll()
+        guard let list = list else {return}
+        self.listMovie = list
+        tableView.reloadData()
+        tableView.beginUpdates()
+        tableView.endUpdates()
+    }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
@@ -62,45 +95,57 @@ class HomeDataSource: UITableViewController {
         case .category:
             let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryTableViewCell", for: indexPath) as! CategoryTableViewCell
             cell.actionMovies = { [weak self]  in
+                guard let `self` = self else {return}
                 //Todo here
             }
-            cell.actionTVShows = { [weak self]  in
-                //Todo here
-            }
-            cell.actionAnime = { [weak self]  in
-                //Todo here
-            }
-            cell.actionMyList = { [weak self]  in
-                //Todo here
-            }
-            cell.selectionStyle = .none
             
+            cell.actionTVShows = { [weak self]  in
+                guard let `self` = self else {return}
+                //Todo here
+                self.delegate?.didChooseTVShow()
+            }
+            
+            cell.actionAnime = { [weak self]  in
+                guard let `self` = self else {return}
+                //Todo here
+                self.delegate?.didChooseAnime()
+            }
+            
+            cell.actionMyList = { [weak self]  in
+                guard let `self` = self else {return}
+                //Todo here
+                self.delegate?.didChooseMyList()
+            }
+            
+            cell.selectionStyle = .none
             return cell
-        case .detail(let models):
+            
+        case .detail:
             let cell = tableView.dequeueReusableCell(withIdentifier: "DetailTableViewCell", for: indexPath) as! DetailTableViewCell
-            cell.setupCollectionView(with: models)
-            cell.setupActionSelectedItem()
+            cell.setupCollectionView(with: self.listMovie)
             cell.actionSelected = { [weak self] item  in
                 guard let `self` = self else { return }
                 self.actionMoveToDetaiView?(item)
             }
             cell.selectionStyle = .none
             return cell
-        case .recent(let models):
-            self.indexPath?(indexPath)
+            
+        case .recent:
             let cell = tableView.dequeueReusableCell(withIdentifier: "RecentTableViewCell", for: indexPath) as! RecentTableViewCell
-            cell.setupCollectionView(with: models)
+            cell.setupCollectionView(with: self.topRateMovie)
             cell.selectionStyle = .none
+            cell.delegate = self
             return cell
-        case .favorites(let models):
-            self.indexPath?(indexPath)
+            
+        case .favorites:
             let cell = tableView.dequeueReusableCell(withIdentifier: "FavoritesTableViewCell", for: indexPath) as! FavoritesTableViewCell
-            cell.setupCollectionView(with: models)
+            cell.setupCollectionView(with: self.onTheAriMovie)
             cell.selectionStyle = .none
+            cell.delegate = self
             return cell
         }
-        
     }
+    
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch sections[section] {
         case .category:
@@ -187,5 +232,17 @@ class HomeDataSource: UITableViewController {
 extension HomeDataSource: CustomHeaderViewDelegate {
     func didTapButton() {
         print("vuongdv Tap Tap Tap")
+    }
+}
+
+extension HomeDataSource: RecentTableViewCellDelegate {
+    func didChooseRecentitem(with item: Movie) {
+        actionMoveToDetaiViewRecent?(item)
+    }
+}
+
+extension HomeDataSource: FavoritesTableViewCellDelegate {
+    func didChooseFavoriteItem(with item: Movie) {
+        actionMoveToDetaiViewWithFavorites?(item)
     }
 }

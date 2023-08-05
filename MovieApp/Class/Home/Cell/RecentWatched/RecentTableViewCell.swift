@@ -7,11 +7,16 @@
 
 import UIKit
 
+protocol RecentTableViewCellDelegate: AnyObject {
+    func didChooseRecentitem(with item: Movie)
+}
+
 class RecentTableViewCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     private var dataSource: FavoritesDataSource = FavoritesDataSource()
     private var data: [Movie] = []
     
+    weak var delegate: RecentTableViewCellDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -46,5 +51,10 @@ extension RecentTableViewCell: UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 150, height: 200)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = self.data[indexPath.row]
+        delegate?.didChooseRecentitem(with: item)
     }
 }

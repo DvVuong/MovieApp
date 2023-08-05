@@ -35,6 +35,7 @@ internal enum Asset {
   internal static let icons8BackWhite = ImageAsset(name: "icons8-back-white")
   internal static let icons8Lock128 = ImageAsset(name: "icons8-lock-128()")
   internal static let icons8Movie50 = ImageAsset(name: "icons8-movie-50")
+  internal static let icons8Star16 = ImageAsset(name: "icons8-star-16()")
   internal static let book = ImageAsset(name: "book")
   internal static let bookUnselected = ImageAsset(name: "book_unselected")
   internal static let calendar = ImageAsset(name: "calendar")

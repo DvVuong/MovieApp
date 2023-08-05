@@ -14,5 +14,6 @@ target 'MovieApp' do
   pod 'CardSlider'
   pod 'RxSwift'
   pod 'RxCocoa'
+  pod 'RxDataSources'
   # Pods for MovieApp
 end

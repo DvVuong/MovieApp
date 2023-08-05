@@ -26,13 +26,13 @@ enum CustomError: Error {
 class APIService {
     static var shared = APIService()
     static var schedulerBackground: SerialDispatchQueueScheduler = SerialDispatchQueueScheduler(qos: DispatchQoS.userInitiated)
-    var queue = DispatchQueue(label: "CallAPI", qos: .background)
-    private var defaultHeader: [String: String] = [
+    static var queue = DispatchQueue(label: "CallAPI", qos: .background)
+    static var defaultHeader: [String: String] = [
         "accept": "application.json",
         "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0ZTRlZjlhNThjYmI5OTRhZjNlOGIwOTViMWQ1MDM2YSIsInN1YiI6IjYzMDYwM2Y3NmU5MzhhMDA5MjM2ZTg4NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1RUPiu6hjnsCH5_MGlk6xMk1deD7rrUunKMDA19wSeE"
     ]
     
-    func fetchData<T: Codable>(with method: MethodHTTP = .get,
+   static func fetchModel<T: Codable>(with method: MethodHTTP = .get,
                                path: String,
                                parameter: [String: Any],
                                expecting: T.Type)  -> Observable<T> {
@@ -80,9 +80,13 @@ class APIService {
                         print("vuongdv parse JSON Error", String(describing: error))
                     }
                 }
+                
+                observer.onCompleted()
             }
             dataTask.resume()
             return Disposables.create()
         }
     }
+    
+    
 }

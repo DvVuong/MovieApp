@@ -7,12 +7,13 @@
 
 import Foundation
 class APIPath {
-    static var shared = APIPath()
-    
     static var BASER_URL = "https://api.themoviedb.org/3"
     static var BASER_IMAGE_URL = "https://image.tmdb.org/t/p/w500"
     static var trending = "trending/movie/week"
     static var topRate = "tv/top_rated"
     static var onTheAir = "tv/on_the_air"
+    static var tvList = "discover/tv"
+    static var upComing = "movie/upcoming"
+
     
 }

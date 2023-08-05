@@ -7,25 +7,25 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
 class DetailMovieViewController: BaseViewController {
+    @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var imageMovie: UIImageView!
-    @IBOutlet weak var nameMovieLabel: UILabel!
-    @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var ageLabel: CustomLabel!
-    @IBOutlet weak var escapeButton: UIButton!
-    @IBOutlet weak var producerLabel: CustomLabel!
-    @IBOutlet weak var categoryLabel: CustomLabel!
-    @IBOutlet weak var collectionView: UICollectionView!
-    
-    private var dataSource: TheCastDataSource = TheCastDataSource()
+    private var dataSource: TableViewDataSource = TableViewDataSource()
     private var viewModel: DetailViewModel = DetailViewModel()
     private var bag = DisposeBag()
+    private var headerTableView = HeaderCell()
     convenience init(item: Movie) {
         self.init()
         viewModel.movieItem.onNext(item)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -33,40 +33,38 @@ class DetailMovieViewController: BaseViewController {
     }
     
     override func setupViewModel() {
-        viewModel.movieItemBehaviorRelay
-            .subscribe(onNext: {[weak self] movie in
-                print("vuongdv movie: \(movie.title ?? "nil")")
-                guard let `self` = self else {return}
-                self.nameMovieLabel.text = movie.title
-//                self.producerLabel.text = movie.q
-//                self.categoryLabel.text = movie.name
+        viewModel.movieObservable
+            .withUnretained(self)
+            .do(onNext: { onwner , movie in
+                onwner.headerTableView.bindData(with: movie)
             })
-            .disposed(by: bag)
-        
-        DispatchQueue.main.async {[weak self] in
-            guard let `self` = self else {return}
-            self.imageMovie.image = self.viewModel.getImage()
-        }
+            .subscribe(onNext: {onwner, movie in
+                onwner.dataSource.setUpTableView(with: onwner.tableView, lists: movie)
+        })
+        .disposed(by: bag)
     }
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        escapeButton.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi * 0.5))
-        ageLabel.cornerRadiusLabel(8)
-        producerLabel.cornerRadiusLabel(8)
-        categoryLabel.cornerRadiusLabel(8)
-        backButton.cornerRadius(5)
-        escapeButton.cornerRadius(5)
+        headerTableView.frame = CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 450)
     }
     
     override func setupTap() {
-        backButton.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
+        headerTableView.backButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: {owner, _ in
+                owner.pop()
+            })
+            .disposed(by: bag)
     }
     
     override func setupUI() {
-        collectionView.delegate = dataSource
-        collectionView.dataSource = dataSource
-        collectionView.register(UINib(nibName: "TheCastCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "TheCastCollectionViewCell")
-        collectionView.register(UINib(nibName: "HeaderCell", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderCell")
+        tableView.delegate = dataSource
+        tableView.dataSource = dataSource
+        tableView.tableHeaderView = headerTableView
+        tableView.separatorStyle = .none
+        tableView.register(DetailMovieTableViewCell.self, forCellReuseIdentifier: DetailMovieTableViewCell.indentifier)
+        tableView.register(DesciptionTableCell.self, forCellReuseIdentifier: DesciptionTableCell.indentifier)
     }
     
     //MARK: Action

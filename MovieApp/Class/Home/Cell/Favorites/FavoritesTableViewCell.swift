@@ -7,9 +7,14 @@
 
 import UIKit
 
+protocol FavoritesTableViewCellDelegate: AnyObject {
+    func didChooseFavoriteItem(with item: Movie)
+}
+
 class FavoritesTableViewCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     
+    weak var delegate: FavoritesTableViewCellDelegate?
     private var dataSource = FavoritesDataSource()
     private var data: [Movie] = []
     override func awakeFromNib() {
@@ -42,5 +47,10 @@ extension FavoritesTableViewCell: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 150, height: 200)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = self.data[indexPath.row]
+        delegate?.didChooseFavoriteItem(with: item)
     }
 }
