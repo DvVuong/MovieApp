@@ -13,16 +13,10 @@ class DetailTableViewCell: UITableViewCell {
     public var actionSelected: ((Movie) -> Void)? = nil
     
     var data: [Movie] = []
-//    var data: [MovieRespone]? = nil {
-//        didSet {
-//            dataSource.setupCollectionView(with: collectionView, list: data ?? [])
-//            print("vuongdv dataIN DelatilTableViewCell \(self.data?.count)")
-//        }
-//    }
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        setupActionSelectedItem()
     }
     
     func setupCollectionView(with list: [Movie]) {
@@ -30,20 +24,11 @@ class DetailTableViewCell: UITableViewCell {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(UINib(nibName: "DetailPostCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "DetailPostCollectionViewCell")
-//        dataSource.setupCollectionView(with: collectionView, list: list)
+        collectionView.reloadData()
     }
     
-    func setupActionSelectedItem() {
-//        dataSource.didSelectedItemHandler = { [weak self] in
-//            guard let `self` = self else { return }
-//            self.actionSelected?()
-//        }
-    }
-
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
 }

@@ -34,9 +34,6 @@ class CustomHeaderView: UITableViewHeaderFooterView {
     }()
     
     var buttonValue: String? = nil {
-//        didSet {
-//            closeButton.setTitle(oldValue, for: .normal)
-//        }
         willSet {
             closeButton.setTitle(newValue, for: .normal)
         }

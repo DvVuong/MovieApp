@@ -30,6 +30,11 @@ class ChatViewController: BaseViewController {
         viewModel.deMozip()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
+    }
+    
     override func setupUI() {
         headerView.defaultItem()
         headerView.title = "Chat"

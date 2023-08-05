@@ -11,14 +11,8 @@ import RxSwift
 import RxCocoa
 
 class HomeViewController: BaseViewController {
-//    @IBOutlet weak var headerView: UIView!
-//    @IBOutlet weak var heigthConstrainHeaderView: NSLayoutConstraint!
     @IBOutlet weak var heightContrainstableView: NSLayoutConstraint!
-//    @IBOutlet weak var avatarImage: UIImageView!
-//    @IBOutlet weak var nameLabel: UILabel!
-//    @IBOutlet weak var notificationView: UIView!
     @IBOutlet weak var tableView: UITableView!
-    
     
     private var isHidingTabBar: Bool = false
     private let viewModel: HomeViewModel = HomeViewModel()
@@ -29,12 +23,6 @@ class HomeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
-        
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.navigationController?.isNavigationBarHidden = true
     }
     
     override func viewDidLoad() {
@@ -54,7 +42,7 @@ class HomeViewController: BaseViewController {
             tableView.contentInset = safeAreaInsets
             tableView.scrollIndicatorInsets = safeAreaInsets
         }
-        
+    
         func hideTabBarIfNeeded() {
             guard !self.isHidingTabBar else { return }
             self.isHidingTabBar = true
@@ -71,39 +59,27 @@ class HomeViewController: BaseViewController {
         viewModel.userPublisher.sink { [weak self] userData in
             guard let `self` = self else { return }
             self.configureNavi(with: nil, nameUser: userData.userName)
-
         }
         .store(in: &subcriptions)
         
         viewModel.fetchListMovie()
             .drive(onNext: {[weak self] movies in
                 guard let `self` = self else {return}
-                self.dataSource.setupTableView(width: self.tableView, list: movies.results)
-                self.tableView.reloadData()
+                self.dataSource.setupTableViewForListMovie(width: self.tableView, list: movies.results)
             })
             .disposed(by: bag)
         
         viewModel.fetchTopRateMovie()
             .drive(onNext: {[weak self] item in
                 guard let `self` = self else {return}
-                self.dataSource.setupTableView(width: self.tableView, listTopRate: item.results)
-                self.dataSource.indexPath = {[weak self] indexPath in
-                    guard let `self` = self else {return}
-                    self.tableView.rectForRow(at: indexPath)
-                }
-                
+                self.dataSource.setupTableViewForTopRateMovie(width: self.tableView, list: item.results)
             })
             .disposed(by: bag)
         
         viewModel.fetchOnTheAirMovie()
             .drive(onNext: {[weak self] item in
                 guard let `self` = self else {return}
-                self.dataSource.setupTableView(width: self.tableView, listOnTheAir: item.results)
-                self.dataSource.indexPath = {[weak self] indexPath in
-                guard let `self` = self else {return}
-                self.tableView.rectForRow(at: indexPath)
-            }
-                
+                self.dataSource.setupTableViewForOnTheAirMovie(width: self.tableView, list: item.results)
             })
             .disposed(by: bag)
     }
@@ -111,7 +87,6 @@ class HomeViewController: BaseViewController {
     private func configureNavi(with image: String?, nameUser: String?) {
         guard let name = nameUser else {return}
         let navi = navigationController!
-        
         let customView = CustomNavigationBarView(frame: CGRect(x: 0, y: 0, width: navi.navigationBar.frame.width, height: navi.navigationBar.frame.height))
         customView.backgroundColor = .clear
         customView.textLabel.text = name
@@ -119,30 +94,46 @@ class HomeViewController: BaseViewController {
         customView.avatarImage.image = Asset.caitlynArcaneWickellia.image
         customView.heightAvatarImage = navi.navigationBar.frame.height - 5
         customView.setupCustomUI()
-        
         // Thêm view vào navigationBar
         if let navigationBar = self.navigationController?.navigationBar {
             navigationBar.addSubview(customView)
         }
     }
+    
     override func setupDataSource() {
         dataSource.delegate = self
         dataSource.actionMoveToDetaiView = { [weak self] item in
             guard let `self` = self else { return }
             let vc = DetailMovieViewController(item: item)
-            vc.hidesBottomBarWhenPushed = true
-            self.push(vc)
+            self.pushToDetailView(with: vc)
+        }
+        
+        dataSource.actionMoveToDetaiViewRecent = {[weak self] item in
+            guard let `self` = self else {return}
+            let vc = DetailMovieViewController(item: item)
+            self.pushToDetailView(with: vc)
+        }
+        
+        dataSource.actionMoveToDetaiViewWithFavorites = {[weak self] item in
+            guard let `self` = self else {return}
+            let vc = DetailMovieViewController(item: item)
+            self.pushToDetailView(with: vc)
         }
     }
     
+    private func pushToDetailView(with vc: UIViewController) {
+        vc.hidesBottomBarWhenPushed = true
+        self.push(vc)
+    }
+    
     private func setupTabelView() {
+        dataSource.delegate = self
         tableView.delegate = dataSource
         tableView.dataSource = dataSource
         tableView.register(UINib(nibName: "CategoryTableViewCell", bundle: nil), forCellReuseIdentifier: "CategoryTableViewCell")
         tableView.register(UINib(nibName: "DetailTableViewCell", bundle: nil), forCellReuseIdentifier: "DetailTableViewCell")
         tableView.register(UINib(nibName: "FavoritesTableViewCell", bundle: nil), forCellReuseIdentifier: "FavoritesTableViewCell")
         tableView.register(UINib(nibName: "RecentTableViewCell", bundle: nil), forCellReuseIdentifier: "RecentTableViewCell")
-        
         tableView.register(CustomHeaderView.self, forHeaderFooterViewReuseIdentifier: "CustomHeader")
     }
    
@@ -153,6 +144,23 @@ class HomeViewController: BaseViewController {
     }
 }
 extension HomeViewController: HomeDataSourceDelegate {
+    func didChooseAnime() {
+        print("vuongdv")
+    }
+    
+    func didChooseTVShow() {
+        viewModel.fecthTVList()
+            .drive(onNext: {[weak self] item in
+                guard let `self` = self else {return}
+                self.dataSource.setupTableViewForTvList(width: self.tableView, list: item.results)
+            })
+            .disposed(by: bag)
+    }
+    
+    func didChooseMyList() {
+        print("vuongdv")
+    }
+    
     func showTabBar() {
         showTabBarIfNeeded()
         print("vuongdv1 ShowTabar")
@@ -167,8 +175,4 @@ extension HomeViewController: HomeDataSourceDelegate {
         showTabBarIfNeeded()
         print("vuongdv2 ShowTabar")
     }
-    
-    
 }
-
-

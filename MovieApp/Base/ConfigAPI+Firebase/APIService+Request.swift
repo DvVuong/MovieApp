@@ -11,22 +11,35 @@ import SwiftUI
 
 extension APIService {
     //Get List Movie
-    func fetchListMovie<T: Codable>(with object: T.Type ) -> Observable<T> {
+   static func fetchListMovie<T: Codable>(with object: T.Type ) -> Observable<T> {
         let path = APIPath.trending
-        return fetchData(with: .get, path: path, parameter: ["":""], expecting: object)
+        return fetchModel(with: .get, path: path, parameter: ["":""], expecting: object)
     }
     
     //Get Top Rate Movie
-    func fetchTopRateMovie<T: Codable>(with object: T.Type) -> Observable<T> {
+    static func fetchTopRateMovie<T: Codable>(with object: T.Type) -> Observable<T> {
         let path = APIPath.topRate
-        return fetchData(with: .get, path: path, parameter: ["":""], expecting: object)
+        return fetchModel(with: .get, path: path, parameter: ["":""], expecting: object)
     }
     
     //Get On The Air
-    func fecthOnTheAir<T: Codable>(with object: T.Type) -> Observable<T> {
+    static func fecthOnTheAir<T: Codable>(with object: T.Type) -> Observable<T> {
         let path = APIPath.onTheAir
         let params = ["":""]
-        return fetchData(with: .get, path: path, parameter: params, expecting: object)
+        return fetchModel(with: .get, path: path, parameter: params, expecting: object)
     }
     
+    //Get TV List
+    static func fetchTVList<T: Codable>(with object: T.Type) -> Observable<T> {
+        let path = APIPath.tvList
+        let params = ["":""]
+        return fetchModel(with: .get, path: path, parameter: params, expecting: object)
+    }
+    
+    //Get upcoming
+    static func fecthUpComingMovie<T: Codable>(with objcet: T.Type) -> Observable<T> {
+        let path = APIPath.upComing
+        let params = ["":""]
+        return fetchModel(with: .get, path: path, parameter: params, expecting: objcet)
+    }
 }

@@ -8,7 +8,7 @@
 import UIKit
 import CardTabBar
 
-class TabBarController: CardTabBarController {
+class TabBarController: UITabBarController {
     
     lazy var homeTab: UIViewController = {
         let homeTabItem = UITabBarItem(title: "Home", image: Asset.icHome.image, selectedImage: nil)
@@ -17,17 +17,11 @@ class TabBarController: CardTabBarController {
         return homeNavTab
     }()
 
-//    lazy var bookTab: UIViewController = {
-//        let searchTabItem = UITabBarItem(title: "Search", image: Asset.icSearch.image, selectedImage: nil)
-//        let navController = NavigationController(rootViewController: SearchViewController())
-//        navController.tabBarItem = searchTabItem
-//        return navController
-//    }()
-
     lazy var editTab: UIViewController = {
         let randomTabItem = UITabBarItem(title: "Reels", image: Asset.icPlay.image, selectedImage: nil)
         let navController = NavigationController(rootViewController: ReelsViewController())
         navController.tabBarItem = randomTabItem
+        navController.navigationController?.isNavigationBarHidden = false
         return navController
     }()
 
@@ -40,22 +34,24 @@ class TabBarController: CardTabBarController {
 
     lazy var moreTab: UIViewController = {
         let commentTabItem = UITabBarItem(title: "Profile", image: Asset.icProfile.image, selectedImage: nil)
-        let navController = NavigationController(rootViewController: ProfileViewController())
-        navController.tabBarItem = commentTabItem
-        return navController
+        let naviController = NavigationController(rootViewController: ProfileViewController())
+        naviController.tabBarItem = commentTabItem
+        return naviController
     }()
     
     lazy var chatTab: UIViewController = {
         let chatTabItem = UITabBarItem(title: "Chat", image: UIImage(systemName: "message.fill"), selectedImage: nil)
         let naviController = NavigationController(rootViewController: ChatViewController())
         naviController.tabBarItem = chatTabItem
+        naviController.navigationController?.isNavigationBarHidden = true
         return naviController
     }()
     
     lazy var bookTap: UIViewController = {
         let bookItem = UITabBarItem(title: "Book", image: UIImage(systemName: "book.closed.fill")?.withTintColor(.black), selectedImage: nil)
-        let naviController = NavigationController(rootViewController: ReadingBookViewController())
+        let naviController = NavigationController(rootViewController: SearchViewController())
         naviController.tabBarItem = bookItem
+        naviController.navigationController?.isNavigationBarHidden = true
         return naviController
     }()
     

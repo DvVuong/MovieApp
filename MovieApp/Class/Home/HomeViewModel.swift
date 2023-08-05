@@ -28,14 +28,18 @@ class HomeViewModel {
     }
     
     func fetchListMovie() -> Driver<MovieRespone> {
-        return APIService.shared.fetchListMovie(with: MovieRespone.self).asDriver(onErrorJustReturn: MovieRespone())
+        return APIService.fetchListMovie(with: MovieRespone.self).asDriver(onErrorJustReturn: MovieRespone())
     }
     
     func fetchTopRateMovie() -> Driver<MovieRespone> {
-        return APIService.shared.fetchTopRateMovie(with: MovieRespone.self).asDriver(onErrorJustReturn: MovieRespone())
+        return APIService.fetchTopRateMovie(with: MovieRespone.self).asDriver(onErrorJustReturn: MovieRespone())
     }
     
     func fetchOnTheAirMovie() -> Driver<MovieRespone> {
-        return APIService.shared.fecthOnTheAir(with: MovieRespone.self).asDriver(onErrorJustReturn: MovieRespone())
+        return APIService.fecthOnTheAir(with: MovieRespone.self).asDriver(onErrorJustReturn: MovieRespone())
+    }
+    
+    func fecthTVList() -> Driver<MovieRespone> {
+        return APIService.fetchTVList(with: MovieRespone.self).asDriver(onErrorJustReturn: MovieRespone())
     }
 }
