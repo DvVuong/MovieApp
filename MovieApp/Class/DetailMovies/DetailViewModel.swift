@@ -35,4 +35,8 @@ class DetailViewModel {
         })
         return img ?? UIImage()
     }
+    
+    func addFavoriteMovie(with idMovie: Int) -> Driver<RequestFavoriteMovie> {
+        APIService.createFavoriteMovie(with: RequestFavoriteMovie.self, movieID: idMovie).asDriver(onErrorJustReturn: RequestFavoriteMovie())
+    }
 }

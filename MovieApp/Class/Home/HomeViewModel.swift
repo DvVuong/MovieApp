@@ -36,7 +36,7 @@ class HomeViewModel {
     }
     
     func fetchOnTheAirMovie() -> Driver<MovieRespone> {
-        return APIService.fecthOnTheAir(with: MovieRespone.self).asDriver(onErrorJustReturn: MovieRespone())
+        return APIService.getFavoritesMovie(with: MovieRespone.self).asDriver(onErrorJustReturn: MovieRespone())
     }
     
     func fecthTVList() -> Driver<MovieRespone> {

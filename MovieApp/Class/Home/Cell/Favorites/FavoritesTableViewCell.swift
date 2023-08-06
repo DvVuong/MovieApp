@@ -30,6 +30,7 @@ class FavoritesTableViewCell: UITableViewCell {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(UINib(nibName: "FavotitesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "FavotitesCollectionViewCell")
+        collectionView.reloadData()
     }
 }
 
