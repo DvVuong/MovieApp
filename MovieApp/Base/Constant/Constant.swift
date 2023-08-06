@@ -14,6 +14,9 @@ class APIPath {
     static var onTheAir = "tv/on_the_air"
     static var tvList = "discover/tv"
     static var upComing = "movie/upcoming"
+    ///14214987 is account ID
+    static var addFavoriteMovie = "account/14214987/favorite"
+    static var favorites = "account/14214987/favorite/movies"
 
     
 }

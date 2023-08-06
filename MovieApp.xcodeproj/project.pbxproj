@@ -62,6 +62,7 @@
 		E246A50D2A51E44900D3CF6C /* DetailDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E246A50C2A51E44900D3CF6C /* DetailDataSource.swift */; };
 		E2801B842A55C61D00C1B0AD /* DetailChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2801B832A55C61C00C1B0AD /* DetailChatViewModel.swift */; };
 		E2832E9F2A7D5ED400EBE071 /* DesciptionTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2832E9E2A7D5ED000EBE071 /* DesciptionTableCell.swift */; };
+		E291467B2A7F8F5F006F7D1E /* RequestFavoriteMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = E291467A2A7F8F5F006F7D1E /* RequestFavoriteMovie.swift */; };
 		E29A00882A68372000344A2D /* CustomAcitviView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29A00872A68372000344A2D /* CustomAcitviView.swift */; };
 		E29C40F02A6C25C90031E766 /* ReadingBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29C40EE2A6C25C90031E766 /* ReadingBookViewController.swift */; };
 		E29C40F12A6C25C90031E766 /* ReadingBookViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E29C40EF2A6C25C90031E766 /* ReadingBookViewController.xib */; };
@@ -178,6 +179,7 @@
 		E246A50C2A51E44900D3CF6C /* DetailDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDataSource.swift; sourceTree = "<group>"; };
 		E2801B832A55C61C00C1B0AD /* DetailChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailChatViewModel.swift; sourceTree = "<group>"; };
 		E2832E9E2A7D5ED000EBE071 /* DesciptionTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesciptionTableCell.swift; sourceTree = "<group>"; };
+		E291467A2A7F8F5F006F7D1E /* RequestFavoriteMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFavoriteMovie.swift; sourceTree = "<group>"; };
 		E29A00872A68372000344A2D /* CustomAcitviView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAcitviView.swift; sourceTree = "<group>"; };
 		E29C40EE2A6C25C90031E766 /* ReadingBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingBookViewController.swift; sourceTree = "<group>"; };
 		E29C40EF2A6C25C90031E766 /* ReadingBookViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReadingBookViewController.xib; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 				E2D3864F2A6EE012003CFBBC /* CommonDataRespone.swift */,
 				E2D386512A6EE182003CFBBC /* CommonResponse.swift */,
 				E2B671FE2A6FD06700B6C553 /* MovieRepsonse.swift */,
+				E291467A2A7F8F5F006F7D1E /* RequestFavoriteMovie.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -998,6 +1001,7 @@
 				E2AEB64B2A77E29200A54933 /* APIService+Request.swift in Sources */,
 				E2AAE43D2A2346C2004CFE0C /* RegisterController.swift in Sources */,
 				E2B278442A740B9400D60F21 /* CustomHeaderView.swift in Sources */,
+				E291467B2A7F8F5F006F7D1E /* RequestFavoriteMovie.swift in Sources */,
 				9D93058E2A386EE5007E2647 /* HomeViewModel.swift in Sources */,
 				9D9305962A3870D7007E2647 /* CategoryTableViewCell.swift in Sources */,
 				E2B670AB2A4C93460019C9DE /* UserActiveDataSource.swift in Sources */,

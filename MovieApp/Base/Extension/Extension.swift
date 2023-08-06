@@ -146,3 +146,17 @@ extension UITabBarController {
            }, completion:nil)
        }
 }
+
+extension Dictionary {
+    var jsonData: Data? {
+        return try? JSONSerialization.data(withJSONObject: self, options: [.prettyPrinted])
+    }
+    
+    func toJson() -> String? {
+        if let jsonData = jsonData {
+            let jsonString = String(data: jsonData, encoding: .utf8)
+            return jsonString
+        }
+        return nil
+    }
+}

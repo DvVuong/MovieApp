@@ -23,6 +23,13 @@ class HomeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
+        
+        viewModel.fetchOnTheAirMovie()
+            .drive(onNext: {[weak self] item in
+                guard let `self` = self else {return}
+                self.dataSource.setupTableViewForOnTheAirMovie(width: self.tableView, list: item.results)
+            })
+            .disposed(by: bag)
     }
     
     override func viewDidLoad() {
@@ -76,12 +83,7 @@ class HomeViewController: BaseViewController {
             })
             .disposed(by: bag)
         
-        viewModel.fetchOnTheAirMovie()
-            .drive(onNext: {[weak self] item in
-                guard let `self` = self else {return}
-                self.dataSource.setupTableViewForOnTheAirMovie(width: self.tableView, list: item.results)
-            })
-            .disposed(by: bag)
+       
     }
     
     private func configureNavi(with image: String?, nameUser: String?) {

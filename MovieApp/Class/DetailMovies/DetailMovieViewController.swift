@@ -56,6 +56,18 @@ class DetailMovieViewController: BaseViewController {
                 owner.pop()
             })
             .disposed(by: bag)
+        
+        headerTableView.actionChooseIDMovie = {[weak self] id in
+            guard let `self` = self, let id = id else {return}
+            print("vuongdv ID: \(id)")
+            self.viewModel.addFavoriteMovie(with: id)
+                .drive(onNext: { item in
+                    print("vuongdv item", item.status_code   as Any)
+                    print("vuongdv item", item.status_message as Any)
+                    print("vuongdv item", item.success as Any)
+                })
+                .disposed(by: self.bag)
+        }
     }
     
     override func setupUI() {

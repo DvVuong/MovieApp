@@ -15,6 +15,9 @@ protocol HeaderCellDelegate: AnyObject {
 
 class HeaderCell: UIView {
     
+    public var actionChooseIDMovie: ((Int?) -> Void)? = nil
+    private var idMovie: Int? = 0
+    
      lazy var backButton: UIButton = {
        let button = UIButton()
         let image = Asset.icons8BackBlack.image
@@ -46,12 +49,13 @@ class HeaderCell: UIView {
     
      lazy var favouriteButton: UIButton = {
        let button = UIButton()
-        button.cornerRadius(5)
-        button.setupBoderWidth(with: 1, color: UIColor.white.cgColor)
-        let image = UIImage(systemName: "heart.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 15))
-        button.setImage(image, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .systemGray6
+         button.cornerRadius(5)
+         button.setupBoderWidth(with: 1, color: UIColor.white.cgColor)
+         let image = UIImage(systemName: "heart.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 15))
+         button.setImage(image, for: .normal)
+         button.translatesAutoresizingMaskIntoConstraints = false
+         button.backgroundColor = .systemGray6
+         button.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -111,11 +115,17 @@ class HeaderCell: UIView {
     }
     
     func bindData(with movie: Movie) {
+        self.idMovie = movie.id ?? 0
         ImageManager.share.fetchImage(with: movie.posterPath ?? "") { [weak self] image in
             guard let `self` = self else {return}
             DispatchQueue.main.async {
                 self.imageMovie.image = image
             }
         }
+    }
+    
+    //MARK: - ActionButton
+    @objc private func didTapButton(_ sender: UIButton) {
+        actionChooseIDMovie?(idMovie)
     }
 }
