@@ -129,11 +129,11 @@ class DesciptionTableCell: UITableViewCell {
         overViewMovie.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
         
         starImage.snp.makeConstraints { make in
-            make.width.height.equalTo(20)
+            make.width.height.equalTo(15)
         }
         
         voteLable.snp.makeConstraints { make in
-            make.width.height.equalTo(40)
+            make.width.lessThanOrEqualTo(45)
         }
         
         voteMovie.addArrangedSubview(voteLable)
@@ -145,8 +145,7 @@ class DesciptionTableCell: UITableViewCell {
     
     func bindData(with data: Movie?) {
         guard let data = data else {return}
-        
-        nameMovieLable.text = "Name Movie: \(data.originalTitle ?? "") "
+        nameMovieLable.text = "Movie: \(data.originalTitle ?? "") "
         overViewMovie.text = "Overview: \(data.overview ?? "") "
         voteMovieLable.text = "\(data.voteAverage ?? 0)"
     }

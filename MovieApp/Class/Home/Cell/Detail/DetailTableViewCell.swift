@@ -10,7 +10,7 @@ import UIKit
 class DetailTableViewCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     private var dataSource = CollectionViewDataSource()
-    public var actionSelected: ((Movie) -> Void)? = nil
+    public var actionSelected: ((Movie, Int) -> Void)? = nil
     
     var data: [Movie] = []
 
@@ -50,7 +50,8 @@ extension DetailTableViewCell: UICollectionViewDelegate, UICollectionViewDataSou
     
      func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
          let item = data[indexPath.row]
-         actionSelected?(item)
+         let index = indexPath.row
+         actionSelected?(item, index)
     }
     
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

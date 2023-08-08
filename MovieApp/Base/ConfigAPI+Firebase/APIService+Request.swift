@@ -48,14 +48,19 @@ extension APIService {
     }
     
     // Add FavoriteMovie
-    static func createFavoriteMovie<T: Codable>(with object: T.Type, movieID: Int? = 0) -> Observable<T> {
+    static func createFavoriteMovie<T: Codable>(with object: T.Type, movieID: Int? = 0, isFavorite: Bool) -> Observable<T> {
         let path = APIPath.addFavoriteMovie
-        print("vuongdv path: \(path)")
         let param: [String: Any] = [
             "media_type": "movie",
             "media_id": movieID ?? 0,
-            "favorite": true
+            "favorite": isFavorite
         ]
         return requestModel(with: .post, path: path, expecting: object, parameter: param)
+    }
+    
+    //Get Video
+    static func fetchVideo<T: Codable>(with object: T.Type, movieId: Int) -> Observable<T> {
+        let path = APIPath.videos + "/" + "\(movieId)" + "/" + "videos"
+        return fetchModel(path: path, expecting: object)
     }
 }

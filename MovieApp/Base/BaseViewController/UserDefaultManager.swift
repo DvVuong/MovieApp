@@ -13,6 +13,7 @@ class UserDefaultManager {
     private let _idCurrentUSer = "CurrentUserID"
     private let _curentUser = "CurrentUser"
     private let _partnerUser = "PartnerUser"
+    private let _FavoritesMovie = "FavoritesMovie"
     
     func getIdUser(_ id: String) {
         UserDefaults.standard.set(id, forKey: _idUser)
@@ -72,5 +73,26 @@ class UserDefaultManager {
             print("vuongdv", error.localizedDescription)
         }
         return UserResponse()
+    }
+    
+    func setFavoritesMovie(with movie: Movie) {
+        do {
+            let encoderData = try PropertyListEncoder().encode(movie)
+            UserDefaults.standard.set(encoderData, forKey: _FavoritesMovie)
+        }
+        catch (let error){
+            print("vuongdv", error.localizedDescription)
+        }
+    }
+    func getFavoritesMovie() -> Movie? {
+        do {
+            let data = UserDefaults.standard.value(forKey: _FavoritesMovie) as? Data ?? Data()
+            let objc = try PropertyListDecoder().decode(Movie.self, from: data)
+            return objc
+        }
+        catch (let error) {
+            print("vuongdv", error.localizedDescription)
+        }
+        return nil
     }
 }

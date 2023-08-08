@@ -19,15 +19,41 @@ class HomeViewController: BaseViewController {
     private var dataSource: HomeDataSource = HomeDataSource()
     private var subcriptions = Set<AnyCancellable>()
     private var bag = DisposeBag()
+    private var indexItemMovie: Int? = 0
+    private var movies: [Movie]? = []
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
         
+        
+        viewModel.fetchListMovie()
+            .drive(onNext: {[weak self] movie in
+                guard let `self` = self else {return}
+                self.movies = movie.results
+                self.dataSource.setupTableViewForListMovie(width: self.tableView, list: movie.results)
+            })
+            .disposed(by: bag)
+        
         viewModel.fetchOnTheAirMovie()
             .drive(onNext: {[weak self] item in
-                guard let `self` = self else {return}
-                self.dataSource.setupTableViewForOnTheAirMovie(width: self.tableView, list: item.results)
+                var movies: [Movie] = []
+                guard let `self` = self, let data = item.results else {return}
+                for i in data {
+                    let movie = Movie(backdropPath: i.backdropPath,
+                                      id: i.id,
+                                      title: i.title,
+                                      originalLanguage: i.originalLanguage,
+                                      originalTitle: i.originalTitle,
+                                      overview: i.overview,
+                                      posterPath: i.posterPath,
+                                      mediaType: i.mediaType,
+                                      releaseDate: i.releaseDate,
+                                      voteAverage: i.voteAverage,
+                                      isFavorites: true)
+                    movies.append(movie)
+                }
+                self.dataSource.setupTableViewForOnTheAirMovie(width: self.tableView, list: movies)
             })
             .disposed(by: bag)
     }
@@ -69,13 +95,6 @@ class HomeViewController: BaseViewController {
         }
         .store(in: &subcriptions)
         
-        viewModel.fetchListMovie()
-            .drive(onNext: {[weak self] movies in
-                guard let `self` = self else {return}
-                self.dataSource.setupTableViewForListMovie(width: self.tableView, list: movies.results)
-            })
-            .disposed(by: bag)
-        
         viewModel.fetchTopRateMovie()
             .drive(onNext: {[weak self] item in
                 guard let `self` = self else {return}
@@ -104,21 +123,23 @@ class HomeViewController: BaseViewController {
     
     override func setupDataSource() {
         dataSource.delegate = self
-        dataSource.actionMoveToDetaiView = { [weak self] item in
+        dataSource.actionMoveToDetaiView = { [weak self] item, index  in
             guard let `self` = self else { return }
-            let vc = DetailMovieViewController(item: item)
+            self.indexItemMovie = index
+            let vc = DetailMovieViewController(item: item, index: index)
+            vc.delegate = self
             self.pushToDetailView(with: vc)
         }
         
         dataSource.actionMoveToDetaiViewRecent = {[weak self] item in
             guard let `self` = self else {return}
-            let vc = DetailMovieViewController(item: item)
+            let vc = DetailMovieViewController(item: item, index: 0)
             self.pushToDetailView(with: vc)
         }
         
         dataSource.actionMoveToDetaiViewWithFavorites = {[weak self] item in
             guard let `self` = self else {return}
-            let vc = DetailMovieViewController(item: item)
+            let vc = DetailMovieViewController(item: item, index: 0)
             self.pushToDetailView(with: vc)
         }
     }
@@ -177,4 +198,12 @@ extension HomeViewController: HomeDataSourceDelegate {
         showTabBarIfNeeded()
         print("vuongdv2 ShowTabar")
     }
+}
+
+
+extension HomeViewController: DetailMovieViewControllerDelegate {
+    func setFavoritesMovie(with isFavorites: Bool, index: Int) {
+        print("vuongdv", isFavorites , "index", index)
+    }
+    
 }
