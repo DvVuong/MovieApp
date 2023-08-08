@@ -48,7 +48,7 @@ class TabBarController: UITabBarController {
     }()
     
     lazy var bookTap: UIViewController = {
-        let bookItem = UITabBarItem(title: "Book", image: UIImage(systemName: "book.closed.fill")?.withTintColor(.black), selectedImage: nil)
+        let bookItem = UITabBarItem(title: "Search", image: Asset.icSearch.image, selectedImage: nil)
         let naviController = NavigationController(rootViewController: SearchViewController())
         naviController.tabBarItem = bookItem
         naviController.navigationController?.isNavigationBarHidden = true
@@ -64,7 +64,7 @@ class TabBarController: UITabBarController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-       self.navigationController?.isNavigationBarHidden = true
+       self.navigationController?.isNavigationBarHidden = false
     }
 
     // MARK: - UI

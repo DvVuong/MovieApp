@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        windows = UIWindow(frame: UIScreen.main.bounds)
         let id = UserDefaultManager.shared.setIdUser()
         if id.isEmpty {
-            windows.rootViewController = UINavigationController(rootViewController: LoginViewController())
+            windows.rootViewController = UINavigationController(rootViewController: ViewController())
         }else {
             windows.rootViewController = UINavigationController(rootViewController: TabBarController())
             FirebaseManager.shared.changeStateForUser(with: id, isActive: true)

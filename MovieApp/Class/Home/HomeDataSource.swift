@@ -20,7 +20,7 @@ class HomeDataSource: UITableViewController {
     private var startContentOffset: CGFloat!
     private var lastContentOffset: CGFloat!
     
-    public var actionMoveToDetaiView:((Movie) -> Void)? = nil
+    public var actionMoveToDetaiView:((Movie, Int) -> Void)? = nil
     public var actionMoveToDetaiViewWithFavorites:((Movie) -> Void)? = nil
     public var actionMoveToDetaiViewRecent:((Movie) -> Void)? = nil
     public var handlerActionScroll: (() -> Void)? = nil
@@ -123,9 +123,9 @@ class HomeDataSource: UITableViewController {
         case .detail:
             let cell = tableView.dequeueReusableCell(withIdentifier: "DetailTableViewCell", for: indexPath) as! DetailTableViewCell
             cell.setupCollectionView(with: self.listMovie)
-            cell.actionSelected = { [weak self] item  in
+            cell.actionSelected = { [weak self] item, index  in
                 guard let `self` = self else { return }
-                self.actionMoveToDetaiView?(item)
+                self.actionMoveToDetaiView?(item, index)
             }
             cell.selectionStyle = .none
             return cell

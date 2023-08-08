@@ -769,6 +769,7 @@ PODS:
   - SnapKit (5.6.0)
   - SwiftGen (6.6.2)
   - Toaster (2.3.0)
+  - youtube-ios-player-helper (1.0.4)
 
 DEPENDENCIES:
   - CardSlider
@@ -782,6 +783,7 @@ DEPENDENCIES:
   - SnapKit (~> 5.6.0)
   - SwiftGen (~> 6.0)
   - Toaster
+  - youtube-ios-player-helper (~> 1.0.4)
 
 SPEC REPOS:
   trunk:
@@ -812,6 +814,7 @@ SPEC REPOS:
     - SnapKit
     - SwiftGen
     - Toaster
+    - youtube-ios-player-helper
 
 SPEC CHECKSUMS:
   abseil: 926fb7a82dc6d2b8e1f2ed7f3a718bce691d1e46
@@ -841,7 +844,8 @@ SPEC CHECKSUMS:
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SwiftGen: 1366a7f71aeef49954ca5a63ba4bef6b0f24138c
   Toaster: c3473963c78e8cabbf6ea6f11ad0fdaae6f54987
+  youtube-ios-player-helper: e9b97535e816db3152179d84d999bc1807ecd689
 
-PODFILE CHECKSUM: 2c87a95e53f7633c1859f3b828f73875a1299539
+PODFILE CHECKSUM: 6a29fb0b25ec0706cce45a80e15eb398037fcf83
 
 COCOAPODS: 1.11.3

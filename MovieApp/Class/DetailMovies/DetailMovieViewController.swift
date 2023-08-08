@@ -9,6 +9,10 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+protocol DetailMovieViewControllerDelegate: AnyObject {
+    func setFavoritesMovie(with isFavorites: Bool, index: Int)
+}
+
 class DetailMovieViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
     
@@ -16,9 +20,12 @@ class DetailMovieViewController: BaseViewController {
     private var viewModel: DetailViewModel = DetailViewModel()
     private var bag = DisposeBag()
     private var headerTableView = HeaderCell()
-    convenience init(item: Movie) {
+    weak var delegate: DetailMovieViewControllerDelegate?
+    
+    convenience init(item: Movie, index: Int) {
         self.init()
         viewModel.movieItem.onNext(item)
+        viewModel.indexPublisher.onNext(index)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,12 +43,32 @@ class DetailMovieViewController: BaseViewController {
         viewModel.movieObservable
             .withUnretained(self)
             .do(onNext: { onwner , movie in
-                onwner.headerTableView.bindData(with: movie)
+                onwner.headerTableView.bindData(with: movie)})
+                .subscribe(onNext: {onwner, movie in
+                    onwner.dataSource.setUpTableView(with: onwner.tableView, lists: movie)
+                })
+                .disposed(by: bag)
+                
+        viewModel.indexObservable
+            .withUnretained(self)
+            .subscribe(onNext: {owner, index in
+                owner.headerTableView.indexItem = index
             })
-            .subscribe(onNext: {onwner, movie in
-                onwner.dataSource.setUpTableView(with: onwner.tableView, lists: movie)
-        })
-        .disposed(by: bag)
+            .disposed(by: bag)
+                
+        viewModel.fecthVideos(with: viewModel.movieIDBehaviorRelay.value)
+            .drive(onNext: {[weak self]  items in
+                guard let `self` = self, let data = items.results else {return}
+                var videos: [Video] = []
+                for i in data {
+                    if (i.type ?? "" ) == "Clip" || (i.type ?? "") == "Teaser" {
+                        videos.append(i)
+                    }
+                 }
+                self.dataSource.setupTableForTrailer(with: self.tableView, list: Array(videos.prefix(3)))
+                self.tableView.reloadData()
+            })
+            .disposed(by: bag)
     }
     
     override func viewWillLayoutSubviews() {
@@ -50,6 +77,7 @@ class DetailMovieViewController: BaseViewController {
     }
     
     override func setupTap() {
+        headerTableView.delegate = self
         headerTableView.backButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: {owner, _ in
@@ -59,12 +87,18 @@ class DetailMovieViewController: BaseViewController {
         
         headerTableView.actionChooseIDMovie = {[weak self] id in
             guard let `self` = self, let id = id else {return}
-            print("vuongdv ID: \(id)")
             self.viewModel.addFavoriteMovie(with: id)
                 .drive(onNext: { item in
-                    print("vuongdv item", item.status_code   as Any)
-                    print("vuongdv item", item.status_message as Any)
-                    print("vuongdv item", item.success as Any)
+                  
+                })
+                .disposed(by: self.bag)
+        }
+        
+        headerTableView.actionUnFavoriteMovie = {[weak self] id in
+            guard let `self` = self, let id = id else {return}
+            self.viewModel.unFavoriteMovie(with: id)
+                .drive(onNext: {item in
+                    
                 })
                 .disposed(by: self.bag)
         }
@@ -75,13 +109,20 @@ class DetailMovieViewController: BaseViewController {
         tableView.dataSource = dataSource
         tableView.tableHeaderView = headerTableView
         tableView.separatorStyle = .none
-        tableView.register(DetailMovieTableViewCell.self, forCellReuseIdentifier: DetailMovieTableViewCell.indentifier)
+        tableView.allowsSelection = false
         tableView.register(DesciptionTableCell.self, forCellReuseIdentifier: DesciptionTableCell.indentifier)
+        tableView.register(TrailerTableViewCell.self, forCellReuseIdentifier: TrailerTableViewCell.indentifer)
     }
     
     //MARK: Action
     
     @objc private func didTapButton(_ sender: UIButton) {
         pop()
+    }
+}
+
+extension DetailMovieViewController: HeaderCellDelegate {
+    func didTapFavourite(with isFavorites: Bool, index: Int) {
+        delegate?.setFavoritesMovie(with: isFavorites, index: index)
     }
 }
