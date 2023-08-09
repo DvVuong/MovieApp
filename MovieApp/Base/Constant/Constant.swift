@@ -17,7 +17,10 @@ class APIPath {
     ///14214987 is account ID
     static var addFavoriteMovie = "account/14214987/favorite"
     static var favorites = "account/14214987/favorite/movies"
-    static var videos = "movie"
+    static var videos = "movie/"
+    static var searchMovie = "search/movie?query="
+    static var searchTV = "search/tv?query="
+    static var defaultValue = "&include_adult=false&language=en-US&page="
 
     
 }

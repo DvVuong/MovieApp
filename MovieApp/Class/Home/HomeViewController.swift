@@ -26,15 +26,6 @@ class HomeViewController: BaseViewController {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
         
-        
-        viewModel.fetchListMovie()
-            .drive(onNext: {[weak self] movie in
-                guard let `self` = self else {return}
-                self.movies = movie.results
-                self.dataSource.setupTableViewForListMovie(width: self.tableView, list: movie.results)
-            })
-            .disposed(by: bag)
-        
         viewModel.fetchOnTheAirMovie()
             .drive(onNext: {[weak self] item in
                 var movies: [Movie] = []
@@ -102,7 +93,13 @@ class HomeViewController: BaseViewController {
             })
             .disposed(by: bag)
         
-       
+        viewModel.fetchListMovie()
+            .drive(onNext: {[weak self] movie in
+                guard let `self` = self else {return}
+                self.movies = movie.results
+                self.dataSource.setupTableViewForListMovie(width: self.tableView, list: movie.results)
+            })
+            .disposed(by: bag)
     }
     
     private func configureNavi(with image: String?, nameUser: String?) {
@@ -200,10 +197,8 @@ extension HomeViewController: HomeDataSourceDelegate {
     }
 }
 
-
 extension HomeViewController: DetailMovieViewControllerDelegate {
     func setFavoritesMovie(with isFavorites: Bool, index: Int) {
         print("vuongdv", isFavorites , "index", index)
     }
-    
 }

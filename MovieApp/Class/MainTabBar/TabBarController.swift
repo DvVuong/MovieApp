@@ -51,7 +51,8 @@ class TabBarController: UITabBarController {
         let bookItem = UITabBarItem(title: "Search", image: Asset.icSearch.image, selectedImage: nil)
         let naviController = NavigationController(rootViewController: SearchViewController())
         naviController.tabBarItem = bookItem
-        naviController.navigationController?.isNavigationBarHidden = true
+        naviController.navigationController?.isNavigationBarHidden = false
+        naviController.navigationController?.navigationBar.backgroundColor = .clear
         return naviController
     }()
     
