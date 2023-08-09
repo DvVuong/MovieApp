@@ -85,7 +85,7 @@ class ChatViewController: BaseViewController {
         }
     }
     
-     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+    override func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
          if textField === searchUserTextField {
              UIView.transition(with: self.searchView, duration: 0.5, options: .allowAnimatedContent
                                , animations: {

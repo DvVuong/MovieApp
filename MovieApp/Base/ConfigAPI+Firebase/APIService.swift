@@ -42,7 +42,10 @@ class APIService {
                                expecting: T.Type)  -> Observable<T> {
 
         return Observable.create { observer in
-            var request = URLRequest(url: NSURL(string: APIPath.BASER_URL + "/" + path )! as URL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
+            guard let url = URL(string: APIPath.BASER_URL + "/" + path ) else {
+                return Disposables.create()
+            }
+            var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
             request.httpMethod = method.rawValue
             request.allHTTPHeaderFields = self.defaultHeader
             let session = URLSession.shared

@@ -60,7 +60,12 @@ extension APIService {
     
     //Get Video
     static func fetchVideo<T: Codable>(with object: T.Type, movieId: Int) -> Observable<T> {
-        let path = APIPath.videos + "/" + "\(movieId)" + "/" + "videos"
+        let path = APIPath.videos +  "\(movieId)" + "/" + "videos"
+        return fetchModel(path: path, expecting: object)
+    }
+    //Search Movie or TV
+    static func searchMovieTV<T: Codable>(with object: T.Type, type: String, text: String, page: Int) -> Observable<T> {
+        let path = "search/" + type + "?query="  + text + APIPath.defaultValue + "\(page)"
         return fetchModel(path: path, expecting: object)
     }
 }

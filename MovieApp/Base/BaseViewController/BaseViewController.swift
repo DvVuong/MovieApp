@@ -67,13 +67,13 @@ extension BaseViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         hideKeyboardWhenTappedAround()
     }
-    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        return true
+    }
 }
-
 
 extension BaseViewController {
     @objc func keyBoardWillShow(_ sender: Notification) {
-       
         
     }
     
