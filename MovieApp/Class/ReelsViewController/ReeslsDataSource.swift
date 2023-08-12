@@ -8,9 +8,14 @@
 import Foundation
 import UIKit
 
-class ResslsDataSource: UITableViewController {
+protocol ReeslsDataSourceDelegate: AnyObject {
+    func didTapItem(with item: Movie)
+}
+
+class ReeslsDataSource: UITableViewController {
     
     private var movies: [Movie] = []
+    weak var delegate: ReeslsDataSourceDelegate?
     func setTableView(width tableView: UITableView, lists: [Movie]?) {
         guard let lists = lists else {return}
         self.movies = lists
@@ -24,6 +29,11 @@ class ResslsDataSource: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: UpComingTableViewCell.indentifier, for: indexPath) as? UpComingTableViewCell else {return UITableViewCell()}
         let item = movies[indexPath.row]
         cell.bindDataUI(with: item)
+        cell.didTapButton()
+        cell.actionPlayButton = {[weak self] movie in
+            guard let `self` = self, let movie = movie else {return}
+            self.delegate?.didTapItem(with: movie)
+        }
         return cell
     }
     

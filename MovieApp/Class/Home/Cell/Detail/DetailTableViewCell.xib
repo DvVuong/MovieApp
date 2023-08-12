@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,16 +13,13 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DetailTableViewCell" rowHeight="393" id="KGk-i7-Jjw" customClass="DetailTableViewCell" customModule="MovieApp" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="393"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="414" height="393"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="TOU-j3-PaJ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="350"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="393"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="350" id="Imb-tZ-W4L"/>
-                        </constraints>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ZQL-2E-c9t">
                             <size key="itemSize" width="128" height="128"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -31,23 +27,13 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                     </collectionView>
-                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="vS8-Yd-MdA">
-                        <rect key="frame" x="70" y="340" width="274" height="26"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="26" id="XOQ-Hl-0of"/>
-                        </constraints>
-                        <color key="pageIndicatorTintColor" systemColor="systemBlueColor"/>
-                    </pageControl>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstItem="vS8-Yd-MdA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="70" id="0JS-b7-kUU"/>
-                    <constraint firstItem="TOU-j3-PaJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="9kx-hc-BdN"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="vS8-Yd-MdA" secondAttribute="bottom" constant="-5" id="KLT-cV-X9o"/>
-                    <constraint firstAttribute="trailing" secondItem="TOU-j3-PaJ" secondAttribute="trailing" id="OlF-PB-s9Z"/>
-                    <constraint firstItem="TOU-j3-PaJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Q5r-aH-x90"/>
-                    <constraint firstItem="vS8-Yd-MdA" firstAttribute="top" secondItem="TOU-j3-PaJ" secondAttribute="bottom" constant="-10" id="U1R-FH-Mtj"/>
-                    <constraint firstAttribute="trailing" secondItem="vS8-Yd-MdA" secondAttribute="trailing" constant="70" id="sAy-fn-Ebq"/>
+                    <constraint firstAttribute="bottom" secondItem="TOU-j3-PaJ" secondAttribute="bottom" id="8x5-3f-sSH"/>
+                    <constraint firstItem="TOU-j3-PaJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="SdJ-PN-ez9"/>
+                    <constraint firstAttribute="trailing" secondItem="TOU-j3-PaJ" secondAttribute="trailing" id="ZCS-bq-1zT"/>
+                    <constraint firstItem="TOU-j3-PaJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="kza-9C-A4h"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -58,9 +44,4 @@
             <point key="canvasLocation" x="108.3969465648855" y="111.61971830985917"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-    </resources>
 </document>

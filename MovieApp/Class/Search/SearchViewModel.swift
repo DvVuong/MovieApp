@@ -13,11 +13,11 @@ import UIKit
 
 class SearchViewModel {
     var typeBehaviorRelay = BehaviorRelay<String>(value: "")
-    var movieObservable: Observable<MovieRespone> {
+    var movieObservable: Observable<[Movie]> {
         return movieBeahviorRelay.asObservable()
     }
     
-    private var movieBeahviorRelay = BehaviorRelay<MovieRespone>(value: MovieRespone())
+    private var movieBeahviorRelay = BehaviorRelay<[Movie]>(value: [])
     private var bag = DisposeBag()
     init() {
     }
@@ -33,6 +33,8 @@ class SearchViewModel {
             .distinctUntilChanged()
             .flatMapLatest({ query  -> Observable<MovieRespone> in
                 if query.isEmpty {
+                    print("vuongdv a a a a a")
+                    self.movieBeahviorRelay.accept([])
                     return .just(MovieRespone())
                 }
                 return APIService.searchMovieTV(with: MovieRespone.self,
@@ -43,7 +45,7 @@ class SearchViewModel {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] movieResponse in
                 guard let `self` = self else {return}
-                self.movieBeahviorRelay.accept(movieResponse)
+                self.movieBeahviorRelay.accept(movieResponse.results ?? [])
             })
             .disposed(by: bag)            
     }

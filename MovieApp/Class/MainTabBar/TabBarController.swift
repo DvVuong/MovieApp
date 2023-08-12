@@ -8,7 +8,7 @@
 import UIKit
 import CardTabBar
 
-class TabBarController: UITabBarController {
+class TabBarController: CardTabBarController {
     
     lazy var homeTab: UIViewController = {
         let homeTabItem = UITabBarItem(title: "Home", image: Asset.icHome.image, selectedImage: nil)
@@ -77,7 +77,7 @@ class TabBarController: UITabBarController {
     }
     
     private func setupViewController() {
-        viewControllers = [homeTab, bookTap, editTab, chatTab, moreTab]
+        viewControllers = [homeTab, bookTap, editTab, moreTab]
     }
 
 }

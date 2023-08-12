@@ -6,23 +6,45 @@
 //
 
 import UIKit
+import SnapKit
 
 class ProfileTableViewCell: UITableViewCell {
-    @IBOutlet weak var titelLabel: UILabel!
-    @IBOutlet weak var button: UIButton!
-    
-    
+    private lazy var titelLabel: UILabel = {
+       let title = UILabel()
+        title.translatesAutoresizingMaskIntoConstraints = false
+        title.textAlignment = .left
+        return title
+    }()
+
     public var handelButton: (() -> Void)? = nil
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        button.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
+        configgure()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    private func configgure() {
+        contentView.addSubview(titelLabel)
+        
+        titelLabel.snp.makeConstraints { make in
+            make.leading.equalTo(contentView.snp.leading).offset(5)
+            make.centerY.equalTo(contentView.snp.centerY)
+            make.width.lessThanOrEqualTo(200)
+        }
+        
+        updateConstraintsIfNeeded()
+        
+    }
+    
+    func bindData(with text: String?) {
+        guard let `text` = text else {return}
+        titelLabel.text = text
     }
     
     @objc private func didTapButton(_ sender: UIButton) {

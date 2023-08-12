@@ -7,6 +7,14 @@
 
 import Foundation
 import SwiftUI
+
+class UserDefaultContans {
+    static let idUser = "UserID"
+    static let idCurrentUser = "CurrentUserID"
+    static let curentUser = "CurrentUser"
+    static let partnerUser = "PartnerUser"
+    static let favoritesMovie = "FavoritesMovie"
+}
 class UserDefaultManager {
     static let shared = UserDefaultManager()
     private let _idUser = "UserID"
@@ -16,25 +24,25 @@ class UserDefaultManager {
     private let _FavoritesMovie = "FavoritesMovie"
     
     func getIdUser(_ id: String) {
-        UserDefaults.standard.set(id, forKey: _idUser)
+        UserDefaults.standard.set(id, forKey: UserDefaultContans.idUser)
     }
     
     func setIdUser() -> String {
-        return UserDefaults.standard.string(forKey: _idUser) ?? ""
+        return UserDefaults.standard.string(forKey: UserDefaultContans.idUser) ?? ""
     }
     
     func getCurrentUserID(_ id: String) {
-        UserDefaults.standard.set(id, forKey: _idCurrentUSer)
+        UserDefaults.standard.set(id, forKey: UserDefaultContans.idCurrentUser)
     }
     
     func setCurrentUserID() -> String {
-        return UserDefaults.standard.string(forKey: _idCurrentUSer) ?? ""
+        return UserDefaults.standard.string(forKey: UserDefaultContans.idCurrentUser) ?? ""
     }
     
     func setCurrentUser(_ currentUser: UserResponse) {
         do {
             let encoderData = try PropertyListEncoder().encode(currentUser)
-            UserDefaults.standard.set(encoderData, forKey: _curentUser)
+            UserDefaults.standard.set(encoderData, forKey: UserDefaultContans.curentUser)
         }
         catch (let error) {
             print("vuongdv", error.localizedDescription)
@@ -43,7 +51,7 @@ class UserDefaultManager {
     
     func getCurrentUsert() -> UserResponse {
         do {
-            let data = UserDefaults.standard.value(forKey: _curentUser) as! Data
+            let data = UserDefaults.standard.value(forKey: UserDefaultContans.curentUser) as! Data
             let objc = try PropertyListDecoder().decode(UserResponse.self, from: data)
             return objc
         }
@@ -56,7 +64,7 @@ class UserDefaultManager {
     func setPartnerUser(_ partnerUser: UserResponse) {
         do {
             let encoderData = try PropertyListEncoder().encode(partnerUser)
-            UserDefaults.standard.set(encoderData, forKey: _partnerUser)
+            UserDefaults.standard.set(encoderData, forKey: UserDefaultContans.partnerUser)
         }
         catch (let error) {
             print("vuongdv", error.localizedDescription)
@@ -65,7 +73,7 @@ class UserDefaultManager {
     
     func getPartnerUser()  -> UserResponse {
         do {
-            let data = UserDefaults.standard.value(forKey: _partnerUser) as! Data
+            let data = UserDefaults.standard.value(forKey: UserDefaultContans.partnerUser) as! Data
             let objc = try PropertyListDecoder().decode(UserResponse.self, from: data)
             return objc
         }
@@ -78,7 +86,7 @@ class UserDefaultManager {
     func setFavoritesMovie(with movie: Movie) {
         do {
             let encoderData = try PropertyListEncoder().encode(movie)
-            UserDefaults.standard.set(encoderData, forKey: _FavoritesMovie)
+            UserDefaults.standard.set(encoderData, forKey: UserDefaultContans.favoritesMovie)
         }
         catch (let error){
             print("vuongdv", error.localizedDescription)
@@ -86,7 +94,7 @@ class UserDefaultManager {
     }
     func getFavoritesMovie() -> Movie? {
         do {
-            let data = UserDefaults.standard.value(forKey: _FavoritesMovie) as? Data ?? Data()
+            let data = UserDefaults.standard.value(forKey: UserDefaultContans.favoritesMovie) as? Data ?? Data()
             let objc = try PropertyListDecoder().decode(Movie.self, from: data)
             return objc
         }
@@ -94,5 +102,11 @@ class UserDefaultManager {
             print("vuongdv", error.localizedDescription)
         }
         return nil
+    }
+    
+    //Remove Object
+    
+    func removeObject(with key: String) {
+        UserDefaults.standard.removeObject(forKey: key)
     }
 }

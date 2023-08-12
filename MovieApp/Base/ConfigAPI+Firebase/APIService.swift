@@ -11,7 +11,6 @@ import RxRelay
 import SwiftUI
 import AVFoundation
 
-
 enum MethodHTTP: String {
     case get = "GET"
     case post = "POST"

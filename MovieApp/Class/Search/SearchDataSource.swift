@@ -13,7 +13,7 @@ protocol SearchDataSourceDelegate: AnyObject {
 
 class SearchDataSource: UITableViewController {
     
-    private var data: [Movie] = []
+    private lazy var data: [Movie] = []
     weak var delegate: SearchDataSourceDelegate?
     
     func setTableView(with tableView: UITableView, lists: [Movie]?) {

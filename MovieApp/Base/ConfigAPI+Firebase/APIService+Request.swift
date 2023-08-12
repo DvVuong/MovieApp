@@ -31,7 +31,6 @@ extension APIService {
     //Get TV List
     static func fetchTVList<T: Codable>(with object: T.Type) -> Observable<T> {
         let path = APIPath.tvList
-       
         return fetchModel(with: .get, path: path, expecting: object)
     }
     

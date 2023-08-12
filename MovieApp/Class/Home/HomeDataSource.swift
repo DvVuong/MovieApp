@@ -181,7 +181,7 @@ class HomeDataSource: UITableViewController {
         case .category:
             return UITableView.automaticDimension
         case .detail:
-            return UITableView.automaticDimension
+            return 500
         case .recent:
             return 230
         case .favorites:

@@ -9,10 +9,11 @@ import UIKit
 import Combine
 
 class ProfileViewController: BaseViewController {
-    @IBOutlet weak var avatarUser: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var tableView: UITableView!
-    
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: CGRect.zero, style: .grouped)
+        
+        return tableView
+    }()
     private let viewModel: ProfileViewModel = ProfileViewModel()
     private let dataSource: ProfileDataSource = ProfileDataSource()
     private var subcriptions = Set<AnyCancellable>()
@@ -23,42 +24,82 @@ class ProfileViewController: BaseViewController {
         setupViewModel()
         setupTableView()
         onBind()
+        conficgureNavi()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = false
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        tableView.frame = view.bounds
+    }
+    
+    private func conficgureNavi() {
+        self.navigationController?.navigationBar.topItem?.title = "Setting"
+        self.navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     override func onBind() {
-        viewModel.dosomething.sink { text in
-            ToastUtil.showToast(with: text ?? "")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//                self.popToVC(LoginViewController())
-                self.pop()
-            }
-            
-        }.store(in: &subcriptions)
+//        viewModel.dosomething.sink { text in
+//            ToastUtil.showToast(with: text ?? "")
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+////                self.popToVC(LoginViewController())
+//                self.push(LoginViewController())
+//            }
+//            
+//        }.store(in: &subcriptions)
     }
     
     private func setupTableView() {
+        view.addSubview(tableView)
         tableView.delegate = dataSource
         tableView.dataSource = dataSource
         tableView.register(UINib(nibName: "ProfileTableViewCell", bundle: nil), forCellReuseIdentifier: "ProfileTableViewCell")
+        
+        dataSource.delegate = self
     }
-    
-   override func setupUI() {
-       avatarUser.cornerRadius(avatarUser.frame.size.height / 2)
-    }
-    
+
     override func setupTap() {
-        dataSource.handelAction = { [weak self] in
-            guard let `self` = self else { return }
-            self.viewModel.logoutUser()
-        }
     }
     
     override func setupViewModel() {
-        viewModel.userPublisher.sink { [weak self] userData in
-            guard let `self` = self else { return }
-            self.nameLabel.text = userData.userName ?? ""
-        }
-        .store(in: &subcriptions)
+       
     }
+    
+    private func showAlert(with message: String, completion: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: message, message: nil, preferredStyle: .actionSheet)
+        let okAction = UIAlertAction(title: "Log out", style: .default) { _ in
+            completion?()
+        }
+        let cancelAcction = UIAlertAction(title: "Cancel", style: .cancel)
+        alert.addAction(okAction)
+        alert.addAction(cancelAcction)
+        self.present(alert, animated: true, completion: nil)
+    }
+}
 
+extension ProfileViewController: ProfileDataSourceDelegate {
+    func didChooseSetting() {
+        print("Vuongdv Setting")
+    }
+    
+    func didChooseUser() {
+        print("Vuongdv User")
+    }
+    
+    func didChooseLogout() {
+        showAlert(with: "Do you want to Log out?") {[weak self] in
+            guard let `self` = self else {return}
+            self.viewModel.logoutUser() {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    let vc = LoginViewController()
+                    vc.hidesBottomBarWhenPushed = true
+                    self.push(vc)
+                }
+            }
+        }
+    }
 }
