@@ -21,7 +21,6 @@ class UpComingTableViewCell: UITableViewCell {
        let image = UIImageView()
         image.contentMode = .scaleAspectFill
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.cornerRadius(10)
         return image
     }()
     
