@@ -39,5 +39,6 @@ class SearchDataSource: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = data[indexPath.row]
         delegate?.didChooseItem(with: item)
+        tableView.deselectRow(at: indexPath, animated: false)
     }
 }

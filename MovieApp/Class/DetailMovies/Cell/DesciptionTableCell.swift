@@ -27,6 +27,12 @@ class DesciptionTableCell: UITableViewCell {
         return stackView
     }()
     
+    private lazy var releaseDateStackView: UIStackView = {
+       let stackView = UIStackView()
+        stackView.axis = .horizontal
+        return stackView
+    }()
+    
     private lazy var overviewStackView: UIStackView = {
        let stackView = UIStackView()
         return stackView
@@ -42,7 +48,7 @@ class DesciptionTableCell: UITableViewCell {
     
     private lazy var nameMovieLable: UILabel = {
        let nameMovie = UILabel()
-        nameMovie.textColor = .black
+//        nameMovie.textColor = .black
         return nameMovie
     }()
     
@@ -63,7 +69,14 @@ class DesciptionTableCell: UITableViewCell {
     private lazy var voteLable: UILabel = {
        let lable = UILabel()
         lable.textColor = .black
-        lable.text = "Vote:"
+        lable.attributedText = setHigLight("Vote: ", value: nil)
+        return lable
+    }()
+    
+    private var releaseDate: UILabel = {
+       let lable = UILabel()
+//        lable.textColor = .black
+        lable.textAlignment = .left
         return lable
     }()
     
@@ -90,6 +103,7 @@ class DesciptionTableCell: UITableViewCell {
         }
 
         contentStackView.addArrangedSubview(nameStackView)
+        contentStackView.addArrangedSubview(releaseDateStackView)
         contentStackView.addArrangedSubview(voteMovie)
         contentStackView.addArrangedSubview(overviewStackView)
         
@@ -113,6 +127,10 @@ class DesciptionTableCell: UITableViewCell {
         }
     
         voteMovie.arrangedSubviews.forEach { subView in
+            subView.removeFromSuperview()
+        }
+        
+        releaseDateStackView.arrangedSubviews.forEach { subView in
             subView.removeFromSuperview()
         }
         
@@ -140,13 +158,24 @@ class DesciptionTableCell: UITableViewCell {
         voteMovie.addArrangedSubview(starImage)
         voteMovie.addArrangedSubview(voteMovieLable)
         nameStackView.addArrangedSubview(nameMovieLable)
+        releaseDateStackView.addArrangedSubview(releaseDate)
         overviewStackView.addArrangedSubview(overViewMovie)
     }
     
     func bindData(with data: Movie?) {
         guard let data = data else {return}
-        nameMovieLable.text = "Movie: \(data.originalTitle ?? "") "
-        overViewMovie.text = "Overview: \(data.overview ?? "") "
+        nameMovieLable.attributedText = setHigLight("Movie: ", value: (data.originalTitle ?? ""))
+        overViewMovie.attributedText = setHigLight("Overview: ", value: (data.overview ?? ""))
         voteMovieLable.text = "\(data.voteAverage ?? 0)"
+        releaseDate.attributedText = setHigLight("Year: ", value: (data.releaseDate ?? ""))
+    }
+    
+    func setHigLight(_ title: String? = nil, value: String? = nil) -> NSAttributedString {
+        let mutableAttrinbutedString = NSMutableAttributedString()
+        let firtAtt = NSAttributedString(string: title ?? "", attributes: [.foregroundColor: UIColor.blue])
+        let secondAtt = NSAttributedString(string: value ?? "", attributes: [.foregroundColor: UIColor.black])
+        mutableAttrinbutedString.append(firtAtt)
+        mutableAttrinbutedString.append(secondAtt)
+        return mutableAttrinbutedString
     }
 }
