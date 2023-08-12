@@ -13,32 +13,40 @@ class ReelsViewController: BaseViewController {
 
     private lazy var tableView: UITableView = {
        let tableView = UITableView()
-        
         return tableView
     }()
     
     private let viewModel: ReelsViewModel = ReelsViewModel()
     private var bag = DisposeBag()
-    private var dataSource: ResslsDataSource = ResslsDataSource()
+    private var dataSource: ReeslsDataSource = ReeslsDataSource()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.isNavigationBarHidden = true
-        navigationController?.title = "Upcoming"
+        
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+        view.addSubview(tableView)
         tableView.frame = view.bounds
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewModel()
-        view.addSubview(tableView)
+        setupConfigNavi()
+    }
+    
+    override func setupUI() {
         tableView.register(UpComingTableViewCell.self, forCellReuseIdentifier: UpComingTableViewCell.indentifier)
         tableView.delegate = dataSource
         tableView.dataSource = dataSource
+        dataSource.delegate = self
+    }
+    
+    private func setupConfigNavi() {
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.topItem?.title = "UpComning"
     }
     
     override func setupViewModel() {
@@ -50,5 +58,14 @@ class ReelsViewController: BaseViewController {
             })
             .disposed(by: bag)
     }
+}
+
+extension ReelsViewController: ReeslsDataSourceDelegate {
+    func didTapItem(with item: Movie) {
+        let vc = DetailMovieViewController(item: item, index: 0)
+        self.push(vc)
+    }
+    
+    
 }
 

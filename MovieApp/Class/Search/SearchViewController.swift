@@ -82,7 +82,7 @@ class SearchViewController: BaseViewController {
         viewModel.movieObservable
             .withUnretained(self)
             .subscribe(onNext: {onwer, items in
-                onwer.dataSource.setTableView(with: self.tableView, lists: items.results)
+                onwer.dataSource.setTableView(with: self.tableView, lists: items)
                 DispatchQueue.main.async {
                     onwer.tableView.reloadData()
                 }

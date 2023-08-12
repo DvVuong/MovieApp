@@ -8,14 +8,20 @@
 import Foundation
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
 class UpComingTableViewCell: UITableViewCell {
     static var indentifier = "UpComingTableViewCell"
+    private var bag = DisposeBag()
+    public var actionPlayButton: ((Movie?) -> Void)? = nil
+    private var itemMovie: Movie?
     
     private lazy var imageMovie: UIImageView = {
        let image = UIImageView()
         image.contentMode = .scaleAspectFill
         image.translatesAutoresizingMaskIntoConstraints = false
+        image.cornerRadius(10)
         return image
     }()
     
@@ -40,16 +46,9 @@ class UpComingTableViewCell: UITableViewCell {
         setupUI()
     }
     
-
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        //imageMovie.cornerRadius(20)
-    }
-    
     
     private func setupUI() {
         contentView.addSubview(imageMovie)
@@ -86,6 +85,7 @@ class UpComingTableViewCell: UITableViewCell {
     }
     
     func bindDataUI(with movie: Movie) {
+        self.itemMovie = movie
         titleLable.text = movie.title ?? ""
         ImageManager.share.fetchImage(with: movie.posterPath ?? "") { image in
             DispatchQueue.main.async { [weak self] in
@@ -93,5 +93,13 @@ class UpComingTableViewCell: UITableViewCell {
                 self.imageMovie.image = image
             }
         }
+    }
+    func didTapButton() {
+        buttonPlay.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: {owner, _ in
+                owner.actionPlayButton?(owner.itemMovie)
+            })
+            .disposed(by: bag)
     }
 }

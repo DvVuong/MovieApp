@@ -20,14 +20,11 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4w0-Pa-1OF">
                         <rect key="frame" x="0.0" y="0.0" width="232" height="300"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Space art wallpapers" translatesAutoresizingMaskIntoConstraints="NO" id="hVe-B5-izX">
-                                <rect key="frame" x="5" y="10" width="222" height="222"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="hVe-B5-izX" secondAttribute="height" id="guh-tr-6Xf"/>
-                                </constraints>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" image="Space art wallpapers" translatesAutoresizingMaskIntoConstraints="NO" id="hVe-B5-izX">
+                                <rect key="frame" x="5" y="0.0" width="222" height="214"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Episode 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q42-aY-nIt">
-                                <rect key="frame" x="20" y="237" width="192" height="21"/>
+                                <rect key="frame" x="20" y="219" width="192" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="DXp-A5-szk"/>
                                 </constraints>
@@ -36,7 +33,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pow Pow" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hT5-tb-b7o">
-                                <rect key="frame" x="20" y="263" width="192" height="24"/>
+                                <rect key="frame" x="20" y="245" width="192" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="LuW-sC-w0h"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -45,10 +45,10 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Q42-aY-nIt" firstAttribute="top" secondItem="hVe-B5-izX" secondAttribute="bottom" constant="5" id="28o-jn-DI6"/>
-                            <constraint firstItem="hVe-B5-izX" firstAttribute="top" secondItem="4w0-Pa-1OF" secondAttribute="top" constant="10" id="4z7-qD-yyJ"/>
+                            <constraint firstItem="hVe-B5-izX" firstAttribute="top" secondItem="4w0-Pa-1OF" secondAttribute="top" id="4z7-qD-yyJ"/>
                             <constraint firstItem="hVe-B5-izX" firstAttribute="leading" secondItem="4w0-Pa-1OF" secondAttribute="leading" constant="5" id="Fc7-sR-Wju"/>
                             <constraint firstItem="hT5-tb-b7o" firstAttribute="leading" secondItem="4w0-Pa-1OF" secondAttribute="leading" constant="20" id="Krm-Yk-KVH"/>
-                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="hT5-tb-b7o" secondAttribute="bottom" id="Mea-Xe-8nc"/>
+                            <constraint firstAttribute="bottom" secondItem="hT5-tb-b7o" secondAttribute="bottom" constant="5" id="Mea-Xe-8nc"/>
                             <constraint firstAttribute="trailing" secondItem="hVe-B5-izX" secondAttribute="trailing" constant="5" id="W1R-3r-hfc"/>
                             <constraint firstItem="hT5-tb-b7o" firstAttribute="top" secondItem="Q42-aY-nIt" secondAttribute="bottom" constant="5" id="dbd-iH-fmf"/>
                             <constraint firstAttribute="trailing" secondItem="hT5-tb-b7o" secondAttribute="trailing" constant="20" id="eUd-kO-mJE"/>
@@ -72,7 +72,7 @@
                 <outlet property="nameLabel" destination="hT5-tb-b7o" id="lrL-k4-wEJ"/>
                 <outlet property="titleLabel" destination="Q42-aY-nIt" id="7kU-C0-IIO"/>
             </connections>
-            <point key="canvasLocation" x="195.41984732824426" y="76.760563380281695"/>
+            <point key="canvasLocation" x="194.20289855072465" y="76.339285714285708"/>
         </collectionViewCell>
     </objects>
     <resources>
