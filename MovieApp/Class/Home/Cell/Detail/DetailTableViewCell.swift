@@ -11,7 +11,7 @@ class DetailTableViewCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     private var dataSource = CollectionViewDataSource()
     public var actionSelected: ((Movie, Int) -> Void)? = nil
-    
+   
     var data: [Movie] = []
 
     override func awakeFromNib() {
@@ -52,6 +52,10 @@ extension DetailTableViewCell: UICollectionViewDelegate, UICollectionViewDataSou
          let item = data[indexPath.row]
          let index = indexPath.row
          actionSelected?(item, index)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {

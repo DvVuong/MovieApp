@@ -21,27 +21,17 @@ class HomeViewController: BaseViewController {
     private var bag = DisposeBag()
     private var indexItemMovie: Int? = 0
     private var movies: [Movie]? = []
+    private var refreshControll = UIRefreshControl()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
-        
         viewModel.fetchOnTheAirMovie()
             .drive(onNext: {[weak self] item in
                 var movies: [Movie] = []
                 guard let `self` = self, let data = item.results else {return}
                 for i in data {
-                    let movie = Movie(backdropPath: i.backdropPath,
-                                      id: i.id,
-                                      title: i.title,
-                                      originalLanguage: i.originalLanguage,
-                                      originalTitle: i.originalTitle,
-                                      overview: i.overview,
-                                      posterPath: i.posterPath,
-                                      mediaType: i.mediaType,
-                                      releaseDate: i.releaseDate,
-                                      voteAverage: i.voteAverage,
-                                      isFavorites: true)
+                    let movie = Movie(backdropPath: i.backdropPath,id: i.id,title: i.title,originalLanguage: i.originalLanguage,originalTitle: i.originalTitle,overview: i.overview,posterPath: i.posterPath,mediaType: i.mediaType,releaseDate: i.releaseDate,voteAverage: i.voteAverage,isFavorites: true)
                     movies.append(movie)
                 }
                 self.dataSource.setupTableViewForOnTheAirMovie(width: self.tableView, list: movies)
@@ -55,44 +45,24 @@ class HomeViewController: BaseViewController {
         setupTabelView()
         setupViewModel()
         setupDataSource()
-    }
-    
-    override func viewWillLayoutSubviews() {
-            super.viewWillLayoutSubviews()
-            let safeAreaInsets: UIEdgeInsets = UIEdgeInsets(top: 0,
-                                                            left: 0,
-                                                            bottom: self.tabBarController?.view.safeAreaInsets.bottom ?? 0,
-                                                            right: 0)
-            tableView.contentInset = safeAreaInsets
-            tableView.scrollIndicatorInsets = safeAreaInsets
-        }
-    
-        func hideTabBarIfNeeded() {
-            guard !self.isHidingTabBar else { return }
-            self.isHidingTabBar = true
-            self.tabBarController?.setTabBar(hidden: true, animated: true)
-        }
+        refreshTableView()
+        viewModel.getData()
         
-        func showTabBarIfNeeded() {
-            guard self.isHidingTabBar else { return }
-            self.isHidingTabBar = false
-            self.tabBarController?.setTabBar(hidden: false, animated: true)
-        }
-    
+    }
     override func setupViewModel() {
-        viewModel.userPublisher.sink { [weak self] userData in
+        super.bindViewModel(viewModel)
+        viewModel.userPublisher.sink { [weak self] user in
             guard let `self` = self else { return }
-            self.configureNavi(with: nil, nameUser: userData.userName)
+            self.configureNavi(with: nil, nameUser: user.userName ?? "")
         }
         .store(in: &subcriptions)
         
-        viewModel.fetchTopRateMovie()
-            .drive(onNext: {[weak self] item in
-                guard let `self` = self else {return}
-                self.dataSource.setupTableViewForTopRateMovie(width: self.tableView, list: item.results)
-            })
-            .disposed(by: bag)
-        
+        viewModel.arrItemsMovie.subscribe(onNext: { item in
+            DispatchQueue.main.async {
+                self.dataSource.setupTableViewForTopRateMovie(width: self.tableView, list: item)
+            }
+        }).disposed(by: bag)
+       
         viewModel.fetchListMovie()
             .drive(onNext: {[weak self] movie in
                 guard let `self` = self else {return}
@@ -101,12 +71,11 @@ class HomeViewController: BaseViewController {
             })
             .disposed(by: bag)
     }
-    
+
     private func configureNavi(with image: String?, nameUser: String?) {
         guard let name = nameUser else {return}
-        let navi = navigationController!
+        guard let navi = navigationController else {return}
         let customView = CustomNavigationBarView(frame: CGRect(x: 0, y: 0, width: navi.navigationBar.frame.width, height: navi.navigationBar.frame.height))
-        customView.backgroundColor = .clear
         customView.textLabel.text = name
         customView.textLabel.textColor = .black
         customView.avatarImage.image = Asset.caitlynArcaneWickellia.image
@@ -155,12 +124,22 @@ class HomeViewController: BaseViewController {
         tableView.register(UINib(nibName: "FavoritesTableViewCell", bundle: nil), forCellReuseIdentifier: "FavoritesTableViewCell")
         tableView.register(UINib(nibName: "RecentTableViewCell", bundle: nil), forCellReuseIdentifier: "RecentTableViewCell")
         tableView.register(CustomHeaderView.self, forHeaderFooterViewReuseIdentifier: "CustomHeader")
+        tableView.addSubview(refreshControll)
+    }
+    
+    private func refreshTableView() {
+        refreshControll.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
     }
    
 //MARK: Navigation
     
     @objc func didTapButton(_ sender: UIButton) {
        
+    }
+    
+    @objc func refreshData(_ sender: UIRefreshControl) {
+        print("vuongdv.... Start RefreshControll")
+        refreshControll.endRefreshing()
     }
 }
 extension HomeViewController: HomeDataSourceDelegate {
@@ -182,18 +161,23 @@ extension HomeViewController: HomeDataSourceDelegate {
     }
     
     func showTabBar() {
-        showTabBarIfNeeded()
+       
         print("vuongdv1 ShowTabar")
     }
     
     func willHideTabbar() {
-        hideTabBarIfNeeded()
+     
         print("vuongdv HideTabbar")
     }
     
     func willShowTabbar() {
-        showTabBarIfNeeded()
+      
         print("vuongdv2 ShowTabar")
+    }
+    
+   func loadmoreNewsPost() {
+        print("vuongdv loadmore")
+       viewModel.getData()
     }
 }
 

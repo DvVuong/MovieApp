@@ -43,14 +43,7 @@ class ProfileViewController: BaseViewController {
     }
     
     override func onBind() {
-//        viewModel.dosomething.sink { text in
-//            ToastUtil.showToast(with: text ?? "")
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-////                self.popToVC(LoginViewController())
-//                self.push(LoginViewController())
-//            }
-//            
-//        }.store(in: &subcriptions)
+
     }
     
     private func setupTableView() {

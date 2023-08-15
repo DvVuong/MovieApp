@@ -11,7 +11,7 @@ import Combine
 class ChatViewModel {
     let messagePublisher = PassthroughSubject<[MessageResponse], Never>()
     let userPublisher = PassthroughSubject<[UserResponse], Never>()
-    let currentUser = UserDefaultManager.shared.setCurrentUserID()
+    let currentUser = UserDefaultManager.shared.currentUserId
     let reloadData = PassthroughSubject<Void, Never>()
     
     func fetchUser() {

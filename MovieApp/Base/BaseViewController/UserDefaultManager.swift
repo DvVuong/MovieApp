@@ -15,6 +15,7 @@ class UserDefaultContans {
     static let partnerUser = "PartnerUser"
     static let favoritesMovie = "FavoritesMovie"
 }
+
 class UserDefaultManager {
     static let shared = UserDefaultManager()
     private let _idUser = "UserID"
@@ -23,90 +24,89 @@ class UserDefaultManager {
     private let _partnerUser = "PartnerUser"
     private let _FavoritesMovie = "FavoritesMovie"
     
-    func getIdUser(_ id: String) {
-        UserDefaults.standard.set(id, forKey: UserDefaultContans.idUser)
-    }
-    
-    func setIdUser() -> String {
-        return UserDefaults.standard.string(forKey: UserDefaultContans.idUser) ?? ""
-    }
-    
-    func getCurrentUserID(_ id: String) {
-        UserDefaults.standard.set(id, forKey: UserDefaultContans.idCurrentUser)
-    }
-    
-    func setCurrentUserID() -> String {
-        return UserDefaults.standard.string(forKey: UserDefaultContans.idCurrentUser) ?? ""
-    }
-    
-    func setCurrentUser(_ currentUser: UserResponse) {
-        do {
-            let encoderData = try PropertyListEncoder().encode(currentUser)
-            UserDefaults.standard.set(encoderData, forKey: UserDefaultContans.curentUser)
+    var idUser: String {
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultContans.idUser)
         }
-        catch (let error) {
-            print("vuongdv", error.localizedDescription)
+        
+        get {
+            return UserDefaults.standard.string(forKey: UserDefaultContans.idUser) ?? ""
         }
     }
     
-    func getCurrentUsert() -> UserResponse {
-        do {
-            let data = UserDefaults.standard.value(forKey: UserDefaultContans.curentUser) as! Data
-            let objc = try PropertyListDecoder().decode(UserResponse.self, from: data)
-            return objc
+    var currentUserId: String {
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultContans.idCurrentUser)
         }
-        catch (let error){
-            print("vuongdv", error.localizedDescription)
-        }
-        return UserResponse()
-    }
-    
-    func setPartnerUser(_ partnerUser: UserResponse) {
-        do {
-            let encoderData = try PropertyListEncoder().encode(partnerUser)
-            UserDefaults.standard.set(encoderData, forKey: UserDefaultContans.partnerUser)
-        }
-        catch (let error) {
-            print("vuongdv", error.localizedDescription)
+        get {
+            return UserDefaults.standard.string(forKey: UserDefaultContans.idCurrentUser) ?? ""
         }
     }
     
-    func getPartnerUser()  -> UserResponse {
-        do {
-            let data = UserDefaults.standard.value(forKey: UserDefaultContans.partnerUser) as! Data
-            let objc = try PropertyListDecoder().decode(UserResponse.self, from: data)
-            return objc
+    var currentUser: UserResponse? {
+        set {
+            if let newValue = newValue {
+                setObjectToUserDefault(with: newValue, forkey: UserDefaultContans.curentUser)
+            }
         }
-        catch (let error) {
-            print("vuongdv", error.localizedDescription)
+        
+        get {
+            guard let object  = getObjecFormUserDefault(with: UserResponse.self, key: UserDefaultContans.curentUser) else {return nil}
+            return object
         }
-        return UserResponse()
     }
     
-    func setFavoritesMovie(with movie: Movie) {
-        do {
-            let encoderData = try PropertyListEncoder().encode(movie)
-            UserDefaults.standard.set(encoderData, forKey: UserDefaultContans.favoritesMovie)
+    
+    var partnerUser: UserResponse? {
+        set {
+            if let newValue = newValue {
+                setObjectToUserDefault(with: newValue, forkey: UserDefaultContans.partnerUser)
+            }
         }
-        catch (let error){
-            print("vuongdv", error.localizedDescription)
+        
+        get {
+            guard let object  = getObjecFormUserDefault(with: UserResponse.self, key: UserDefaultContans.partnerUser) else {return nil}
+            return object
         }
-    }
-    func getFavoritesMovie() -> Movie? {
-        do {
-            let data = UserDefaults.standard.value(forKey: UserDefaultContans.favoritesMovie) as? Data ?? Data()
-            let objc = try PropertyListDecoder().decode(Movie.self, from: data)
-            return objc
-        }
-        catch (let error) {
-            print("vuongdv", error.localizedDescription)
-        }
-        return nil
     }
     
+    var favoritesMovie: Movie? {
+        set {
+            if let newValue = newValue {
+                setObjectToUserDefault(with: newValue, forkey: UserDefaultContans.favoritesMovie)
+            }
+        }
+        
+        get {
+            guard let object  = getObjecFormUserDefault(with: Movie.self, key: UserDefaultContans.favoritesMovie) else {return nil}
+            return object
+        }
+    }
+
     //Remove Object
-    
     func removeObject(with key: String) {
         UserDefaults.standard.removeObject(forKey: key)
+    }
+    
+    func setObjectToUserDefault<T: Codable>(with object: T, forkey key: String) {
+        do {
+            let encoder = try PropertyListEncoder().encode(object)
+            UserDefaults.standard.set(encoder, forKey: key)
+        }
+        catch (let error) {
+            print("vuongdv error: \(error)")
+        }
+    }
+    
+    func getObjecFormUserDefault<T: Codable>(with object: T.Type, key: String) -> T? {
+        do {
+            let data = UserDefaults.standard.value(forKey: key) as? Data ?? Data()
+            let object = try PropertyListDecoder().decode(object.self, from: data)
+            return object
+        }
+        catch (let error) {
+            print("vuongdv error: \(error)")
+        }
+        return nil
     }
 }

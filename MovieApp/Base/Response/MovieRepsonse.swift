@@ -10,9 +10,11 @@ import Foundation
 struct MovieRespone: Codable {
     var page: Int?
     var results: [Movie]?
+    var totalPages: Int?
     private enum CodingKeys: String, CodingKey {
         case results
         case page
+        case totalPages = "total_pages"
     }
 }
 

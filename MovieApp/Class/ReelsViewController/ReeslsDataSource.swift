@@ -30,9 +30,11 @@ class ReeslsDataSource: UITableViewController {
         let item = movies[indexPath.row]
         cell.bindDataUI(with: item)
         cell.didTapButton()
+        cell.selectionStyle = .none
         cell.actionPlayButton = {[weak self] movie in
             guard let `self` = self, let movie = movie else {return}
             self.delegate?.didTapItem(with: movie)
+            print("vuongdv did choose item move to DetailView")
         }
         return cell
     }

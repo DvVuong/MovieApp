@@ -54,10 +54,15 @@ final class RegisterViewModel {
         FirebaseManager.shared.loginAccount(with: email, password: password) { authDataResult, error in
             guard authDataResult == nil else  {
                 completion(true)
-                UserDefaultManager.shared.getCurrentUserID(authDataResult?.user.uid ?? "")
+                UserDefaultManager.shared.currentUserId = authDataResult?.user.uid ?? ""
                 FirebaseManager.shared.changeStateForUser(with: authDataResult?.user.uid ?? "", isActive: true)
                 return
             }
+            
+//            UserDefaultManager.shared.currentUserId = authDataResult?.user.uid ?? ""
+//            let id = UserDefaultManager.shared.idUser
+//            print("vuongdv id : \(id)")
+//            FirebaseManager.shared.changeStateForUser(with: authDataResult?.user.uid ?? "", isActive: true)
             completion(false)
         }
     }

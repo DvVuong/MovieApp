@@ -28,7 +28,7 @@ class DetailDataSource: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let currentId = UserDefaultManager.shared.setCurrentUserID()
+        let currentId = UserDefaultManager.shared.currentUserId
         let item = data[indexPath.row]
         if item.typeMessage == 0 {
             if item.idSender == currentId {

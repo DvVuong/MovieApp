@@ -5,7 +5,9 @@
 //  Created by mr.root on 5/28/23.
 //
 
-import UIKit
+import RxSwift
+import SVProgressHUD
+import SafariServices
 
 class BaseViewController: UIViewController {
     
@@ -79,5 +81,11 @@ extension BaseViewController {
     
     @objc func keyBoardWillHide(_ sender: Notification) {
         
+    }
+}
+
+extension BaseViewController {
+    internal func bindViewModel(_ viewModel: BaseViewModel, assignView: UIView? = nil) {
+        viewModel.bindViewProgress(view: assignView ?? view)
     }
 }

@@ -29,7 +29,6 @@ class LoginViewController: BaseViewController {
     override func setupTap() {
         logInButton.addTarget(self, action: #selector(didTap(_:)), for: .touchUpInside)
         registerButton.addTarget(self, action: #selector(didTap(_:)), for: .touchUpInside)
-        
     }
     
     @objc func didTap(_ sender: UIButton) {
@@ -58,9 +57,9 @@ class LoginViewController: BaseViewController {
                     ToastUtil.showToast(with: L10n.logInSuccess)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
                         guard let `self` = self else { return }
-                        let tabbar = TabBarController()
-                        (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController =
-                        tabbar
+//                        let tabbar = TabBarController()
+//                        (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController =
+//                        tabbar
                         let vc = TabBarController()
                         self.push(vc)
                     }

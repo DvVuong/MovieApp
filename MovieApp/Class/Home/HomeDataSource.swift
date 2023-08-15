@@ -13,6 +13,7 @@ protocol HomeDataSourceDelegate: AnyObject {
     func didChooseTVShow()
     func didChooseAnime()
     func didChooseMyList()
+    func loadmoreNewsPost()
 }
 
 class HomeDataSource: UITableViewController {
@@ -86,6 +87,9 @@ class HomeDataSource: UITableViewController {
         case .recent:
             return 1
         case .favorites:
+            guard self.onTheAriMovie.count != 0 else  {
+                return 0
+            }
             return 1
         }
     }
@@ -171,7 +175,13 @@ class HomeDataSource: UITableViewController {
         case .recent:
             header.titleLable.text = "Recent Watched"
         case .favorites:
-            header.titleLable.text = "My Favorites"
+            if self.onTheAriMovie.count == 0  {
+                header.titleLable.text = ""
+                header.buttonValue = ""
+            } else {
+                header.titleLable.text = "My Favorites"
+                header.buttonValue = "Close"
+            }
         }
         return header
     }
@@ -215,6 +225,7 @@ class HomeDataSource: UITableViewController {
         delegate?.showTabBar()
         return true
     }
+}
     
 //    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
 //        delegate?.handlerActionScroll()
@@ -227,7 +238,7 @@ class HomeDataSource: UITableViewController {
 //    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
 //        delegate?.handelEndActionScroll()
 //    }
-}
+
 
 extension HomeDataSource: CustomHeaderViewDelegate {
     func didTapButton() {
@@ -238,6 +249,10 @@ extension HomeDataSource: CustomHeaderViewDelegate {
 extension HomeDataSource: RecentTableViewCellDelegate {
     func didChooseRecentitem(with item: Movie) {
         actionMoveToDetaiViewRecent?(item)
+    }
+    
+   func canLoadMore() {
+       delegate?.loadmoreNewsPost()
     }
 }
 

@@ -11,7 +11,7 @@ import UIKit
 
 class DetailChatViewModel {
     let reciverUserPassthroughSubject = PassthroughSubject<UserResponse, Never>()
-    let currentUser = UserDefaultManager.shared.getCurrentUsert()
+    let currentUser = UserDefaultManager.shared.currentUser
     var reciverUser: UserResponse?
     var message = CurrentValueSubject<[MessageResponse]?, Never>(nil)
     var imagePublisher = PassthroughSubject<UIImage, Never>()
@@ -33,20 +33,19 @@ class DetailChatViewModel {
     }
     
     func createMessage(_ text: String, messagetye: MessageType) {
-        FirebaseManager.shared.createMessage(text, sender: currentUser, reciver: reciverUser ?? UserResponse(), messageType: messagetye)
+        FirebaseManager.shared.createMessage(text, sender: currentUser ?? UserResponse(), reciver: reciverUser ?? UserResponse(), messageType: messagetye)
     }
     
     func fetchMessage() {
-        FirebaseManager.shared.fecthMessage(self.currentUser, reciver: self.reciverUser ?? UserResponse()) {[weak self] message in
+        FirebaseManager.shared.fecthMessage(self.currentUser ?? UserResponse(), reciver: self.reciverUser ?? UserResponse()) {[weak self] message in
             guard let `self` = self else {return}
             self.message.send(message)
         }
     }
     
     func createMessgaeWithImage(with image: UIImage, messageType: MessageType) {
-        
-        let currentUser = UserDefaultManager.shared.getCurrentUsert()
-        let partner = UserDefaultManager.shared.getPartnerUser()
+        guard  let currentUser = UserDefaultManager.shared.currentUser else {return}
+        guard let partner = UserDefaultManager.shared.partnerUser else {return}
         FirebaseManager.shared.createMessageWithImage(with: image, sender: currentUser, reciver: partner, messageType: messageType)
     }
     
@@ -54,4 +53,3 @@ class DetailChatViewModel {
         return arraysMessage.count
     }
 }
-

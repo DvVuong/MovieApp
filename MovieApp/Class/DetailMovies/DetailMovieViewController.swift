@@ -40,6 +40,7 @@ class DetailMovieViewController: BaseViewController {
     }
     
     override func setupViewModel() {
+        super.bindViewModel(viewModel)
         viewModel.movieObservable
             .withUnretained(self)
             .do(onNext: { onwner , movie in
@@ -60,7 +61,6 @@ class DetailMovieViewController: BaseViewController {
             .drive(onNext: {[weak self]  items in
                 guard let `self` = self, let data = items.results else {return}
                 var videos: [Video] = []
-                print("vuongdv video: \(videos.count)")
                 for i in data {
                     if (i.type ?? "" ) == "Clip" || (i.type ?? "") == "Teaser" {
                         videos.append(i)

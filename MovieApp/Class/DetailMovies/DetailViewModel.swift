@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import UIKit
 
-class DetailViewModel {
+class DetailViewModel: BaseViewModel {
     let movieItem = PublishSubject<Movie>()
     let indexPublisher = PublishSubject<Int>()
     
@@ -24,9 +24,9 @@ class DetailViewModel {
     private let moveiItemspubLisher = BehaviorSubject<Movie>(value: Movie())
     private let indexItemBehavior = BehaviorSubject<Int>(value: 0)
     var movieIDBehaviorRelay = BehaviorRelay<Int>(value: 0)
-    private var bag = DisposeBag()
-    
-    init() {
+
+    override init() {
+        super.init()
         movieItem.subscribe(onNext: {[weak self] movie in
             guard let `self` = self else {return}
             self.moveiItemspubLisher.onNext(movie)
@@ -37,9 +37,6 @@ class DetailViewModel {
             guard let `self` = self else {return}
             self.indexItemBehavior.onNext(index)
         }).disposed(by: bag)
-        
-
-        
     }
     
     func getImage(with url: String) -> UIImage {
@@ -52,14 +49,20 @@ class DetailViewModel {
     }
     
     func addFavoriteMovie(with idMovie: Int) -> Driver<RequestFavoriteMovie> {
-       return APIService.createFavoriteMovie(with: RequestFavoriteMovie.self, movieID: idMovie, isFavorite: true).asDriver(onErrorJustReturn: RequestFavoriteMovie())
+       return APIService.createFavoriteMovie(with: RequestFavoriteMovie.self, movieID: idMovie, isFavorite: true)
+            .trackActivity(makeActivityIndicator)
+            .asDriver(onErrorJustReturn: RequestFavoriteMovie())
     }
     
     func unFavoriteMovie(with idMovie: Int) -> Driver<RequestFavoriteMovie> {
-        return APIService.createFavoriteMovie(with: RequestFavoriteMovie.self, movieID: idMovie, isFavorite: false).asDriver(onErrorJustReturn: RequestFavoriteMovie())
+        return APIService.createFavoriteMovie(with: RequestFavoriteMovie.self, movieID: idMovie, isFavorite: false)
+            .trackActivity(makeActivityIndicator)
+            .asDriver(onErrorJustReturn: RequestFavoriteMovie())
     }
     
     func fecthVideos(with idMovie: Int) -> Driver<VideosResponse> {
-        return APIService.fetchVideo(with: VideosResponse.self, movieId: idMovie).asDriver(onErrorJustReturn: VideosResponse())
+        return APIService.fetchVideo(with: VideosResponse.self, movieId: idMovie)
+            .trackActivity(makeActivityIndicator)
+            .asDriver(onErrorJustReturn: VideosResponse())
     }
 }
