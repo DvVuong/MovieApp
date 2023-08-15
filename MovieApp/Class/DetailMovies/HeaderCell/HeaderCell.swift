@@ -197,7 +197,7 @@ class HeaderCell: UIView {
                           voteAverage: data?.voteAverage,
                           isFavorites: true)
         if sender === favouriteButton {
-            UserDefaultManager.shared.setFavoritesMovie(with: movie)
+            UserDefaultManager.shared.favoritesMovie = movie
             actionChooseIDMovie?(idMovie)
             delegate?.didTapFavourite(with: true, index: indexItem ?? 0)
         }else if sender === unFavoriteMovie {

@@ -8,18 +8,18 @@
 import UIKit
 import CardTabBar
 
-class TabBarController: CardTabBarController {
+class TabBarController: UITabBarController {
     
     lazy var homeTab: UIViewController = {
         let homeTabItem = UITabBarItem(title: "Home", image: Asset.icHome.image, selectedImage: nil)
-        let homeNavTab = NavigationController(rootViewController: HomeViewController())
+        let homeNavTab = UINavigationController(rootViewController: HomeViewController())
         homeNavTab.tabBarItem = homeTabItem
         return homeNavTab
     }()
 
     lazy var editTab: UIViewController = {
         let randomTabItem = UITabBarItem(title: "Reels", image: Asset.icPlay.image, selectedImage: nil)
-        let navController = NavigationController(rootViewController: ReelsViewController())
+        let navController = UINavigationController(rootViewController: ReelsViewController())
         navController.tabBarItem = randomTabItem
         navController.navigationController?.isNavigationBarHidden = false
         return navController
@@ -27,32 +27,29 @@ class TabBarController: CardTabBarController {
 
     lazy var notificationTab: UIViewController = {
         let commentTabItem = UITabBarItem(title: "Favorite", image: Asset.icHeart.image, selectedImage: nil)
-        let navController = NavigationController(rootViewController: FavoriteMovieViewController())
+        let navController = UINavigationController(rootViewController: FavoriteMovieViewController())
         navController.tabBarItem = commentTabItem
         return navController
     }()
 
     lazy var moreTab: UIViewController = {
         let commentTabItem = UITabBarItem(title: "Profile", image: Asset.icProfile.image, selectedImage: nil)
-        let naviController = NavigationController(rootViewController: ProfileViewController())
+        let naviController = UINavigationController(rootViewController: ProfileViewController())
         naviController.tabBarItem = commentTabItem
         return naviController
     }()
     
     lazy var chatTab: UIViewController = {
         let chatTabItem = UITabBarItem(title: "Chat", image: UIImage(systemName: "message.fill"), selectedImage: nil)
-        let naviController = NavigationController(rootViewController: ChatViewController())
+        let naviController = UINavigationController(rootViewController: ChatViewController())
         naviController.tabBarItem = chatTabItem
-        naviController.navigationController?.isNavigationBarHidden = true
         return naviController
     }()
     
     lazy var bookTap: UIViewController = {
         let bookItem = UITabBarItem(title: "Search", image: Asset.icSearch.image, selectedImage: nil)
-        let naviController = NavigationController(rootViewController: SearchViewController())
+        let naviController = UINavigationController(rootViewController: SearchViewController())
         naviController.tabBarItem = bookItem
-        naviController.navigationController?.isNavigationBarHidden = false
-        naviController.navigationController?.navigationBar.backgroundColor = .clear
         return naviController
     }()
     
@@ -63,22 +60,13 @@ class TabBarController: CardTabBarController {
         setupUI()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-       self.navigationController?.isNavigationBarHidden = false
-    }
-
     // MARK: - UI
     private func setupUI() {
-        //tabBar.tintColor = .TabBar.title
-        tabBar.backgroundColor = .darkGray.withAlphaComponent(0.1)
-       // tabBar.barTintColor = .Navigation.background
-        //tabBar.indicatorColor = .TabBar.itemBackground
+        tabBar.backgroundColor = .white
     }
     
     private func setupViewController() {
-        viewControllers = [homeTab, bookTap, editTab, moreTab]
+        self.setViewControllers([homeTab, bookTap, editTab, moreTab], animated: true)
     }
-
 }
 

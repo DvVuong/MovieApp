@@ -37,13 +37,35 @@ class APIService {
     
    static func fetchModel<T: Codable>(with method: MethodHTTP = .get,
                                path: String,
-                               parameter: [String: Any]? = ["":""],
+                               parameter: [String: Any]? = nil,
                                expecting: T.Type)  -> Observable<T> {
 
         return Observable.create { observer in
-            guard let url = URL(string: APIPath.BASER_URL + "/" + path ) else {
-                return Disposables.create()
+            var string: String = ""
+            var param: [String: Any] = ["":""]
+
+            if parameter == nil {
+                param = ["":""]
+            }else {
+                param = parameter ?? [:]
+                var paraString = ""
+                var paraString2: [String] = []
+                for (key, _) in param {
+                    paraString = key + "=" + "\(param[key] ?? "")" + "&"
+                    paraString2.append(paraString)
+                }
+                
+                var resultString = paraString2.joined()
+                if !resultString.isEmpty {
+                    resultString = "?" + resultString
+                    if (resultString.contains("&")) {
+                        resultString.removeLast()
+                    }
+                    string =  resultString
+                }
             }
+            
+            guard let url = URL(string: APIPath.BASER_URL + "/" + path + string) else {return Disposables.create()}
             var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
             request.httpMethod = method.rawValue
             request.allHTTPHeaderFields = self.defaultHeader

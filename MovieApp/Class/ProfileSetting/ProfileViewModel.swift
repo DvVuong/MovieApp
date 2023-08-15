@@ -24,9 +24,9 @@ class ProfileViewModel {
     
     func logoutUser(completion: () -> Void) {
         FirebaseManager.shared.logout {
-            let userID = UserDefaultManager.shared.setCurrentUserID()
+            let userID = UserDefaultManager.shared.currentUserId
             FirebaseManager.shared.changeStateForUser(with: userID, isActive: false)
-            UserDefaultManager.shared.removeObject(with: UserDefaultContans.idUser)
+            UserDefaultManager.shared.removeObject(with: UserDefaultContans.idCurrentUser)
             completion()
         }
     }

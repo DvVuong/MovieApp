@@ -52,7 +52,7 @@ class FirebaseManager {
                         "active": isActive
         ] as [String : Any]
         _db.collection(_user).document(id).setData(userData)
-        UserDefaultManager.shared.getIdUser(id)
+        UserDefaultManager.shared.idUser = id
     }
     
     func changeStateForUser(with userID: String, isActive: Bool) {

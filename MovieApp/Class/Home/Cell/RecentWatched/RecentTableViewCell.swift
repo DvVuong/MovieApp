@@ -9,6 +9,7 @@ import UIKit
 
 protocol RecentTableViewCellDelegate: AnyObject {
     func didChooseRecentitem(with item: Movie)
+    func canLoadMore()
 }
 
 class RecentTableViewCell: UITableViewCell {
@@ -27,6 +28,7 @@ class RecentTableViewCell: UITableViewCell {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(UINib(nibName: "FavotitesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "FavotitesCollectionViewCell")
+        collectionView.reloadData()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -56,5 +58,12 @@ extension RecentTableViewCell: UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = self.data[indexPath.row]
         delegate?.didChooseRecentitem(with: item)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.section == collectionView.numberOfSections - 1 &&
+            indexPath.row == collectionView.numberOfItems(inSection: indexPath.section) - 1 {
+            delegate?.canLoadMore()
+        }
     }
 }

@@ -12,18 +12,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowSene = (scene as? UIWindowScene) else { return }
-        var windows = UIWindow(windowScene: windowSene)
-//        windows = UIWindow(frame: UIScreen.main.bounds)
-        let id = UserDefaultManager.shared.setIdUser()
+        let windows = UIWindow(windowScene: windowSene)
+        let id = UserDefaultManager.shared.currentUserId
         if id.isEmpty {
             windows.rootViewController = UINavigationController(rootViewController: ViewController())
         }else {
-            windows.rootViewController = UINavigationController(rootViewController: TabBarController())
+            windows.rootViewController = TabBarController()
             FirebaseManager.shared.changeStateForUser(with: id, isActive: true)
         }
-        windows.makeKeyAndVisible()
         self.window = windows
-        
+        windows.makeKeyAndVisible()
+
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
