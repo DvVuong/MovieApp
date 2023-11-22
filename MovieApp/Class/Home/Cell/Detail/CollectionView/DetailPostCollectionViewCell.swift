@@ -6,10 +6,10 @@
 //
 
 import UIKit
+import FSPagerView
 
-class DetailPostCollectionViewCell: UICollectionViewCell {
+class DetailPostCollectionViewCell: FSPagerViewCell {
     @IBOutlet weak var imageMovies: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     
     override func awakeFromNib() {
@@ -19,6 +19,8 @@ class DetailPostCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupUI() {
+        contentView.backgroundColor = .clear
+        nameLabel.textColor = .white
         imageMovies.cornerRadius(10)
         imageMovies.contentMode = .scaleAspectFill
         imageMovies.clipsToBounds = true
@@ -26,7 +28,6 @@ class DetailPostCollectionViewCell: UICollectionViewCell {
     
     func bindData(with data: Movie) {
         nameLabel.text = data.title
-        titleLabel.text = "\(String(describing: data.id))"
         ImageManager.share.fetchImage(with: data.posterPath ?? "" , completion: {[weak self] image in
             guard let `self` = self else {return}
             DispatchQueue.main.async {
@@ -34,5 +35,4 @@ class DetailPostCollectionViewCell: UICollectionViewCell {
             }
         })
     }
-
 }

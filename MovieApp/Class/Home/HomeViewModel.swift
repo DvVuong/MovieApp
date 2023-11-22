@@ -16,7 +16,7 @@ class HomeViewModel: BaseViewModel {
     var currenPage = 1
     var canLoadMore = BehaviorRelay<Bool>(value: false)
     let userPublisher = PassthroughSubject<UserResponse, Never>()
-    
+    var movies = BehaviorRelay<[Movie]>(value: [])
     
     func fetchUser() {
         FirebaseManager.shared.fecthUserData { [weak self] userResponse in
@@ -44,9 +44,20 @@ class HomeViewModel: BaseViewModel {
     func fetchOnTheAirMovie() -> Driver<MovieRespone> {
         return APIService.getFavoritesMovie(with: MovieRespone.self).asDriver(onErrorJustReturn: MovieRespone())
     }
+    func getMoviewData(_ completion: @escaping([Movie]) -> Void) {
+        APIService.fetchTVList(with: MovieRespone.self)
+            .trackActivity(makeActivityIndicator)
+            .subscribe(onNext: {[weak self] item in
+                completion(item.results ?? []) as Any
+//            guard let `self` = self else {return}
+//                self.movies.accept(item.results ?? [])
+            })
+            .disposed(by: bag)
+    }
     
     func fecthTVList() -> Driver<MovieRespone> {
-        return APIService.fetchTVList(with: MovieRespone.self).asDriver(onErrorJustReturn: MovieRespone())
+        return APIService
+            .fetchTVList(with: MovieRespone.self).asDriver(onErrorJustReturn: MovieRespone())
     }
     
     func getData() {

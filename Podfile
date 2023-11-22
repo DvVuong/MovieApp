@@ -18,5 +18,6 @@ target 'MovieApp' do
   pod "youtube-ios-player-helper", "~> 1.0.4"
   pod 'MBProgressHUD', '~> 1.2.0'
   pod 'SVProgressHUD'
+  pod 'FSPagerView'
   # Pods for MovieApp
 end

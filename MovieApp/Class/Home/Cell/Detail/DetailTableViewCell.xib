@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,29 +16,23 @@
                 <rect key="frame" x="0.0" y="0.0" width="414" height="393"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="TOU-j3-PaJ">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cRh-st-jKm" customClass="FSPagerView" customModule="FSPagerView">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="393"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ZQL-2E-c9t">
-                            <size key="itemSize" width="128" height="128"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        </collectionViewFlowLayout>
-                    </collectionView>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="TOU-j3-PaJ" secondAttribute="bottom" id="8x5-3f-sSH"/>
-                    <constraint firstItem="TOU-j3-PaJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="SdJ-PN-ez9"/>
-                    <constraint firstAttribute="trailing" secondItem="TOU-j3-PaJ" secondAttribute="trailing" id="ZCS-bq-1zT"/>
-                    <constraint firstItem="TOU-j3-PaJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="kza-9C-A4h"/>
+                    <constraint firstItem="cRh-st-jKm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="T9A-Qv-vyJ"/>
+                    <constraint firstAttribute="bottom" secondItem="cRh-st-jKm" secondAttribute="bottom" id="aNl-3Y-zOT"/>
+                    <constraint firstItem="cRh-st-jKm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="mbh-3b-PVY"/>
+                    <constraint firstAttribute="trailing" secondItem="cRh-st-jKm" secondAttribute="trailing" id="wV7-MG-ciz"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
-                <outlet property="collectionView" destination="TOU-j3-PaJ" id="1qZ-YF-Mdr"/>
+                <outlet property="pageView" destination="cRh-st-jKm" id="eFx-qo-hw7"/>
             </connections>
             <point key="canvasLocation" x="108.3969465648855" y="111.61971830985917"/>
         </tableViewCell>

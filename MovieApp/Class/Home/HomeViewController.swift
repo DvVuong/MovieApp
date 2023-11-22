@@ -47,7 +47,6 @@ class HomeViewController: BaseViewController {
         setupDataSource()
         refreshTableView()
         viewModel.getData()
-        
     }
     override func setupViewModel() {
         super.bindViewModel(viewModel)
@@ -62,7 +61,7 @@ class HomeViewController: BaseViewController {
                 self.dataSource.setupTableViewForTopRateMovie(width: self.tableView, list: item)
             }
         }).disposed(by: bag)
-       
+        
         viewModel.fetchListMovie()
             .drive(onNext: {[weak self] movie in
                 guard let `self` = self else {return}
@@ -138,13 +137,22 @@ class HomeViewController: BaseViewController {
     }
     
     @objc func refreshData(_ sender: UIRefreshControl) {
-        print("vuongdv.... Start RefreshControll")
+        
         refreshControll.endRefreshing()
     }
 }
 extension HomeViewController: HomeDataSourceDelegate {
+    func didChooseMovie() {
+        viewModel.fetchListMovie()
+            .drive(onNext: {[weak self] item in
+                guard let `self` = self else {return}
+                self.dataSource.setupTableViewForListMovie(width:        self.tableView, list: item.results)
+            })
+            .disposed(by: bag)
+    }
+    
     func didChooseAnime() {
-        print("vuongdv")
+        
     }
     
     func didChooseTVShow() {
@@ -157,26 +165,11 @@ extension HomeViewController: HomeDataSourceDelegate {
     }
     
     func didChooseMyList() {
-        print("vuongdv")
-    }
-    
-    func showTabBar() {
-       
-        print("vuongdv1 ShowTabar")
-    }
-    
-    func willHideTabbar() {
-     
-        print("vuongdv HideTabbar")
-    }
-    
-    func willShowTabbar() {
-      
-        print("vuongdv2 ShowTabar")
+        
     }
     
    func loadmoreNewsPost() {
-        print("vuongdv loadmore")
+       
        viewModel.getData()
     }
 }
