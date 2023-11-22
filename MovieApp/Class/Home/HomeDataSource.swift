@@ -7,9 +7,7 @@
 
 import UIKit
 protocol HomeDataSourceDelegate: AnyObject {
-    func willHideTabbar()
-    func willShowTabbar()
-    func showTabBar()
+    func didChooseMovie()
     func didChooseTVShow()
     func didChooseAnime()
     func didChooseMyList()
@@ -101,6 +99,7 @@ class HomeDataSource: UITableViewController {
             cell.actionMovies = { [weak self]  in
                 guard let `self` = self else {return}
                 //Todo here
+                self.delegate?.didChooseMovie()
             }
             
             cell.actionTVShows = { [weak self]  in
@@ -199,46 +198,7 @@ class HomeDataSource: UITableViewController {
         }
     }
     
-    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-          let contentOffsetY = scrollView.contentOffset.x
-          self.startContentOffset = contentOffsetY
-          self.lastContentOffset = contentOffsetY
-      }
-      
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-          let currentOffset = scrollView.contentOffset.x
-          let differentFromStart = self.startContentOffset - currentOffset
-          let differentFromLast = self.lastContentOffset - currentOffset
-          self.lastContentOffset = currentOffset
-          if (differentFromStart < 0) {
-              if (scrollView.isTracking && abs(differentFromLast) > 1) {
-                  delegate?.willHideTabbar()
-              }
-          } else {
-              if (scrollView.isTracking && (abs(differentFromLast) > 1)) {
-                  delegate?.willShowTabbar()
-              }
-          }
-      }
-      
-    override func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
-        delegate?.showTabBar()
-        return true
-    }
 }
-    
-//    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        delegate?.handlerActionScroll()
-//    }
-    
-//    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-//        delegate?.handlerActionScroll()
-//    }
-//
-//    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-//        delegate?.handelEndActionScroll()
-//    }
-
 
 extension HomeDataSource: CustomHeaderViewDelegate {
     func didTapButton() {

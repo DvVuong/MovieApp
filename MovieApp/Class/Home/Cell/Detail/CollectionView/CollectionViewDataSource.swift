@@ -32,15 +32,6 @@ class CollectionViewDataSource: NSObject, UICollectionViewDelegate, UICollection
         print("vuongdv he he eh")
         return CGSize(width: 1, height: 450)
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//        let totalCellWidth: CGFloat = (collectionView.frame.width * 2 / 3) * 3
-//        let totalSpacingWidth: CGFloat = 10 * (2)
-//        let leftInset = (collectionView.frame.width - CGFloat(totalCellWidth + totalSpacingWidth)) / 2
-//        let rightInset = leftInset
-//        return UIEdgeInsets(top: 0, left: leftInset, bottom: 0, right: rightInset)
-//    }
-    
      func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
        didSelectedItemHandler?()
     }
