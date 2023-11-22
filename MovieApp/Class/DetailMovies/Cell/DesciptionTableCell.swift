@@ -164,9 +164,9 @@ class DesciptionTableCell: UITableViewCell {
     
     func bindData(with data: Movie?) {
         guard let data = data else {return}
-        nameMovieLable.attributedText = setHigLight("Movie: ", value: (data.originalTitle ?? ""))
+        nameMovieLable.attributedText = setHigLight("Movie: ", value: (data.originalTitle ?? "Unknow"))
         overViewMovie.attributedText = setHigLight("Overview: ", value: (data.overview ?? ""))
-        voteMovieLable.text = "\(data.voteAverage ?? 0)"
+        voteMovieLable.text = "\(Int(data.voteAverage ?? 0))"
         releaseDate.attributedText = setHigLight("Year: ", value: (data.releaseDate ?? ""))
     }
     

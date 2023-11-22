@@ -27,7 +27,7 @@ class MovieTableViewCell: UITableViewCell {
     func bindData(with movie: Movie) {
         nameLabel.text = movie.title ?? ""
         overviewLabel.text = movie.overview ?? ""
-        countStarLabel.text = "\(movie.voteAverage ?? 0)"
+        countStarLabel.text = "\(Int(movie.voteAverage ?? 0))"
         
         ImageManager.share.fetchImage(with: movie.posterPath ?? "") { [weak self] image in
             guard let `self` = self else {return}

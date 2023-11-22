@@ -30,6 +30,7 @@ struct Movie: Codable {
     var releaseDate: String?
     var voteAverage: Float?
     var isFavorites: Bool?
+    var name: String?
 
         private enum CodingKeys: String, CodingKey {
             case backdropPath = "backdrop_path"
@@ -43,5 +44,6 @@ struct Movie: Codable {
             case releaseDate = "release_date"
             case voteAverage = "vote_average"
             case isFavorites
+            case name
         }
 }
